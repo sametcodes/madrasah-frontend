@@ -1,6 +1,10 @@
 {
   "name": "madrasah-frontend",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "shared/*"
+  ],
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -13,6 +17,5 @@
     "turbo": "^1.13.4",
     "prettier": "^3.0.0",
     "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.0.0"
+  }
 }

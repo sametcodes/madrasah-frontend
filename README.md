@@ -13,32 +13,32 @@ Online Medrese Projesi için frontend deposu. Bu proje Turborepo kullanılarak m
 
 ### Gereksinimler
 - Node.js 18+
-- pnpm 8+
+- npm 8+
 
 ### Kurulum
 
 1. Bağımlılıkları yükleyin:
 ```bash
-pnpm install
+npm install
 ```
 
 2. Geliştirme sunucusunu başlatın:
 ```bash
-pnpm dev
+npm run dev
 ```
 
 3. Tüm paketleri build edin:
 ```bash
-pnpm build
+npm run build
 ```
 
 ### Kullanılabilir Komutlar
 
-- `pnpm dev` - Tüm uygulamalar için geliştirme sunucularını başlatır
-- `pnpm build` - Tüm paketleri ve uygulamaları build eder
-- `pnpm lint` - Tüm paketleri lint eder
-- `pnpm format` - Prettier ile kodu formatlar
-- `pnpm clean` - Tüm build dosyalarını temizler
+- `npm run dev` - Tüm uygulamalar için geliştirme sunucularını başlatır
+- `npm run build` - Tüm paketleri ve uygulamaları build eder
+- `npm run lint` - Tüm paketleri lint eder
+- `npm run format` - Prettier ile kodu formatlar
+- `npm run clean` - Tüm build dosyalarını temizler
 
 ## Proje Yapısı
 

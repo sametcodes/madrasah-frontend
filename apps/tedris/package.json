@@ -10,10 +10,10 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@madrasah/hooks": "workspace:*",
-    "@madrasah/types": "workspace:*",
-    "@madrasah/ui": "workspace:*",
-    "@madrasah/utils": "workspace:*",
+    "@madrasah/hooks": "*",
+    "@madrasah/types": "*",
+    "@madrasah/ui": "*",
+    "@madrasah/utils": "*",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.288.0",
