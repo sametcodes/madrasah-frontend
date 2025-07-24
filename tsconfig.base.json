@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,11 +24,21 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/ui/*": ["./shared/ui/src/*"],
-      "@/utils/*": ["./shared/utils/src/*"],
-      "@/types/*": ["./shared/types/src/*"],
-      "@/hooks/*": ["./shared/hooks/src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/ui/*": [
+        "./shared/ui/src/*"
+      ],
+      "@/utils/*": [
+        "./shared/utils/src/*"
+      ],
+      "@/types/*": [
+        "./shared/types/src/*"
+      ],
+      "@/hooks/*": [
+        "./shared/hooks/src/*"
+      ]
     }
   },
   "include": [
