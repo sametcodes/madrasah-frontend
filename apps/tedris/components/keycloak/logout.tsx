@@ -13,10 +13,7 @@ const KeycloakLogoutButton = () => {
       id_token_hint: idtoken ?? '',
     });
     const keycloakLogoutUrl = `${process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER}/protocol/openid-connect/logout?${params.toString()}`;
-    await signOut({
-      redirect: false,
-      callbackUrl: keycloakLogoutUrl,
-    });
+    await signOut({ redirect: false, callbackUrl: keycloakLogoutUrl });
     window.location.href = keycloakLogoutUrl;
   };
   return <Button onClick={() => signOutWithRedirect()}>ÇIKIŞ YAP</Button>;
