@@ -1,0 +1,38 @@
+{
+  "name": "@madrasah/tokens",
+  "version": "1.0.0",
+  "description": "Design tokens package for Madrasah projects",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./css": "./theme/main.css",
+    "./theme.css": "./theme/main.css"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "theme/",
+    "build/"
+  ],
+  "scripts": {
+    "build": "npm run process && node scripts/build.js",
+    "process": "node scripts/process-tokens.js",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "design-tokens",
+    "tailwindcss",
+    "css-variables",
+    "theme"
+  ]
+}
