@@ -20,6 +20,7 @@ module.exports = {
     radix: 'off',
     'no-empty': 'off',
     'no-console': 'off',
+    'react/self-closing-comp': ['error', { component: true, html: true }],
     'consistent-return': 'off',
     'no-restricted-globals': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
