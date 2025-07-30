@@ -6,20 +6,20 @@ const KeycloakLogoutButton = () => {
   const session = useSession();
   const signOutWithRedirect = async () => {
     const idtoken = session.data?.idToken;
-    let keycloakLogoutUrl = `${process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER}/protocol/openid-connect/logout`;
-    keycloakLogoutUrl += `?client_id=${process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID}`;
-    keycloakLogoutUrl += `&post_logout_redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_NEXTAUTH_URL!)}`;
-    keycloakLogoutUrl += `&id_token_hint=${idtoken}`;
-    await signOut({
-      redirect: false,
-      callbackUrl: keycloakLogoutUrl,
+    //TODO: Exception yönetimi eklenmeli NEXT_PUBLIC_KEYCLOAK_CLIENT_ID, NEXT_PUBLIC_NEXTAUTH_URL ve idtoken için
+    const params = new URLSearchParams({
+      client_id: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID ?? '',
+      post_logout_redirect_uri: process.env.NEXT_PUBLIC_NEXTAUTH_URL ?? '',
+      id_token_hint: idtoken ?? '',
     });
+    const keycloakLogoutUrl = `${process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER}/protocol/openid-connect/logout?${params.toString()}`;
+    await signOut({ redirect: false, callbackUrl: keycloakLogoutUrl });
     window.location.href = keycloakLogoutUrl;
   };
   return <Button onClick={() => signOutWithRedirect()}>ÇIKIŞ YAP</Button>;
 };
 const KeycloakLogout = () => {
-  //Session Provider should not to be there. It must be move global provider of app context.
+  //TODO:Session Provider should not to be there. It must be move global provider of app context.
   return (
     <SessionProvider>
       <KeycloakLogoutButton />

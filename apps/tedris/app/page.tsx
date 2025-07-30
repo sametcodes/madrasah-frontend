@@ -1,8 +1,8 @@
 import { Button } from '@madrasah/ui';
-import { authOptions } from './api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import KeycloakLogin from '../components/keycloak/login';
 import KeycloakLogout from '../components/keycloak/logout';
+import authOptions from '../lib/auth_options';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

@@ -21,6 +21,7 @@ module.exports = {
     'no-empty': 'off',
     'no-console': 'off',
     'react/self-closing-comp': ['error', { component: true, html: true }],
+    'func-names': ['error'],
     'consistent-return': 'off',
     'no-restricted-globals': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
