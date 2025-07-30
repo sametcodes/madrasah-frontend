@@ -60,4 +60,4 @@ ENV NEXTAUTH_SECRET=NEXTAUTH_SECRET_PASSWORD
 EXPOSE 3000
 
 # Start the production server
-CMD ["npm", "start"]
+CMD ["npm", "start"] 
