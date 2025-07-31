@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.0.0...v1.1.0) (2025-07-30)
+
+
+### Features
+
+* add commitlint and husky for improved commit message validation ([ca5db1a](https://github.com/amel-tech/madrasah-frontend/commit/ca5db1a2af444bc3527576a3cc00b929a1f951f6))
+
 ## 1.0.0 (2025-07-30)
 
 
