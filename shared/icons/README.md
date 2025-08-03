@@ -20,6 +20,7 @@ npm install @madrasah/icons
 ## Usage
 
 ### Import All Phosphor Icons
+
 ```tsx
 import { Heart, Star, House } from '@madrasah/icons';
 
@@ -35,6 +36,7 @@ export function MyComponent() {
 ```
 
 ### Import Custom Icons
+
 ```tsx
 import { MadrasahLogo } from '@madrasah/icons';
 
@@ -48,6 +50,7 @@ export function Header() {
 ```
 
 ### Mixed Usage
+
 ```tsx
 import { Heart, MadrasahLogo } from '@madrasah/icons';
 
@@ -95,9 +98,11 @@ export const MyCustomIcon: React.FC<IconProps> = ({ size = 24, color = 'currentC
 ## Available Icons
 
 ### Phosphor Icons
+
 All icons from [@phosphor-icons/react](https://phosphoricons.com/) are available.
 
 ### Custom Icons
+
 - `MadrasahLogo` - Company logo with all weight variations
 
 ## Development

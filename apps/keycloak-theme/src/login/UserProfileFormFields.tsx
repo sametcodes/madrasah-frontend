@@ -76,11 +76,7 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                             </div>
                             <div className="flex flex-col gap-1">
                                 {attribute.annotations.inputHelperTextBefore !== undefined && (
-                                    <div
-                                        className="text-sm text-gray-500"
-                                        id={`form-help-text-before-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
+                                    <div className="text-sm text-gray-500" id={`form-help-text-before-${attribute.name}`} aria-live="polite">
                                         {advancedMsg(attribute.annotations.inputHelperTextBefore)}
                                     </div>
                                 )}
@@ -94,11 +90,7 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                 />
                                 <FieldErrors attribute={attribute} displayableErrors={displayableErrors} kcClsx={kcClsx} fieldIndex={undefined} />
                                 {attribute.annotations.inputHelperTextAfter !== undefined && (
-                                    <div
-                                        className="text-sm text-gray-500"
-                                        id={`form-help-text-after-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
+                                    <div className="text-sm text-gray-500" id={`form-help-text-after-${attribute.name}`} aria-live="polite">
                                         {advancedMsg(attribute.annotations.inputHelperTextAfter)}
                                     </div>
                                 )}
@@ -475,7 +467,7 @@ function InputTagSelects(props: InputFieldByTypeProps) {
                             name={attribute.name}
                             value={option}
                             checked={valueOrValues instanceof Array ? valueOrValues.includes(option) : valueOrValues === option}
-                            onCheckedChange={(checked) =>
+                            onCheckedChange={checked =>
                                 dispatchFormAction({
                                     action: "update",
                                     name: attribute.name,
@@ -655,7 +647,7 @@ function SelectTag(props: InputFieldByTypeProps) {
     return (
         <Select
             value={typeof valueOrValues === "string" ? valueOrValues : ""}
-            onValueChange={(value) =>
+            onValueChange={value =>
                 dispatchFormAction({
                     action: "update",
                     name: attribute.name,
@@ -665,9 +657,7 @@ function SelectTag(props: InputFieldByTypeProps) {
             disabled={attribute.readOnly}
         >
             <SelectTrigger
-                className={cn(
-                    displayableErrors.length !== 0 && "border-error-secondary !text-error-primary"
-                )}
+                className={cn(displayableErrors.length !== 0 && "border-error-secondary !text-error-primary")}
                 aria-invalid={displayableErrors.length !== 0}
             >
                 <SelectValue placeholder="Select an option..." />
