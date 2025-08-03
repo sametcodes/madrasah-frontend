@@ -1,6 +1,6 @@
 'use client';
 import { SessionProvider, signOut, useSession } from 'next-auth/react';
-import { Button } from '@madrasah/ui';
+import { Button } from '@madrasah/ui/components/button';
 
 const KeycloakLogoutButton = () => {
   const session = useSession();
