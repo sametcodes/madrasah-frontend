@@ -1,25 +1,13 @@
 {
+    "extends": "@madrasah/typescript-config/react-library.json",
     "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
-        "module": "ESNext",
-        "skipLibCheck": true,
-
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
+        "baseUrl": ".",
+        "paths": {
+            "@madrasah/ui/*": ["../../shared/ui/src/*"],
+            "react": ["./node_modules/@types/react"],
+        },
         "jsx": "react-jsx",
-
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    "include": ["."],
+    "exclude": ["node_modules", "dist"]
 }
