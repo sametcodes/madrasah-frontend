@@ -8,6 +8,7 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 
 import { Button } from "@madrasah/ui/components/button";
+import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@madrasah/ui/components/select";
 import { Alert, AlertDescription } from "@madrasah/ui/components/alert";
 import { cn } from "@madrasah/ui/lib/utils";
 import { Badge } from "@madrasah/ui/components/badge";
@@ -20,6 +21,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         displayMessage = true,
         displayRequiredFields = false,
         headerNode,
+        headerSubNode,
         socialProvidersNode = null,
         infoNode = null,
         documentTitle,
@@ -33,7 +35,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, enabledLanguages } = i18n;
+    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
 
     const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
@@ -59,22 +61,44 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
         <div className={cn(kcClsx("kcLoginClass"), "min-h-screen flex")}>
-            {/* Left side - Form */}
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="w-full max-w-md">
-                    <div className={cn(kcClsx("kcFormCardClass"), "bg-white rounded-xl shadow-xl border-0 p-8")}>
+                    <div className={cn(kcClsx("kcFormCardClass"), "bg-white rounded-xl border-0 p-8")}>
                         <header className={cn(kcClsx("kcFormHeaderClass"), "mb-8")}>
                             {enabledLanguages.length > 1 && (
-                                <div className={cn(kcClsx("kcLocaleMainClass"), "mb-6")} id="kc-locale">
-                                    <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}></div>
+                                <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+                                    <div id="kc-locale-wrapper" className={cn(kcClsx("kcLocaleWrapperClass"), "hidden")}>
+                                        <Select>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder={msgStr("languages")} />
+                                            </SelectTrigger>
+                                            <SelectContent
+                                                role="menu"
+                                                id="language-switch1"
+                                                aria-labelledby="kc-current-locale-link"
+                                                aria-activedescendant=""
+                                            >
+                                                {enabledLanguages.map(({ languageTag, label, href }, i) => (
+                                                    <SelectItem key={languageTag} value={href} role="menuitem" id={`language-${i + 1}`}>
+                                                        {label}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
                                 </div>
                             )}
                             {(() => {
                                 const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-                                    <div className="text-center mb-6">
-                                        <h1 id="kc-page-title" className="text-2xl font-bold text-gray-900 mb-2">
+                                    <div className="text-center mb-16">
+                                        <h1 id="kc-page-title" className="font-bold text-gray-900 mb-2 text-[30px]">
                                             {headerNode}
                                         </h1>
+                                        {headerSubNode && (
+                                            <p className="text-sm text-black font-light text-[16px]" id="kc-page-subtitle">
+                                                {headerSubNode}
+                                            </p>
+                                        )}
                                     </div>
                                 ) : (
                                     <div id="kc-username" className={cn(kcClsx("kcFormGroupClass"), "mb-6 p-4 bg-gray-50 rounded-lg border")}>
@@ -110,7 +134,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                             <div className={cn(kcClsx("kcLabelWrapperClass"), "mb-4")}>
                                                 <div className="flex items-center gap-2">
                                                     <Badge variant="destructive" className="text-xs">
-                                                        Required
+                                                        *
                                                     </Badge>
                                                     <p className="text-sm text-gray-600">{msg("requiredFields")}</p>
                                                 </div>
