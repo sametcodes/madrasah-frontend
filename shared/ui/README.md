@@ -62,6 +62,33 @@ import { useTheme } from '@madrasah/ui/hooks/use-theme';
 
 ## Development
 
+### Adding New Components
+
+To add new shadcn/ui components to the library, open `shared/ui` and run:
+
+```bash
+npx shadcn@latest add [component-name]
+```
+
+Examples:
+
+```bash
+# Add specific components
+npx shadcn@latest add dialog
+npx shadcn@latest add dropdown-menu
+npx shadcn@latest add form
+
+# Add multiple components at once
+npx shadcn@latest add dialog dropdown-menu form
+```
+
+The shadcn CLI will:
+
+- Download the component source code
+- Install any required dependencies
+- Place components in the `src/components/` directory
+- Update the components configuration
+
 ### Linting
 
 ```bash
