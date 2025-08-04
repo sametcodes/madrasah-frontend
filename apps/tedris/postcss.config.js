@@ -1,5 +1,1 @@
-module.exports = {
-  plugins: {
-    '@tailwindcss/postcss': {},
-  },
-};
+export { plugins } from '@madrasah/ui/postcss.config';

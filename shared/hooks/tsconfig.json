@@ -1,11 +1,10 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "@madrasah/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
     "declaration": true,
     "declarationMap": true,
-    "jsx": "react-jsx",
     "noEmit": false
   },
   "include": ["src/**/*"],

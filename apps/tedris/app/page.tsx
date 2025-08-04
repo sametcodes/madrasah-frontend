@@ -1,4 +1,4 @@
-import { Button } from '@madrasah/ui';
+import { Button } from '@madrasah/ui/components/button';
 import { getServerSession } from 'next-auth';
 import KeycloakLogin from '../components/keycloak/login';
 import KeycloakLogout from '../components/keycloak/logout';
