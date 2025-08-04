@@ -90,7 +90,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             )}
                             {(() => {
                                 const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-                                    <div className="text-center mb-16">
+                                    <div className="text-center mb-4">
                                         <h1 id="kc-page-title" className="font-bold text-gray-900 mb-2 text-[30px]">
                                             {headerNode}
                                         </h1>
@@ -147,7 +147,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 return node;
                             })()}
                         </header>
-
                         <div id="kc-content">
                             <div id="kc-content-wrapper">
                                 {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
@@ -264,10 +263,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             </div>
 
             {/* Right side - Image/Branding */}
-            <div id="kc-header" className={cn(kcClsx("kcHeaderClass"), "flex flex-1 items-center justify-center relative overflow-hidden")}>
-                <div className={cn(kcClsx("kcHeaderWrapperClass"), "relative z-10 text-center text-white px-12")}>
-                    <img src={BackgroundImage} alt="Madrasah Background" className="w-full max-w-lg mx-auto" />
-                </div>
+            <div id="kc-header" className={cn("flex flex-1 items-center relative")}>
+                <img src={BackgroundImage} alt="Madrasah Background" className="h-10/12" />
             </div>
         </div>
     );

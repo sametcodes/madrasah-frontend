@@ -45,6 +45,13 @@ export default function Register(props: RegisterProps) {
             displayMessage={messagesPerField.exists("global")}
             displayRequiredFields={false}
         >
+            <div className="mx-auto flex flex-row gap-2 w-fit bg-[#f5f5f5] border border-[#e5e5e5] rounded-[35px] overflow-hidden font-light text-sm mb-8">
+                <div className={"py-2 rounded-[35px] px-6 bg-brand-primary text-white "}>Register</div>
+                <a href={url.loginUrl}>
+                    <div className={"py-2 rounded-[35px] px-5"}>Login</div>
+                </a>
+            </div>
+
             <form id="kc-register-form" className="flex flex-col gap-5" action={url.registrationAction} method="post">
                 <UserProfileFormFields
                     kcContext={kcContext}

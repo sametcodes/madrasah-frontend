@@ -30,6 +30,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
+    const displayRegisterationNodes = realm.password && realm.registrationAllowed && !registrationDisabled;
+
     return (
         <Template
             kcContext={kcContext}
@@ -39,7 +41,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             displayMessage={!messagesPerField.existsError("username", "password")}
             headerNode={msg("loginAccountTitle")}
             headerSubNode={msg("loginAccountSubtitle")}
-            displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
+            displayInfo={displayRegisterationNodes}
             infoNode={
                 <div id="kc-registration-container" className="text-center">
                     <div id="kc-registration">
@@ -96,6 +98,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 </>
             }
         >
+            {displayRegisterationNodes && (
+                <div className="mx-auto flex flex-row gap-2 w-fit bg-[#f5f5f5] border border-[#e5e5e5] rounded-[35px] overflow-hidden font-light text-sm mb-8">
+                    <a href={url.registrationUrl}>
+                        <div className={"py-2 rounded-[35px] px-5 "}>Register</div>
+                    </a>
+                    <div className={"py-2 rounded-[35px] px-6 bg-brand-primary text-white "}>Login</div>
+                </div>
+            )}
+
             <div id="kc-form">
                 <div id="kc-form-wrapper">
                     {realm.password && (
@@ -228,6 +239,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
+                className="border-[var(--input)]"
             >
                 {isPasswordRevealed ? <EyeSlashIcon /> : <EyeIcon />}
             </Button>

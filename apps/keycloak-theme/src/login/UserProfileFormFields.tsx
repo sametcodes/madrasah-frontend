@@ -268,7 +268,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
-                className="shrink-0"
+                className="shrink-0 border-[var(--input)]"
             >
                 {isPasswordRevealed ? <EyeSlashIcon size={16} /> : <EyeIcon size={16} />}
             </Button>
