@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.1.0...v1.2.0) (2025-08-04)
+
+
+### Features
+
+* add React version consistency and root config updates ([1e9a2ef](https://github.com/amel-tech/madrasah-frontend/commit/1e9a2ef7c0c686ca32fa06d4bc13e3ae67cdee20))
+* add shared eslint and typescript configuration packages ([b87fa45](https://github.com/amel-tech/madrasah-frontend/commit/b87fa458f6519ca9407626201f881b59732106c4))
+* restructure UI library with modern component architecture ([290cb4f](https://github.com/amel-tech/madrasah-frontend/commit/290cb4f4631973970bae3f55a9e7b7f5c395e0a2))
+* update Tedris app with shared configurations and test pages ([9941376](https://github.com/amel-tech/madrasah-frontend/commit/99413769e597bcea7c3266377dc138eaa47bd204))
+
+## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/v1.0.0...v1.1.0) (2025-07-30)
+
+
+### Features
+
+* add commitlint and husky for improved commit message validation ([ca5db1a](https://github.com/amel-tech/madrasah-frontend/commit/ca5db1a2af444bc3527576a3cc00b929a1f951f6))
+
 ## 1.0.0 (2025-07-30)
 
 ### Features
