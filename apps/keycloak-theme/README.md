@@ -8,12 +8,12 @@ This theme provides a cohesive authentication experience for Madrasah users, int
 
 ## Tech Stack
 
--   **Keycloakify v11** - Keycloak theme development framework
--   **React 19** - UI library
--   **Tailwind CSS v4** - Styling framework
--   **TypeScript** - Type safety
--   **Vite** - Build tool and dev server
--   **Storybook** - Component development environment
+- **Keycloakify v11** - Keycloak theme development framework
+- **React 19** - UI library
+- **Tailwind CSS v4** - Styling framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Storybook** - Component development environment
 
 ## Folder Structure
 
@@ -70,8 +70,8 @@ npm run run-keycloak
 This command starts a Docker container with Keycloak and your custom theme loaded.
 Access at: http://localhost:8080
 
--   Username: `admin`
--   Password: `admin`
+- Username: `admin`
+- Password: `admin`
 
 ## Development Workflow
 
@@ -124,10 +124,10 @@ Navigate to http://localhost:8080 and test your theme in a real Keycloak environ
 
 This theme leverages the monorepo's shared packages:
 
--   **[`@madrasah/ui`](../../shared/ui)**: UI components and utilities
--   **[`@madrasah/tokens`](../../shared/tokens)**: Design tokens and CSS variables
--   **[`@madrasah/typescript-config`](../../shared/typescript-config)**: TypeScript configuration
--   **[`@madrasah/eslint-config`](../../shared/eslint-config)**: ESLint rules
+- **[`@madrasah/ui`](../../shared/ui)**: UI components and utilities
+- **[`@madrasah/tokens`](../../shared/tokens)**: Design tokens and CSS variables
+- **[`@madrasah/typescript-config`](../../shared/typescript-config)**: TypeScript configuration
+- **[`@madrasah/eslint-config`](../../shared/eslint-config)**: ESLint rules
 
 ## Troubleshooting
 
@@ -152,7 +152,7 @@ This theme leverages the monorepo's shared packages:
 
 ## Links
 
--   [Keycloakify Documentation](https://docs.keycloakify.dev/)
--   [Keycloak Documentation](https://www.keycloak.org/documentation)
--   [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
--   [Main Project README](../../README.md)
+- [Keycloakify Documentation](https://docs.keycloakify.dev/)
+- [Keycloak Documentation](https://www.keycloak.org/documentation)
+- [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
+- [Main Project README](../../README.md)
