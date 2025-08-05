@@ -5,7 +5,8 @@ module.exports = {
   ignorePatterns: ['**/.next/*'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-use-before-define': 'error',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false }],
     quotes: ['error', 'single'],
     'prettier/prettier': [
       'error',
@@ -27,7 +28,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'react/button-has-type': 'off',
-    'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/alt-text': 'off',
