@@ -1,0 +1,52 @@
+{
+    "name": "madrasah-keycloak-theme",
+    "version": "0.0.0",
+    "description": "Starter for Keycloakify 11",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+    },
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "storybook": "storybook dev -p 6006",
+        "format": "prettier . --write",
+        "build-keycloak-theme": "vite build && keycloakify build",
+        "build:keycloak": "keycloakify build",
+        "run-keycloak": "docker run -p 127.0.0.1:8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v \"$(pwd)/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme.jar\" quay.io/keycloak/keycloak:26.3.2 start-dev"
+    },
+    "license": "MIT",
+    "keywords": [],
+    "dependencies": {
+        "@madrasah/ui": "*",
+        "keycloakify": "^11.8.54",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1",
+        "tailwindcss": "^4.1.11"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.15.0",
+        "@madrasah/eslint-config": "*",
+        "@madrasah/typescript-config": "*",
+        "@storybook/react": "^8.1.10",
+        "@storybook/react-vite": "^8.1.10",
+        "@tailwindcss/vite": "^4.1.11",
+        "@types/react": "^18.3.23",
+        "@types/react-dom": "^18.3.7",
+        "@typescript-eslint/eslint-plugin": "^8.15.0",
+        "@typescript-eslint/parser": "^8.15.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "eslint": "^9.15.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-react": "^7.37.2",
+        "eslint-plugin-react-hooks": "^5.0.0",
+        "eslint-plugin-react-refresh": "^0.4.14",
+        "eslint-plugin-storybook": "^0.11.1",
+        "globals": "^15.12.0",
+        "prettier": "3.3.1",
+        "storybook": "^8.1.10",
+        "typescript": "^5.2.2",
+        "typescript-eslint": "^8.15.0",
+        "vite": "^5.0.8"
+    }
+}
