@@ -14,7 +14,6 @@ import { KcPage } from "./kc.gen";
 //     });
 // }
 
-
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         {!window.kcContext ? (
