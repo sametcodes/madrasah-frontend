@@ -3,10 +3,10 @@ import { useState } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import type { ExtendedPageProps } from "../types/PageProps";
 
 import { Input } from "@madrasah/ui/components/input";
 import { Separator } from "@madrasah/ui/components/separator";
@@ -16,7 +16,7 @@ import { cn } from "@madrasah/ui/lib/utils";
 import { Button } from "@madrasah/ui/components/button";
 import { EyeIcon, EyeSlashIcon } from "@madrasah/icons";
 
-export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
+export default function Login(props: ExtendedPageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { kcClsx } = getKcClsx({
@@ -135,7 +135,13 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         name="username"
                                         defaultValue={login.username ?? ""}
                                         id="username"
-                                        placeholder="Email"
+                                        placeholder={
+                                            !realm.loginWithEmailAllowed
+                                                ? msgStr("username")
+                                                : !realm.registrationEmailAsUsername
+                                                  ? msgStr("usernameOrEmail")
+                                                  : msgStr("email")
+                                        }
                                         autoFocus
                                         autoComplete="username"
                                         className={cn(
@@ -169,8 +175,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         autoComplete="current-password"
                                         aria-invalid={messagesPerField.existsError("username", "password")}
                                         placeholder="Password"
+                                        className={cn(
+                                            messagesPerField.existsError("username", "password") &&
+                                                "border border-error-secondary !text-error-primary placeholder:text-error-primary"
+                                        )}
                                     />
-                                    {/* aria-invalid={messagesPerField.existsError("username", "password")} */}
                                 </PasswordWrapper>
                                 {usernameHidden && messagesPerField.existsError("username", "password") && (
                                     <span

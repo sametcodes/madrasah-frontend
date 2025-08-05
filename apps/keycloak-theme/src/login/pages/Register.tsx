@@ -4,7 +4,7 @@ import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { ExtendedPageProps } from "../types/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -13,7 +13,7 @@ import { Checkbox } from "@madrasah/ui/components/checkbox";
 import { Button } from "@madrasah/ui/components/button";
 import { cn } from "@madrasah/ui/lib/utils";
 
-type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n> & {
+type RegisterProps = ExtendedPageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
     doMakeUserConfirmPassword: boolean;
 };

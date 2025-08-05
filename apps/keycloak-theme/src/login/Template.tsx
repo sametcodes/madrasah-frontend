@@ -1,21 +1,21 @@
 import { useEffect } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import type { ExtendedTemplateProps } from "./types/TemplateProps";
 
 import { Button } from "@madrasah/ui/components/button";
-import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@madrasah/ui/components/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@madrasah/ui/components/select";
 import { Alert, AlertDescription } from "@madrasah/ui/components/alert";
 import { cn } from "@madrasah/ui/lib/utils";
 import { Badge } from "@madrasah/ui/components/badge";
 
 import BackgroundImage from "./assets/background.png";
 
-export default function Template(props: TemplateProps<KcContext, I18n>) {
+export default function Template(props: ExtendedTemplateProps<KcContext, I18n>) {
     const {
         displayInfo = false,
         displayMessage = true,
@@ -35,7 +35,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
+    const { msg, msgStr, enabledLanguages } = i18n;
 
     const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
