@@ -1,58 +1,158 @@
-<p align="center">
-    <i>🚀 <a href="https://keycloakify.dev">Keycloakify</a> v11 starter 🚀</i>
-    <br/>
-    <br/>
-</p>
+# Madrasah Keycloak Theme
 
-# Quick start
+A custom Keycloak theme for the Madrasah project, built with Keycloakify v11, React 19, and Tailwind CSS v4.
 
-```bash
-git clone https://github.com/keycloakify/keycloakify-starter
-cd keycloakify-starter
-yarn install # Or use an other package manager, just be sure to delete the yarn.lock if you use another package manager.
+## Overview
+
+This theme provides a cohesive authentication experience for Madrasah users, integrating with the design system from [`@madrasah/ui`](../../shared/ui) and [`@madrasah/tokens`](../../shared/tokens) packages.
+
+## Tech Stack
+
+-   **Keycloakify v11** - Keycloak theme development framework
+-   **React 19** - UI library
+-   **Tailwind CSS v4** - Styling framework
+-   **TypeScript** - Type safety
+-   **Vite** - Build tool and dev server
+-   **Storybook** - Component development environment
+
+## Folder Structure
+
+```
+apps/keycloak-theme/
+├── src/                    # Source code
+│   ├── account/           # Account theme components
+│   ├── login/             # Login theme components
+│   ├── email/             # Email theme templates
+│   └── shared/            # Shared components and utilities
+├── dist/                  # Vite build output
+├── dist_keycloak/         # Keycloak theme JAR files
+├── build/                 # Additional build artifacts
+├── storybook-static/      # Storybook build output
+├── .rendered/             # jsx-email build output
+├── package.json           # Dependencies and scripts
+├── vite.config.ts         # Vite configuration
+├── tailwind.config.js     # Tailwind configuration
+└── tsconfig.json          # TypeScript configuration
 ```
 
-# Testing the theme locally
+## Available Scripts
 
-[Documentation](https://docs.keycloakify.dev/testing-your-theme)
-
-# How to customize the theme
-
-[Documentation](https://docs.keycloakify.dev/customization-strategies)
-
-# Building the theme
-
-You need to have [Maven](https://maven.apache.org/) installed to build the theme (Maven >= 3.1.1, Java >= 7).  
-The `mvn` command must be in the $PATH.
-
-- On macOS: `brew install maven`
-- On Debian/Ubuntu: `sudo apt-get install maven`
-- On Windows: `choco install openjdk` and `choco install maven` (Or download from [here](https://maven.apache.org/download.cgi))
+### Development
 
 ```bash
+# Start development server with hot reload
+npm run dev
+
+# Run Storybook for component development
+npm run storybook
+```
+
+### Building
+
+```bash
+# Build the Keycloak theme JAR files
+npm run build-keycloak-theme
+
+# Build only the Keycloak theme (without Vite build)
+npm run build:keycloak
+
+# Format code with Prettier
+npm run format
+```
+
+### Testing & Running
+
+```bash
+# Run Keycloak locally with the built theme
+npm run run-keycloak
+```
+
+This command starts a Docker container with Keycloak and your custom theme loaded.
+Access at: http://localhost:8080
+
+-   Username: `admin`
+-   Password: `admin`
+
+## Development Workflow
+
+### 1. Initial Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### 2. Component Development
+
+For isolated component development, use Storybook:
+
+```bash
+npm run storybook
+```
+
+This opens Storybook at http://localhost:6006 where you can develop and test individual components.
+
+### 3. Theme Development
+
+Head to [Quick Start Guide](https://docs.keycloakify.dev/) for Keycloakify theme development.
+
+### 4. Building for Production
+
+```bash
+# Build the complete theme
 npm run build-keycloak-theme
 ```
 
-Note that by default Keycloakify generates multiple .jar files for different versions of Keycloak.  
-You can customize this behavior, see documentation [here](https://docs.keycloakify.dev/features/compiler-options/keycloakversiontargets).
+This creates JAR files in `dist_keycloak/` that can be deployed to Keycloak.
 
-# Initializing the account theme
-
-```bash
-npx keycloakify initialize-account-theme
-```
-
-# Initializing the email theme
+### 5. Local Testing with Keycloak
 
 ```bash
-npx keycloakify initialize-email-theme
+# Build the theme first
+npm run build-keycloak-theme
+
+# Run Keycloak with your theme
+npm run run-keycloak
 ```
 
-# GitHub Actions
+Navigate to http://localhost:8080 and test your theme in a real Keycloak environment.
 
-The starter comes with a generic GitHub Actions workflow that builds the theme and publishes
-the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v10.0.0).  
-To release a new version **just update the `package.json` version and push**.
+## Integration with Shared Packages
 
-To enable the workflow go to your fork of this repository on GitHub then navigate to:
-`Settings` > `Actions` > `Workflow permissions`, select `Read and write permissions`.
+This theme leverages the monorepo's shared packages:
+
+-   **[`@madrasah/ui`](../../shared/ui)**: UI components and utilities
+-   **[`@madrasah/tokens`](../../shared/tokens)**: Design tokens and CSS variables
+-   **[`@madrasah/typescript-config`](../../shared/typescript-config)**: TypeScript configuration
+-   **[`@madrasah/eslint-config`](../../shared/eslint-config)**: ESLint rules
+
+## Troubleshooting
+
+### Build Issues
+
+1. Ensure Maven is installed and in PATH: `mvn --version`
+2. Clear build cache: `rm -rf dist/ dist_keycloak/ build/`
+3. Reinstall dependencies: `rm -rf node_modules && npm install`
+
+### Theme Not Loading
+
+1. Check JAR file exists in `dist_keycloak/`
+2. Verify Keycloak version compatibility
+3. Check Keycloak logs for errors
+
+## Contributing
+
+1. Follow the [main project guidelines](../../README.md)
+2. Use shared configurations from the monorepo
+3. Test theme in both development and Keycloak environments
+4. Format code with `npm run format` before committing
+
+## Links
+
+-   [Keycloakify Documentation](https://docs.keycloakify.dev/)
+-   [Keycloak Documentation](https://www.keycloak.org/documentation)
+-   [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
+-   [Main Project README](../../README.md)
