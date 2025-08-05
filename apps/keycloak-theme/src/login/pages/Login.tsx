@@ -81,9 +81,6 @@ export default function Login(props: ExtendedPageProps<Extract<KcContext, { page
                                                 type="button"
                                                 size="sm"
                                             >
-                                                {p.iconClasses && (
-                                                    <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>
-                                                )}
                                                 <span
                                                     className={clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text")}
                                                     dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}

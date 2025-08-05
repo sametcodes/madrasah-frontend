@@ -72,7 +72,7 @@ export default function Register(props: RegisterProps) {
                 {recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined) && (
                     <div className="form-group">
                         <div className="flex flex-col gap-2">
-                            <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
+                            <div className="g-recaptcha w-full" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
                         </div>
                     </div>
                 )}
@@ -125,7 +125,7 @@ function TermsAcceptance(props: {
         <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
                 <Label className="text-gray-600">{msg("termsTitle")}</Label>
-                <div id="kc-registration-terms-text" className="text-sm text-gray-600 p-3 border rounded-md bg-gray-50">
+                <div id="kc-registration-terms-text" className="text-gray-600">
                     {msg("termsText")}
                 </div>
             </div>
