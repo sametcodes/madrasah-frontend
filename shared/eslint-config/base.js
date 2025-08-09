@@ -38,8 +38,9 @@ export const config = [
   {
     // Custom project rules migrated from legacy .eslintrc.js (non-React specific)
     rules: {
-      // TypeScript rules
-      '@typescript-eslint/no-unused-vars': 'error',
+      // TypeScript rules - Let TypeScript handle unused vars detection
+      'no-unused-vars': 'off', // Disable base rule as it can report incorrect errors
+      '@typescript-eslint/no-unused-vars': 'off', // Let TypeScript's noUnusedLocals handle this
       '@typescript-eslint/no-use-before-define': 'error',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-empty-interface': 'off',

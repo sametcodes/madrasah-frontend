@@ -1,23 +1,32 @@
-import pluginNext from '@next/eslint-plugin-next';
-
+import { FlatCompat } from '@eslint/eslintrc';
 import { config as reactConfig } from './react-internal.js';
+
+const compat = new FlatCompat({
+  baseDirectory: import.meta.dirname,
+});
 
 /**
  * A custom ESLint configuration for libraries that use Next.js.
  *
  * @type {import("eslint").Linter.Config}
  * */
-export const nextJsConfig = [
+export const config = [
   ...reactConfig,
-  {
-    plugins: {
-      '@next/next': pluginNext,
+  ...compat.config({
+    extends: ['next', 'next/core-web-vitals'],
+    settings: {
+      next: {
+        rootDir: 'apps/tedris',
+      },
     },
     rules: {
-      ...pluginNext.configs.recommended.rules,
-      ...pluginNext.configs['core-web-vitals'].rules,
-      // Disable pages directory warning for app directory projects
       '@next/next/no-html-link-for-pages': 'off',
+    },
+  }),
+  {
+    // Override Next.js default no-unused-vars config - let TypeScript handle this instead
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   {
