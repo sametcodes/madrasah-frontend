@@ -30,7 +30,7 @@ export const config = [
       // React scope no longer necessary with new JSX transform.
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      
+
       // React-specific rules from legacy config
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'react/button-has-type': 'off',
