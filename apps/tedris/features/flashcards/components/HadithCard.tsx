@@ -1,20 +1,19 @@
 'use client';
 
-import { Bookmark, BookOpen } from 'lucide-react';
-import { MouseEvent, TouchEvent, useState } from 'react';
+import { HadithCard as HadithCardType } from '@madrasah/types';
+import { useState, TouchEvent, MouseEvent } from 'react';
+import { BookOpen, Bookmark } from 'lucide-react';
+import FlashCard from './FlashCard';
+import { useFlashCards } from '../hooks/useFlashCards';
 
-import { toDisplay } from '../../lib/flashCardUtils';
-import { FlashCard } from '@madrasah/types';
+type HadithCardProps = HadithCardType;
 
-import { useFlashCards } from '../../hooks/useFlashCards';
-import FlashCardComponent from './FlashCard';
-
-export default function FlashCardContent(card: FlashCard) {
+export default function HadithCard({ id, fullText, partialText, type }: HadithCardProps) {
   const [flipped, setFlipped] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
-  const data = toDisplay(card);
+
   const { toggleMemorized, isCardMemorized } = useFlashCards();
-  const memorized = isCardMemorized(data.id);
+  const memorized = isCardMemorized(id);
 
   const handleTouchStart = (e: TouchEvent | MouseEvent) => {
     const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX;
@@ -36,7 +35,7 @@ export default function FlashCardContent(card: FlashCard) {
   const handleCardFlip = () => setFlipped((prev) => !prev);
 
   return (
-    <div className="relative h-[500px] w-full">
+    <div className="relative w-full h-[500px]">
       <div
         className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
         style={{
@@ -50,45 +49,39 @@ export default function FlashCardContent(card: FlashCard) {
         onMouseLeave={handleTouchEnd}
       >
         {/* Ön Yüz */}
-        <div
-          className="backface-hidden absolute w-full"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-          }}
-        >
-          <FlashCardComponent>
-            <Header title={data.title} />
-            <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">{data.question}</p>
-            <CardActions onFlip={handleCardFlip} memorized={memorized} onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })} />
-          </FlashCardComponent>
+        <div className="absolute backface-hidden w-full" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+          <FlashCard>
+            <Header />
+            <p className="text-lg sm:text-xl whitespace-pre-wrap break-words text-gray-400">{partialText}</p>
+            <CardActions onFlip={handleCardFlip} memorized={memorized} onToggleMemorized={() => toggleMemorized({ id, type })} />
+          </FlashCard>
         </div>
 
         {/* Arka Yüz */}
         <div
-          className="rotate-y-180 backface-hidden absolute w-full"
+          className="absolute rotate-y-180 backface-hidden w-full"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
-          <FlashCardComponent>
-            <Header title={data.title} />
-            <p className="text-primary whitespace-pre-wrap break-words text-lg font-semibold sm:text-xl">{data.value}</p>
-            <CardActions onFlip={handleCardFlip} memorized={memorized} onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })} />
-          </FlashCardComponent>
+          <FlashCard>
+            <Header />
+            <p className="text-lg sm:text-xl whitespace-pre-wrap break-words text-primary font-semibold">{fullText}</p>
+            <CardActions onFlip={handleCardFlip} memorized={memorized} onToggleMemorized={() => toggleMemorized({ id, type })} />
+          </FlashCard>
         </div>
       </div>
     </div>
   );
 }
 
-function Header({ title = '' }) {
+function Header() {
   return (
-    <div className="text-primary mb-4 flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2 text-primary mb-4">
       <BookOpen size={20} />
-      <h3 className="text-base font-semibold sm:text-lg">{title ?? ''}</h3>
+      <h3 className="text-base sm:text-lg font-semibold">Hadis Kartı</h3>
     </div>
   );
 }
@@ -102,17 +95,17 @@ type CardActionsProps = {
 function CardActions({ onFlip, memorized, onToggleMemorized }: CardActionsProps) {
   return (
     <div className="mt-4 flex flex-col items-center gap-4">
-      <button onClick={onFlip} className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors">
+      <button onClick={onFlip} className="p-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors">
         <BookOpen size={20} />
       </button>
       <button
         onClick={onToggleMemorized}
-        className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${
+        className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors ${
           memorized ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
         }`}
       >
         <Bookmark size={16} />
-        <span className="text-sm font-medium">{memorized ? 'Tekrarla' : 'Ezberledim'}</span>
+        <span className="text-sm font-medium">{memorized ? 'Ezberlendi' : 'Ezberle'}</span>
       </button>
     </div>
   );
