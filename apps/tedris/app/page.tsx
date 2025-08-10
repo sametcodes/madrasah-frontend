@@ -1,7 +1,7 @@
 import { Button } from '@madrasah/ui/components/button';
 import { getServerSession } from 'next-auth';
-import KeycloakLogin from '../components/keycloak/login';
-import KeycloakLogout from '../components/keycloak/logout';
+import KeycloakLogin from '../features/keycloak/login';
+import KeycloakLogout from '../features/keycloak/logout';
 import authOptions from '../lib/auth_options';
 
 export default async function Home() {
