@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { FlashCard } from '@madrasah/types';
 
-import FlashCardContent from './FlashCardContent';
+import FlashCardContent from './flashcardContent';
 
 type FlashCardListProps = {
   cards: FlashCard[];

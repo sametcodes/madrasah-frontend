@@ -1,5 +1,5 @@
 import { FlashCard, FlashCardType, HadithCard, VocabCard } from '@madrasah/types';
-import FlashCardList from '../../features/flashcards/components/FlashCardList';
+import FlashCardList from '../../features/flashcards/components/flashcardList';
 
 const hadith: HadithCard = {
   id: 'asd',

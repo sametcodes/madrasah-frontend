@@ -7,7 +7,7 @@ import { toDisplay } from '../utils/flashCardUtils';
 import { FlashCard } from '@madrasah/types';
 
 import { useFlashCards } from '../hooks/useFlashCards';
-import FlashCardComponent from './FlashCard';
+import FlashCardComponent from './flashcard';
 
 export default function FlashCardContent(card: FlashCard) {
   const [flipped, setFlipped] = useState(false);

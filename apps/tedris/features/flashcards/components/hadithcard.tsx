@@ -3,7 +3,7 @@
 import { HadithCard as HadithCardType } from '@madrasah/types';
 import { useState, TouchEvent, MouseEvent } from 'react';
 import { BookOpen, Bookmark } from 'lucide-react';
-import FlashCard from './FlashCard';
+import FlashCard from './flashcard';
 import { useFlashCards } from '../hooks/useFlashCards';
 
 type HadithCardProps = HadithCardType;
