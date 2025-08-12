@@ -8,9 +8,11 @@ interface IATFormGroupProps {
   wrapperClass?: string;
   placeholder?: string;
   type?: string;
+  value: string | number;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function ATFormGroup({ id, label, wrapperClass = 'mb-6', placeholder, type = 'text' }: IATFormGroupProps) {
+function ATFormGroup({ id, label, wrapperClass = 'mb-6', placeholder, type = 'text', value, onChange }: IATFormGroupProps) {
   return (
     <div className={wrapperClass}>
       {label && (
@@ -18,7 +20,7 @@ function ATFormGroup({ id, label, wrapperClass = 'mb-6', placeholder, type = 'te
           {label}
         </Label>
       )}
-      <Input key={id} type={type} placeholder={placeholder} />
+      <Input key={id} type={type} placeholder={placeholder} value={value} onChange={onChange} />
     </div>
   );
 }

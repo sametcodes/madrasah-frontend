@@ -57,7 +57,7 @@ export default function FlashCardContent(card: FlashCard) {
             WebkitBackfaceVisibility: 'hidden',
           }}
         >
-          <FlashCardComponent>
+          <FlashCardComponent className="mx-auto">
             <Header title={data.title} />
             <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">{data.question}</p>
             <CardActions onFlip={handleCardFlip} memorized={memorized} onToggleMemorized={() => toggleMemorized({ id: data.id, type: data.type })} />

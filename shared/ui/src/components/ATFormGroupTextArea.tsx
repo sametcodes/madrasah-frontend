@@ -10,9 +10,11 @@ interface IATFormGroupTextAreaProps {
   placeholder?: string;
   rows?: number;
   inputClassName?: string;
+  value: string | number;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
-function ATFormGroupTextArea({ id, label, wrapperClass = 'mb-6', placeholder, rows = 4, inputClassName = '' }: IATFormGroupTextAreaProps) {
+function ATFormGroupTextArea({ id, label, wrapperClass = 'mb-6', placeholder, rows = 4, inputClassName = '', value, onChange }: IATFormGroupTextAreaProps) {
   return (
     <div className={cn(wrapperClass)}>
       {label && (
@@ -21,7 +23,7 @@ function ATFormGroupTextArea({ id, label, wrapperClass = 'mb-6', placeholder, ro
         </Label>
       )}
 
-      <Textarea key={id} placeholder={placeholder} rows={rows} className={inputClassName} />
+      <Textarea key={id} placeholder={placeholder} rows={rows} className={inputClassName} value={value} onChange={onChange} />
     </div>
   );
 }
