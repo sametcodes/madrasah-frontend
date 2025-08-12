@@ -10,6 +10,9 @@
       "dependsOn": ["^lint"],
       "env": ["KEYCLOAK_CLIENT_ID", "KEYCLOAK_CLIENT_SECRET", "KEYCLOAK_ISSUER"]
     },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
     "dev": {
       "dependsOn": ["lint"],
       "cache": false,
