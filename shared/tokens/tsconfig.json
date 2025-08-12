@@ -1,10 +1,9 @@
 {
-  "extends": "@madrasah/typescript-config/react-library",
+  "extends": "@madrasah/typescript-config/base",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@madrasah/ui/*": ["../../shared/ui/src/*"]
     },
   },
   "include": ["**/*.ts", "**/*.tsx"],

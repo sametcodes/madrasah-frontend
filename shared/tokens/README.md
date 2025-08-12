@@ -62,8 +62,8 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 
 ```css
 /* globals.css or main.css */
-@import '@madrasah/tokens/css';
-@import 'tailwindcss';
+@import "@madrasah/tokens/css";
+@import "tailwindcss";
 ```
 
 ### 2. Use in your components
@@ -72,8 +72,12 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 // Tokens are available as Tailwind utilities with semantic naming
 <div className="bg-background-neutral-primary text-text-neutral-primary border border-border-neutral-primary">
   <h1 className="text-text-brand-primary">Hello World</h1>
-  <p className="text-text-neutral-secondary">This uses semantic design tokens</p>
-  <button className="bg-background-success-bold text-text-success-inverse">Success Button</button>
+  <p className="text-text-neutral-secondary">
+    This uses semantic design tokens
+  </p>
+  <button className="bg-background-success-bold text-text-success-inverse">
+    Success Button
+  </button>
 </div>
 ```
 
@@ -116,11 +120,11 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 You can also import tokens as JavaScript objects:
 
 ```javascript
-import tokens from '@madrasah/tokens';
+import tokens from "@madrasah/tokens";
 
 // Access parsed token values
-console.log(tokens['background-color-brand-primary']); // rgba(12, 74, 110, 1)
-console.log(tokens['text-color-neutral-primary']); // rgba(17, 24, 39, 1)
+console.log(tokens["background-color-brand-primary"]); // rgba(12, 74, 110, 1)
+console.log(tokens["text-color-neutral-primary"]); // rgba(17, 24, 39, 1)
 ```
 
 ## CSS Custom Properties

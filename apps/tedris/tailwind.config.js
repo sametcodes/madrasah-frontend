@@ -7,6 +7,6 @@ const config = {
     '../../shared/ui/components/**/*.{js,ts,jsx,tsx}',
     '../../shared/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
-};
+}
 
-export default config;
+export default config

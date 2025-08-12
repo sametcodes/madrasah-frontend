@@ -10,10 +10,12 @@
     "scripts": {
         "dev": "vite",
         "storybook": "storybook dev -p 6006",
-        "format": "prettier . --write",
+        "lint": "eslint . --max-warnings 0",
+        "lint:fix": "eslint . --max-warnings 0 --fix",
         "build-keycloak-theme": "vite build && keycloakify build",
         "build:keycloak": "keycloakify build",
-        "run-keycloak": "docker run -p 127.0.0.1:8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v \"$(pwd)/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme.jar\" quay.io/keycloak/keycloak:26.3.2 start-dev"
+        "run-keycloak": "docker run -p 127.0.0.1:8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin -v \"$(pwd)/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme.jar\" quay.io/keycloak/keycloak:26.3.2 start-dev",
+        "check-types": "tsc --noEmit"
     },
     "license": "MIT",
     "keywords": [],
@@ -25,7 +27,6 @@
         "tailwindcss": "^4.1.11"
     },
     "devDependencies": {
-        "@eslint/js": "^9.15.0",
         "@madrasah/eslint-config": "*",
         "@madrasah/typescript-config": "*",
         "@storybook/react": "^8.1.10",
@@ -36,17 +37,10 @@
         "@typescript-eslint/eslint-plugin": "^8.15.0",
         "@typescript-eslint/parser": "^8.15.0",
         "@vitejs/plugin-react": "^4.2.1",
-        "eslint": "^9.15.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-react": "^7.37.2",
-        "eslint-plugin-react-hooks": "^5.0.0",
-        "eslint-plugin-react-refresh": "^0.4.14",
-        "eslint-plugin-storybook": "^0.11.1",
         "globals": "^15.12.0",
         "prettier": "3.3.1",
         "storybook": "^8.1.10",
         "typescript": "^5.2.2",
-        "typescript-eslint": "^8.15.0",
         "vite": "^5.0.8"
     }
 }
