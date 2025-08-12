@@ -1,21 +1,43 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import * as React from "react"
+import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
-import { cn } from "@madrasah/ui/lib/utils";
+import { cn } from "@madrasah/ui/lib/utils"
 
-interface SeparatorProps extends Omit<React.ComponentProps<typeof SeparatorPrimitive.Root>, "children"> {
-  label?: string;
-  labelClassName?: string;
+interface SeparatorProps
+  extends Omit<
+    React.ComponentProps<typeof SeparatorPrimitive.Root>,
+    "children"
+  > {
+  label?: string
+  labelClassName?: string
 }
 
-function Separator({ className, orientation = "horizontal", decorative = true, label, labelClassName, ...props }: SeparatorProps) {
+function Separator({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  label,
+  labelClassName,
+  ...props
+}: SeparatorProps) {
   // If there's a label, render the labeled version
   if (label) {
     return (
-      <div className={cn("relative flex items-center", orientation === "vertical" ? "flex-col h-full" : "w-full", className)}>
-        <div className={cn("bg-border shrink-0", orientation === "horizontal" ? "h-px flex-1" : "w-px flex-1")} />
+      <div
+        className={cn(
+          "relative flex items-center",
+          orientation === "vertical" ? "flex-col h-full" : "w-full",
+          className,
+        )}
+      >
+        <div
+          className={cn(
+            "bg-border shrink-0",
+            orientation === "horizontal" ? "h-px flex-1" : "w-px flex-1",
+          )}
+        />
         <span
           className={cn(
             "bg-background px-3 py-1 text-sm text-muted-foreground whitespace-nowrap",
@@ -25,9 +47,14 @@ function Separator({ className, orientation = "horizontal", decorative = true, l
         >
           {label}
         </span>
-        <div className={cn("bg-border shrink-0", orientation === "horizontal" ? "h-px flex-1" : "w-px flex-1")} />
+        <div
+          className={cn(
+            "bg-border shrink-0",
+            orientation === "horizontal" ? "h-px flex-1" : "w-px flex-1",
+          )}
+        />
       </div>
-    );
+    )
   }
 
   // Default separator without label
@@ -42,7 +69,7 @@ function Separator({ className, orientation = "horizontal", decorative = true, l
       )}
       {...props}
     />
-  );
+  )
 }
 
-export { Separator };
+export { Separator }

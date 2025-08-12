@@ -60,7 +60,7 @@ Paylaşılan UI paketine yeni Shadcn/ui bileşenleri eklemek için:
 Örnek:
 
 ```tsx
-import { Button, Card } from '@madrasah/ui';
+import { Button, Card } from "@madrasah/ui";
 ```
 
 ## Dizin Yapısı

@@ -14,48 +14,48 @@ const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 const doMakeUserConfirmPassword = true;
 
 export default function KcPage(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+  const { kcContext } = props;
 
-    const { i18n } = useI18n({ kcContext });
+  const { i18n } = useI18n({ kcContext });
 
-    return (
-        <Suspense>
-            {(() => {
-                switch (kcContext.pageId) {
-                    case "login.ftl":
-                        return (
-                            <Login
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                            />
-                        );
-                    case "register.ftl":
-                        return (
-                            <Register
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                                UserProfileFormFields={UserProfileFormFields}
-                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-                            />
-                        );
-                    default:
-                        return (
-                            <DefaultPage
-                                kcContext={kcContext}
-                                i18n={i18n}
-                                classes={classes}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                                UserProfileFormFields={UserProfileFormFields}
-                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-                            />
-                        );
-                }
-            })()}
-        </Suspense>
-    );
+  return (
+    <Suspense>
+      {(() => {
+        switch (kcContext.pageId) {
+          case "login.ftl":
+            return (
+              <Login
+                {...{ kcContext, i18n, classes }}
+                Template={Template}
+                doUseDefaultCss={true}
+              />
+            );
+          case "register.ftl":
+            return (
+              <Register
+                {...{ kcContext, i18n, classes }}
+                Template={Template}
+                doUseDefaultCss={true}
+                UserProfileFormFields={UserProfileFormFields}
+                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+              />
+            );
+          default:
+            return (
+              <DefaultPage
+                kcContext={kcContext}
+                i18n={i18n}
+                classes={classes}
+                Template={Template}
+                doUseDefaultCss={true}
+                UserProfileFormFields={UserProfileFormFields}
+                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+              />
+            );
+        }
+      })()}
+    </Suspense>
+  );
 }
 
 const classes = {} satisfies { [key in ClassKey]?: string };

@@ -1,12 +1,12 @@
-import { Button } from '@madrasah/ui/components/button';
-import { getServerSession } from 'next-auth';
-import KeycloakLogin from '../components/keycloak/login';
-import KeycloakLogout from '../components/keycloak/logout';
-import authOptions from '../lib/auth_options';
+import { Button } from '@madrasah/ui/components/button'
+import { getServerSession } from 'next-auth'
+import KeycloakLogin from '../components/keycloak/login'
+import KeycloakLogout from '../components/keycloak/logout'
+import authOptions from '../lib/auth_options'
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-  if (!session) return <KeycloakLogin />;
+  const session = await getServerSession(authOptions)
+  if (!session) return <KeycloakLogin />
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -17,5 +17,5 @@ export default async function Home() {
         </div>
       </div>
     </main>
-  );
+  )
 }

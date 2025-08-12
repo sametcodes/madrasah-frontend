@@ -1,5 +1,5 @@
 {
-  "extends": "@madrasah/typescript-config/nextjs.json",
+  "extends": "@madrasah/typescript-config/react-library",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
