@@ -1,11 +1,12 @@
-import { config } from '@madrasah/eslint-config/base';
-import { rules } from 'eslint-config-prettier';
+import { baseConfig } from '@madrasah/eslint-config/base'
 
-export default [
-  ...config,
+const iconsConfig = [
+  ...baseConfig,
   {
     rules: {
       'no-restricted-imports': 'off',
     },
   },
-];
+]
+
+export default iconsConfig

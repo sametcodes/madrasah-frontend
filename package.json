@@ -10,6 +10,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint --fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo clean",
     "prepare": "husky"
@@ -20,26 +21,25 @@
     "@turbo/gen": "^1.13.4",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.3",
     "husky": "^9.1.7",
+    "jiti": "^2.5.1",
     "prettier": "^3.6.2",
-    "turbo": "^1.13.4",
+    "turbo": "^2.5.5",
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@madrasah/eslint-config": "^0.0.0",
-    "@madrasah/typescript-config": "^0.0.0"
+    "@madrasah/eslint-config": "*",
+    "@madrasah/typescript-config": "*"
   },
   "resolutions": {
+    "eslint": "^9.33.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "overrides": {
+    "eslint": "^9.33.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
-  }
+  },
+  "packageManager": "npm@10.9.2"
 }
