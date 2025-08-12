@@ -10,11 +10,11 @@ import {
   PaypalLogoIcon,
   Icon,
   IconProps,
-} from "@madrasah/icons";
+} from '@madrasah/icons'
 
 type IconMapProps = IconProps & {
-  alias: string;
-};
+  alias: string
+}
 
 const iconComponents: Record<string, Icon> = {
   google: GoogleLogoIcon,
@@ -26,11 +26,11 @@ const iconComponents: Record<string, Icon> = {
   github: GithubLogoIcon,
   gitlab: GitlabLogoIcon,
   paypal: PaypalLogoIcon,
-};
+}
 
 export const IconMap = (props: IconMapProps): JSX.Element | null => {
-  const { alias, ...iconProps } = props;
-  const IconComponent = iconComponents[alias];
+  const { alias, ...iconProps } = props
+  const IconComponent = iconComponents[alias]
 
-  return IconComponent ? <IconComponent {...iconProps} /> : null;
-};
+  return IconComponent ? <IconComponent {...iconProps} /> : null
+}

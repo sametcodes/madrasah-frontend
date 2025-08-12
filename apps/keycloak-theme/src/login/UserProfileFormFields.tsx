@@ -1,32 +1,32 @@
-import type { JSX } from "keycloakify/tools/JSX";
-import { useEffect, Fragment } from "react";
-import { assert } from "keycloakify/tools/assert";
-import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
-import type { KcClsx } from "keycloakify/login/lib/kcClsx";
+import type { JSX } from 'keycloakify/tools/JSX'
+import { useEffect, Fragment } from 'react'
+import { assert } from 'keycloakify/tools/assert'
+import { useIsPasswordRevealed } from 'keycloakify/tools/useIsPasswordRevealed'
+import type { KcClsx } from 'keycloakify/login/lib/kcClsx'
 import {
   useUserProfileForm,
   getButtonToDisplayForMultivaluedAttributeField,
   type FormAction,
   type FormFieldError,
-} from "keycloakify/login/lib/useUserProfileForm";
-import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
-import type { Attribute } from "keycloakify/login/KcContext";
-import type { KcContext } from "./KcContext";
-import type { I18n } from "./i18n";
+} from 'keycloakify/login/lib/useUserProfileForm'
+import type { UserProfileFormFieldsProps } from 'keycloakify/login/UserProfileFormFieldsProps'
+import type { Attribute } from 'keycloakify/login/KcContext'
+import type { KcContext } from './KcContext'
+import type { I18n } from './i18n'
 
-import { Input } from "@madrasah/ui/components/input";
-import { Label } from "@madrasah/ui/components/label";
-import { Checkbox } from "@madrasah/ui/components/checkbox";
-import { Button } from "@madrasah/ui/components/button";
+import { Input } from '@madrasah/ui/components/input'
+import { Label } from '@madrasah/ui/components/label'
+import { Checkbox } from '@madrasah/ui/components/checkbox'
+import { Button } from '@madrasah/ui/components/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@madrasah/ui/components/select";
-import { cn } from "@madrasah/ui/lib/utils";
-import { EyeIcon, EyeSlashIcon } from "@madrasah/icons";
+} from '@madrasah/ui/components/select'
+import { cn } from '@madrasah/ui/lib/utils'
+import { EyeIcon, EyeSlashIcon } from '@madrasah/icons'
 
 export default function UserProfileFormFields(
   props: UserProfileFormFieldsProps<KcContext, I18n>,
@@ -39,9 +39,9 @@ export default function UserProfileFormFields(
     doMakeUserConfirmPassword,
     BeforeField,
     AfterField,
-  } = props;
+  } = props
 
-  const { advancedMsg } = i18n;
+  const { advancedMsg } = i18n
 
   const {
     formState: { formFieldStates, isFormSubmittable },
@@ -50,13 +50,13 @@ export default function UserProfileFormFields(
     kcContext,
     i18n,
     doMakeUserConfirmPassword,
-  });
+  })
 
   useEffect(() => {
-    onIsFormSubmittableValueChange(isFormSubmittable);
-  }, [isFormSubmittable]);
+    onIsFormSubmittableValueChange(isFormSubmittable)
+  }, [isFormSubmittable, onIsFormSubmittableValueChange])
 
-  const groupNameRef = { current: "" };
+  const groupNameRef = { current: '' }
 
   return (
     <>
@@ -84,24 +84,24 @@ export default function UserProfileFormFields(
                 className="grid w-full max-w-sm items-center gap-2"
                 style={{
                   display:
-                    attribute.annotations.inputType === "hidden" ||
-                    (attribute.name === "password-confirm" &&
-                      !doMakeUserConfirmPassword)
-                      ? "none"
+                    attribute.annotations.inputType === 'hidden'
+                    || (attribute.name === 'password-confirm'
+                      && !doMakeUserConfirmPassword)
+                      ? 'none'
                       : undefined,
                 }}
               >
                 <div className="flex flex-col gap-1">
                   <Label htmlFor={attribute.name} className="text-gray-600">
-                    {advancedMsg(attribute.displayName ?? "")}
+                    {advancedMsg(attribute.displayName ?? '')}
                     {attribute.required && (
                       <span className="text-red-500 ml-1">*</span>
                     )}
                   </Label>
                 </div>
                 <div className="flex flex-col gap-1">
-                  {attribute.annotations.inputHelperTextBefore !==
-                    undefined && (
+                  {attribute.annotations.inputHelperTextBefore
+                    !== undefined && (
                     <div
                       className="text-sm text-gray-500"
                       id={`form-help-text-before-${attribute.name}`}
@@ -147,30 +147,30 @@ export default function UserProfileFormFields(
                 </div>
               </div>
             </Fragment>
-          );
+          )
         },
       )}
     </>
-  );
+  )
 }
 
 function GroupLabel(props: {
-  attribute: Attribute;
+  attribute: Attribute
   groupNameRef: {
-    current: string;
-  };
-  i18n: I18n;
-  kcClsx: KcClsx;
+    current: string
+  }
+  i18n: I18n
+  kcClsx: KcClsx
 }) {
-  const { attribute, groupNameRef, i18n } = props;
+  const { attribute, groupNameRef, i18n } = props
 
-  const { advancedMsg } = i18n;
+  const { advancedMsg } = i18n
 
   if (attribute.group?.name !== groupNameRef.current) {
-    groupNameRef.current = attribute.group?.name ?? "";
+    groupNameRef.current = attribute.group?.name ?? ''
 
-    if (groupNameRef.current !== "") {
-      assert(attribute.group !== undefined);
+    if (groupNameRef.current !== '') {
+      assert(attribute.group !== undefined)
 
       return (
         <div
@@ -182,11 +182,11 @@ function GroupLabel(props: {
           )}
         >
           {(() => {
-            const groupDisplayHeader = attribute.group.displayHeader ?? "";
-            const groupHeaderText =
-              groupDisplayHeader !== ""
+            const groupDisplayHeader = attribute.group.displayHeader ?? ''
+            const groupHeaderText
+              = groupDisplayHeader !== ''
                 ? advancedMsg(groupDisplayHeader)
-                : attribute.group.name;
+                : attribute.group.name
 
             return (
               <div className="flex flex-col gap-1">
@@ -197,14 +197,14 @@ function GroupLabel(props: {
                   {groupHeaderText}
                 </Label>
               </div>
-            );
+            )
           })()}
           {(() => {
-            const groupDisplayDescription =
-              attribute.group.displayDescription ?? "";
+            const groupDisplayDescription
+              = attribute.group.displayDescription ?? ''
 
-            if (groupDisplayDescription !== "") {
-              const groupDescriptionText = advancedMsg(groupDisplayDescription);
+            if (groupDisplayDescription !== '') {
+              const groupDescriptionText = advancedMsg(groupDisplayDescription)
 
               return (
                 <div className="flex flex-col gap-1">
@@ -215,43 +215,43 @@ function GroupLabel(props: {
                     {groupDescriptionText}
                   </Label>
                 </div>
-              );
+              )
             }
 
-            return null;
+            return null
           })()}
         </div>
-      );
+      )
     }
   }
 
-  return null;
+  return null
 }
 
 function FieldErrors(props: {
-  attribute: Attribute;
-  displayableErrors: FormFieldError[];
-  fieldIndex: number | undefined;
-  kcClsx: KcClsx;
+  attribute: Attribute
+  displayableErrors: FormFieldError[]
+  fieldIndex: number | undefined
+  kcClsx: KcClsx
 }) {
-  const { attribute, fieldIndex } = props;
+  const { attribute, fieldIndex } = props
 
   const displayableErrors = props.displayableErrors.filter(
-    (error) => error.fieldIndex === fieldIndex,
-  );
+    error => error.fieldIndex === fieldIndex,
+  )
 
   if (displayableErrors.length === 0) {
-    return null;
+    return null
   }
 
   return (
     <span
-      id={`input-error-${attribute.name}${fieldIndex === undefined ? "" : `-${fieldIndex}`}`}
+      id={`input-error-${attribute.name}${fieldIndex === undefined ? '' : `-${fieldIndex}`}`}
       className="text-error-secondary text-sm"
       aria-live="polite"
     >
       {displayableErrors
-        .filter((error) => error.fieldIndex === fieldIndex)
+        .filter(error => error.fieldIndex === fieldIndex)
         .map(({ errorMessage }, i, arr) => (
           <Fragment key={i}>
             {errorMessage}
@@ -259,36 +259,36 @@ function FieldErrors(props: {
           </Fragment>
         ))}
     </span>
-  );
+  )
 }
 
 type InputFieldByTypeProps = {
-  attribute: Attribute;
-  valueOrValues: string | string[];
-  displayableErrors: FormFieldError[];
-  dispatchFormAction: React.Dispatch<FormAction>;
-  i18n: I18n;
-  kcClsx: KcClsx;
-};
+  attribute: Attribute
+  valueOrValues: string | string[]
+  displayableErrors: FormFieldError[]
+  dispatchFormAction: React.Dispatch<FormAction>
+  i18n: I18n
+  kcClsx: KcClsx
+}
 
 function InputFieldByType(props: InputFieldByTypeProps) {
-  const { attribute, valueOrValues } = props;
+  const { attribute, valueOrValues } = props
 
   switch (attribute.annotations.inputType) {
     // NOTE: Unfortunately, keycloak won't let you define input type="hidden" in the Admin Console.
     // sometimes in the future it might.
-    case "hidden":
+    case 'hidden':
       return (
         <input type="hidden" name={attribute.name} value={valueOrValues} />
-      );
-    case "textarea":
-      return <TextareaTag {...props} />;
-    case "select":
-    case "multiselect":
-      return <SelectTag {...props} />;
-    case "select-radiobuttons":
-    case "multiselect-checkboxes":
-      return <InputTagSelects {...props} />;
+      )
+    case 'textarea':
+      return <TextareaTag {...props} />
+    case 'select':
+    case 'multiselect':
+      return <SelectTag {...props} />
+    case 'select-radiobuttons':
+    case 'multiselect-checkboxes':
+      return <InputTagSelects {...props} />
     default: {
       if (valueOrValues instanceof Array) {
         return (
@@ -297,14 +297,14 @@ function InputFieldByType(props: InputFieldByTypeProps) {
               <InputTag key={i} {...props} fieldIndex={i} />
             ))}
           </>
-        );
+        )
       }
 
-      const inputNode = <InputTag {...props} fieldIndex={undefined} />;
+      const inputNode = <InputTag {...props} fieldIndex={undefined} />
 
       if (
-        attribute.name === "password" ||
-        attribute.name === "password-confirm"
+        attribute.name === 'password'
+        || attribute.name === 'password-confirm'
       ) {
         return (
           <PasswordWrapper
@@ -314,26 +314,26 @@ function InputFieldByType(props: InputFieldByTypeProps) {
           >
             {inputNode}
           </PasswordWrapper>
-        );
+        )
       }
 
-      return inputNode;
+      return inputNode
     }
   }
 }
 
 function PasswordWrapper(props: {
-  kcClsx: KcClsx;
-  i18n: I18n;
-  passwordInputId: string;
-  children: JSX.Element;
+  kcClsx: KcClsx
+  i18n: I18n
+  passwordInputId: string
+  children: JSX.Element
 }) {
-  const { i18n, passwordInputId, children } = props;
+  const { i18n, passwordInputId, children } = props
 
-  const { msgStr } = i18n;
+  const { msgStr } = i18n
 
-  const { isPasswordRevealed, toggleIsPasswordRevealed } =
-    useIsPasswordRevealed({ passwordInputId });
+  const { isPasswordRevealed, toggleIsPasswordRevealed }
+    = useIsPasswordRevealed({ passwordInputId })
 
   return (
     <div className="flex flex-row gap-1">
@@ -342,20 +342,22 @@ function PasswordWrapper(props: {
         variant="outline"
         type="button"
         aria-label={msgStr(
-          isPasswordRevealed ? "hidePassword" : "showPassword",
+          isPasswordRevealed ? 'hidePassword' : 'showPassword',
         )}
         aria-controls={passwordInputId}
         onClick={toggleIsPasswordRevealed}
         className="shrink-0 border-[var(--input)]"
       >
-        {isPasswordRevealed ? (
-          <EyeSlashIcon size={16} />
-        ) : (
-          <EyeIcon size={16} />
-        )}
+        {isPasswordRevealed
+          ? (
+              <EyeSlashIcon size={16} />
+            )
+          : (
+              <EyeIcon size={16} />
+            )}
       </Button>
     </div>
-  );
+  )
 }
 
 function InputTag(
@@ -368,42 +370,42 @@ function InputTag(
     valueOrValues,
     i18n,
     displayableErrors,
-  } = props;
+  } = props
 
-  const { advancedMsgStr } = i18n;
+  const { advancedMsgStr } = i18n
 
   return (
     <>
       <Input
         type={(() => {
-          const { inputType } = attribute.annotations;
+          const { inputType } = attribute.annotations
 
-          if (inputType?.startsWith("html5-")) {
-            return inputType.slice(6);
+          if (inputType?.startsWith('html5-')) {
+            return inputType.slice(6)
           }
 
-          return inputType ?? "text";
+          return inputType ?? 'text'
         })()}
         id={attribute.name}
         name={attribute.name}
         value={(() => {
           if (fieldIndex !== undefined) {
-            assert(valueOrValues instanceof Array);
-            return valueOrValues[fieldIndex];
+            assert(valueOrValues instanceof Array)
+            return valueOrValues[fieldIndex]
           }
 
-          assert(typeof valueOrValues === "string");
+          assert(typeof valueOrValues === 'string')
 
-          return valueOrValues;
+          return valueOrValues
         })()}
         className={cn(
-          displayableErrors.find((error) => error.fieldIndex === fieldIndex) !==
-            undefined &&
-            "border-error-secondary !text-error-primary placeholder:text-error-primary",
+          displayableErrors.find(error => error.fieldIndex === fieldIndex)
+          !== undefined
+          && 'border-error-secondary !text-error-primary placeholder:text-error-primary',
         )}
         aria-invalid={
-          displayableErrors.find((error) => error.fieldIndex === fieldIndex) !==
-          undefined
+          displayableErrors.find(error => error.fieldIndex === fieldIndex)
+          !== undefined
         }
         disabled={attribute.readOnly}
         autoComplete={attribute.autocomplete}
@@ -417,43 +419,41 @@ function InputTag(
             ([key, value]) => [`data-${key}`, value],
           ),
         )}
-        onChange={(event) =>
+        onChange={event =>
           dispatchFormAction({
-            action: "update",
+            action: 'update',
             name: attribute.name,
             valueOrValues: (() => {
               if (fieldIndex !== undefined) {
-                assert(valueOrValues instanceof Array);
+                assert(valueOrValues instanceof Array)
 
                 return valueOrValues.map((value, i) => {
                   if (i === fieldIndex) {
-                    return event.target.value;
+                    return event.target.value
                   }
 
-                  return value;
-                });
+                  return value
+                })
               }
 
-              return event.target.value;
+              return event.target.value
             })(),
-          })
-        }
+          })}
         onBlur={() =>
           dispatchFormAction({
-            action: "focus lost",
+            action: 'focus lost',
             name: attribute.name,
             fieldIndex: fieldIndex,
-          })
-        }
+          })}
       />
       {(() => {
         if (fieldIndex === undefined) {
-          return null;
+          return null
         }
 
-        assert(valueOrValues instanceof Array);
+        assert(valueOrValues instanceof Array)
 
-        const values = valueOrValues;
+        const values = valueOrValues
 
         return (
           <>
@@ -471,30 +471,30 @@ function InputTag(
               i18n={i18n}
             />
           </>
-        );
+        )
       })()}
     </>
-  );
+  )
 }
 
 function AddRemoveButtonsMultiValuedAttribute(props: {
-  attribute: Attribute;
-  values: string[];
-  fieldIndex: number;
-  dispatchFormAction: React.Dispatch<Extract<FormAction, { action: "update" }>>;
-  i18n: I18n;
+  attribute: Attribute
+  values: string[]
+  fieldIndex: number
+  dispatchFormAction: React.Dispatch<Extract<FormAction, { action: 'update' }>>
+  i18n: I18n
 }) {
-  const { attribute, values, fieldIndex, dispatchFormAction, i18n } = props;
+  const { attribute, values, fieldIndex, dispatchFormAction, i18n } = props
 
-  const { msg } = i18n;
+  const { msg } = i18n
 
   const { hasAdd, hasRemove } = getButtonToDisplayForMultivaluedAttributeField({
     attribute,
     values,
     fieldIndex,
-  });
+  })
 
-  const idPostfix = `-${attribute.name}-${fieldIndex + 1}`;
+  const idPostfix = `-${attribute.name}-${fieldIndex + 1}`
 
   return (
     <div className="flex gap-2 mt-2">
@@ -506,13 +506,12 @@ function AddRemoveButtonsMultiValuedAttribute(props: {
           size="sm"
           onClick={() =>
             dispatchFormAction({
-              action: "update",
+              action: 'update',
               name: attribute.name,
               valueOrValues: values.filter((_, i) => i !== fieldIndex),
-            })
-          }
+            })}
         >
-          {msg("remove")}
+          {msg('remove')}
         </Button>
       )}
       {hasAdd && (
@@ -523,130 +522,128 @@ function AddRemoveButtonsMultiValuedAttribute(props: {
           size="sm"
           onClick={() =>
             dispatchFormAction({
-              action: "update",
+              action: 'update',
               name: attribute.name,
-              valueOrValues: [...values, ""],
-            })
-          }
+              valueOrValues: [...values, ''],
+            })}
         >
-          {msg("addValue")}
+          {msg('addValue')}
         </Button>
       )}
     </div>
-  );
+  )
 }
 
 function InputTagSelects(props: InputFieldByTypeProps) {
-  const { attribute, dispatchFormAction, i18n, valueOrValues } = props;
+  const { attribute, dispatchFormAction, i18n, valueOrValues } = props
 
-  const { inputType } = attribute.annotations;
+  const { inputType } = attribute.annotations
 
   assert(
-    inputType === "select-radiobuttons" ||
-      inputType === "multiselect-checkboxes",
-  );
+    inputType === 'select-radiobuttons'
+    || inputType === 'multiselect-checkboxes',
+  )
 
   const options = (() => {
     walk: {
-      const { inputOptionsFromValidation } = attribute.annotations;
+      const { inputOptionsFromValidation } = attribute.annotations
 
       if (inputOptionsFromValidation === undefined) {
-        break walk;
+        break walk
       }
 
       const validator = (
         attribute.validators as Record<string, { options?: string[] }>
-      )[inputOptionsFromValidation];
+      )[inputOptionsFromValidation]
 
       if (validator === undefined) {
-        break walk;
+        break walk
       }
 
       if (validator.options === undefined) {
-        break walk;
+        break walk
       }
 
-      return validator.options;
+      return validator.options
     }
 
-    return attribute.validators.options?.options ?? [];
-  })();
+    return attribute.validators.options?.options ?? []
+  })()
 
   return (
     <div className="flex flex-col gap-3">
-      {options.map((option) => (
+      {options.map(option => (
         <div key={option} className="flex items-center space-x-2">
-          {inputType === "multiselect-checkboxes" ? (
-            <Checkbox
-              id={`${attribute.name}-${option}`}
-              name={attribute.name}
-              value={option}
-              checked={
-                valueOrValues instanceof Array
-                  ? valueOrValues.includes(option)
-                  : valueOrValues === option
-              }
-              onCheckedChange={(checked) =>
-                dispatchFormAction({
-                  action: "update",
-                  name: attribute.name,
-                  valueOrValues: (() => {
-                    const isChecked = !!checked;
+          {inputType === 'multiselect-checkboxes'
+            ? (
+                <Checkbox
+                  id={`${attribute.name}-${option}`}
+                  name={attribute.name}
+                  value={option}
+                  checked={
+                    valueOrValues instanceof Array
+                      ? valueOrValues.includes(option)
+                      : valueOrValues === option
+                  }
+                  onCheckedChange={checked =>
+                    dispatchFormAction({
+                      action: 'update',
+                      name: attribute.name,
+                      valueOrValues: (() => {
+                        const isChecked = !!checked
 
-                    if (valueOrValues instanceof Array) {
-                      const newValues = [...valueOrValues];
+                        if (valueOrValues instanceof Array) {
+                          const newValues = [...valueOrValues]
 
-                      if (isChecked) {
-                        newValues.push(option);
-                      } else {
-                        newValues.splice(newValues.indexOf(option), 1);
-                      }
+                          if (isChecked) {
+                            newValues.push(option)
+                          }
+                          else {
+                            newValues.splice(newValues.indexOf(option), 1)
+                          }
 
-                      return newValues;
-                    }
+                          return newValues
+                        }
 
-                    return isChecked ? option : "";
-                  })(),
-                })
-              }
-              disabled={attribute.readOnly}
-              aria-invalid={props.displayableErrors.length !== 0}
-            />
-          ) : (
-            <input
-              type="radio"
-              id={`${attribute.name}-${option}`}
-              name={attribute.name}
-              value={option}
-              className="w-4 h-4 text-brand-primary bg-gray-100 border-gray-300 focus:ring-brand-primary focus:ring-2"
-              aria-invalid={props.displayableErrors.length !== 0}
-              disabled={attribute.readOnly}
-              checked={
-                valueOrValues instanceof Array
-                  ? valueOrValues.includes(option)
-                  : valueOrValues === option
-              }
-              onChange={(event) =>
-                dispatchFormAction({
-                  action: "update",
-                  name: attribute.name,
-                  valueOrValues: event.target.checked ? option : "",
-                })
-              }
-              onBlur={() =>
-                dispatchFormAction({
-                  action: "focus lost",
-                  name: attribute.name,
-                  fieldIndex: undefined,
-                })
-              }
-            />
-          )}
+                        return isChecked ? option : ''
+                      })(),
+                    })}
+                  disabled={attribute.readOnly}
+                  aria-invalid={props.displayableErrors.length !== 0}
+                />
+              )
+            : (
+                <input
+                  type="radio"
+                  id={`${attribute.name}-${option}`}
+                  name={attribute.name}
+                  value={option}
+                  className="w-4 h-4 text-brand-primary bg-gray-100 border-gray-300 focus:ring-brand-primary focus:ring-2"
+                  disabled={attribute.readOnly}
+                  checked={
+                    valueOrValues instanceof Array
+                      ? valueOrValues.includes(option)
+                      : valueOrValues === option
+                  }
+                  onChange={event =>
+                    dispatchFormAction({
+                      action: 'update',
+                      name: attribute.name,
+                      valueOrValues: event.target.checked ? option : '',
+                    })}
+                  onBlur={() =>
+                    dispatchFormAction({
+                      action: 'focus lost',
+                      name: attribute.name,
+                      fieldIndex: undefined,
+                    })}
+                />
+              )}
           <Label
             htmlFor={`${attribute.name}-${option}`}
             className={cn(
-              "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-              attribute.readOnly && "opacity-50",
+              'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+              attribute.readOnly && 'opacity-50',
             )}
           >
             {inputLabel(i18n, attribute, option)}
@@ -654,25 +651,25 @@ function InputTagSelects(props: InputFieldByTypeProps) {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 function TextareaTag(props: InputFieldByTypeProps) {
-  const { attribute, dispatchFormAction, displayableErrors, valueOrValues } =
-    props;
+  const { attribute, dispatchFormAction, displayableErrors, valueOrValues }
+    = props
 
-  assert(typeof valueOrValues === "string");
+  assert(typeof valueOrValues === 'string')
 
-  const value = valueOrValues;
+  const value = valueOrValues
 
   return (
     <textarea
       id={attribute.name}
       name={attribute.name}
       className={cn(
-        "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-        displayableErrors.length !== 0 &&
-          "border-error-secondary !text-error-primary placeholder:text-error-primary",
+        'flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+        displayableErrors.length !== 0
+        && 'border-error-secondary !text-error-primary placeholder:text-error-primary',
       )}
       aria-invalid={displayableErrors.length !== 0}
       disabled={attribute.readOnly}
@@ -692,22 +689,20 @@ function TextareaTag(props: InputFieldByTypeProps) {
           : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
       }
       value={value}
-      onChange={(event) =>
+      onChange={event =>
         dispatchFormAction({
-          action: "update",
+          action: 'update',
           name: attribute.name,
           valueOrValues: event.target.value,
-        })
-      }
+        })}
       onBlur={() =>
         dispatchFormAction({
-          action: "focus lost",
+          action: 'focus lost',
           name: attribute.name,
           fieldIndex: undefined,
-        })
-      }
+        })}
     />
-  );
+  )
 }
 
 function SelectTag(props: InputFieldByTypeProps) {
@@ -717,37 +712,37 @@ function SelectTag(props: InputFieldByTypeProps) {
     displayableErrors,
     i18n,
     valueOrValues,
-  } = props;
+  } = props
 
-  const isMultiple = attribute.annotations.inputType === "multiselect";
+  const isMultiple = attribute.annotations.inputType === 'multiselect'
 
   const options = (() => {
     walk: {
-      const { inputOptionsFromValidation } = attribute.annotations;
+      const { inputOptionsFromValidation } = attribute.annotations
 
       if (inputOptionsFromValidation === undefined) {
-        break walk;
+        break walk
       }
 
-      assert(typeof inputOptionsFromValidation === "string");
+      assert(typeof inputOptionsFromValidation === 'string')
 
       const validator = (
         attribute.validators as Record<string, { options?: string[] }>
-      )[inputOptionsFromValidation];
+      )[inputOptionsFromValidation]
 
       if (validator === undefined) {
-        break walk;
+        break walk
       }
 
       if (validator.options === undefined) {
-        break walk;
+        break walk
       }
 
-      return validator.options;
+      return validator.options
     }
 
-    return attribute.validators.options?.options ?? [];
-  })();
+    return attribute.validators.options?.options ?? []
+  })()
 
   if (isMultiple) {
     // For multiselect, fall back to native select as shadcn Select doesn't support multiple
@@ -756,9 +751,9 @@ function SelectTag(props: InputFieldByTypeProps) {
         id={attribute.name}
         name={attribute.name}
         className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-          displayableErrors.length !== 0 &&
-            "border-error-secondary !text-error-primary",
+          'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+          displayableErrors.length !== 0
+          && 'border-error-secondary !text-error-primary',
         )}
         aria-invalid={displayableErrors.length !== 0}
         disabled={attribute.readOnly}
@@ -769,49 +764,46 @@ function SelectTag(props: InputFieldByTypeProps) {
             : parseInt(`${attribute.annotations.inputTypeSize}`)
         }
         value={valueOrValues}
-        onChange={(event) =>
+        onChange={event =>
           dispatchFormAction({
-            action: "update",
+            action: 'update',
             name: attribute.name,
             valueOrValues: Array.from(event.target.selectedOptions).map(
-              (option) => option.value,
+              option => option.value,
             ),
-          })
-        }
+          })}
         onBlur={() =>
           dispatchFormAction({
-            action: "focus lost",
+            action: 'focus lost',
             name: attribute.name,
             fieldIndex: undefined,
-          })
-        }
+          })}
       >
-        {options.map((option) => (
+        {options.map(option => (
           <option key={option} value={option}>
             {inputLabel(i18n, attribute, option)}
           </option>
         ))}
       </select>
-    );
+    )
   }
 
   // For single select, use shadcn Select component
   return (
     <Select
-      value={typeof valueOrValues === "string" ? valueOrValues : ""}
-      onValueChange={(value) =>
+      value={typeof valueOrValues === 'string' ? valueOrValues : ''}
+      onValueChange={value =>
         dispatchFormAction({
-          action: "update",
+          action: 'update',
           name: attribute.name,
           valueOrValues: value,
-        })
-      }
+        })}
       disabled={attribute.readOnly}
     >
       <SelectTrigger
         className={cn(
-          displayableErrors.length !== 0 &&
-            "border-error-secondary !text-error-primary",
+          displayableErrors.length !== 0
+          && 'border-error-secondary !text-error-primary',
         )}
         aria-invalid={displayableErrors.length !== 0}
       >
@@ -821,30 +813,30 @@ function SelectTag(props: InputFieldByTypeProps) {
         <SelectItem value="">
           <span className="text-gray-500">Select an option...</span>
         </SelectItem>
-        {options.map((option) => (
+        {options.map(option => (
           <SelectItem key={option} value={option}>
             {inputLabel(i18n, attribute, option)}
           </SelectItem>
         ))}
       </SelectContent>
     </Select>
-  );
+  )
 }
 
 function inputLabel(i18n: I18n, attribute: Attribute, option: string) {
-  const { advancedMsg } = i18n;
+  const { advancedMsg } = i18n
 
   if (attribute.annotations.inputOptionLabels !== undefined) {
-    const { inputOptionLabels } = attribute.annotations;
+    const { inputOptionLabels } = attribute.annotations
 
-    return advancedMsg(inputOptionLabels[option] ?? option);
+    return advancedMsg(inputOptionLabels[option] ?? option)
   }
 
   if (attribute.annotations.inputOptionLabelsI18nPrefix !== undefined) {
     return advancedMsg(
       `${attribute.annotations.inputOptionLabelsI18nPrefix}.${option}`,
-    );
+    )
   }
 
-  return option;
+  return option
 }
