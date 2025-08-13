@@ -16,12 +16,17 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
             <span>Home</span>
           </Link>
           <Link
+            prefetch
             href="/learning"
             className={cn('px-4 py-2 text-sm font-medium', activeTab === 'learning' && 'text-brand-primary border-b-2 border-brand-primary')}
           >
             <span>Learning</span>
           </Link>
-          <Link href="/cards" className={cn('px-4 py-2 text-sm font-medium', activeTab === 'cards' && 'text-brand-primary border-b-2 border-brand-primary')}>
+          <Link
+            prefetch
+            href="/cards"
+            className={cn('px-4 py-2 text-sm font-medium', activeTab === 'cards' && 'text-brand-primary border-b-2 border-brand-primary')}
+          >
             <span>Cards</span>
           </Link>
         </div>
