@@ -1,6 +1,6 @@
-import type { User } from 'next-auth';
+import type { User } from "next-auth";
 
-declare module 'next-auth' {
+declare module "next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `Provider` React Context
    */
@@ -55,7 +55,7 @@ declare module 'next-auth' {
     refresh_token: string;
     token_type: string;
     id_token: string;
-    'not-before-policy': number;
+    "not-before-policy": number;
     session_state: string;
     scope: string;
   }
@@ -73,7 +73,7 @@ declare module 'next-auth' {
   }
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT {
     name: string;
