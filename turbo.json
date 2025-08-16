@@ -4,7 +4,16 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
-      "env": ["KEYCLOAK_CLIENT_ID", "KEYCLOAK_CLIENT_SECRET", "KEYCLOAK_ISSUER"]
+      "env": [
+        "KEYCLOAK_CLIENT_ID",
+        "KEYCLOAK_CLIENT_SECRET",
+        "KEYCLOAK_ISSUER",
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
+        "NEXT_PUBLIC_KEYCLOAK_ISSUER",
+        "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID",
+        "NEXT_PUBLIC_NEXTAUTH_URL"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"],
@@ -17,7 +26,16 @@
       "dependsOn": ["lint"],
       "cache": false,
       "persistent": true,
-      "env": ["KEYCLOAK_CLIENT_ID", "KEYCLOAK_CLIENT_SECRET", "KEYCLOAK_ISSUER"]
+      "env": [
+        "KEYCLOAK_CLIENT_ID",
+        "KEYCLOAK_CLIENT_SECRET",
+        "KEYCLOAK_ISSUER",
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
+        "NEXT_PUBLIC_KEYCLOAK_ISSUER",
+        "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID",
+        "NEXT_PUBLIC_NEXTAUTH_URL"
+      ]
     },
     "clean": {
       "cache": false
