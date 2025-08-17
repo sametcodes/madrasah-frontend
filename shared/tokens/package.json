@@ -28,7 +28,7 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0"
+    "@types/node": "^24.3.0"
   },
   "keywords": [
     "design-tokens",
