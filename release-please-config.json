@@ -11,7 +11,8 @@
       "pull-request-title-pattern": "chore(keycloak-theme): release ${version}",
       "pull-request-header": "Release for Keycloak Theme",
       "component": "keycloak-theme",
-      "path": "apps/keycloak-theme"
+      "path": "apps/keycloak-theme",
+      "extra-files": ["shared/**"]
     },
     "apps/tedris": {
       "release-type": "node",
@@ -20,7 +21,8 @@
       "pull-request-title-pattern": "chore(tedris): release ${version}",
       "pull-request-header": "Release for Tedris SPA",
       "component": "tedris",
-      "path": "apps/tedris"
+      "path": "apps/tedris",
+      "extra-files": ["shared/**"]
     }
   }
 }

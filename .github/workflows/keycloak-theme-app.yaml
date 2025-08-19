@@ -1,9 +1,11 @@
 name: Keycloak Theme Deploy
 
 on:
-  push:
-    tags:
-      - 'keycloak-theme-v*'
+  workflow_dispatch:
+  workflow_call:
+  release:
+    types:
+      - created
 
 permissions:
   contents: read
@@ -11,7 +13,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || startsWith(github.ref, 'refs/tags/keycloak-theme-v') }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || startsWith(github.event.release.tag_name, 'keycloak-theme-') }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
