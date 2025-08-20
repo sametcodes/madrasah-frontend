@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf .next",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "echo 'Tests not implemented'"
   },
   "dependencies": {
     "@madrasah/hooks": "*",
