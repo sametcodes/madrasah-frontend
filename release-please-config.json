@@ -18,9 +18,9 @@
       "release-type": "node",
       "package-name": "tedris",
       "include-component-in-tag": true,
-      "pull-request-title-pattern": "chore(tedris): release ${version}",
-      "pull-request-header": "Release for Tedris SPA",
-      "component": "tedris",
+      "pull-request-title-pattern": "chore(tedris-web): release ${version}",
+      "pull-request-header": "Release for Tedris Web",
+      "component": "tedris-web",
       "path": "apps/tedris",
       "extra-files": ["shared/**"]
     }
