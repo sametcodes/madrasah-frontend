@@ -64,7 +64,8 @@ jobs:
           port: ${{ secrets.KC_SSH_PORT || 22 }}
           script: |
             echo "Creating backup of existing theme..."
-            sudo cp /opt/keycloak/themes/madrasah-theme.jar /opt/keycloak/themes/madrasah-theme.jar.backup.$(date +%Y%m%d_%H%M%S) || echo "No existing theme to backup"
+            cp /opt/keycloak/themes/madrasah-theme.jar /opt/keycloak/themes/madrasah-theme.jar.backup.$(date +%Y%m%d_%H%M%S) || echo "No existing theme to backup"
+      
       - name: Copy JAR file to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -74,7 +75,6 @@ jobs:
           port: ${{ secrets.KC_SSH_PORT || 22 }}
           source: "apps/keycloak-theme/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar"
           target: "/opt/keycloak/themes/madrasah-theme.jar"
-          strip_components: 3
 
       - name: Restart Keycloak at Coolify
         run: | 
