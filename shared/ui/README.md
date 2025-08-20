@@ -117,7 +117,7 @@ src/
 - **Radix UI** - Accessible primitives
 - **class-variance-authority** - Component variants
 - **clsx & tailwind-merge** - Conditional classes
-- **Lucide React** - Icon library
+- **Phosphor React** - Icon library
 - **next-themes** - Theme management
 - **Zod** - Schema validation
 
