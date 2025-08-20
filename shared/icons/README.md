@@ -22,7 +22,7 @@ npm install @madrasah/icons
 ### Import All Phosphor Icons
 
 ```tsx
-import { Heart, Star, House } from '@madrasah/icons';
+import { Heart, Star, House } from "@madrasah/icons";
 
 export function MyComponent() {
   return (
@@ -38,7 +38,7 @@ export function MyComponent() {
 ### Import Custom Icons
 
 ```tsx
-import { MadrasahLogo } from '@madrasah/icons';
+import { MadrasahLogo } from "@madrasah/icons";
 
 export function Header() {
   return (
@@ -52,7 +52,7 @@ export function Header() {
 ### Mixed Usage
 
 ```tsx
-import { Heart, MadrasahLogo } from '@madrasah/icons';
+import { Heart, MadrasahLogo } from "@madrasah/icons";
 
 export function App() {
   return (
@@ -86,7 +86,12 @@ Custom icons are located in `src/custom.tsx`. They follow the same API as Phosph
 4. Export from the custom file
 
 ```tsx
-export const MyCustomIcon: React.FC<IconProps> = ({ size = 24, color = 'currentColor', weight = 'regular', ...props }) => {
+export const MyCustomIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = "currentColor",
+  weight = "regular",
+  ...props
+}) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" {...props}>
       {/* Your SVG paths */}

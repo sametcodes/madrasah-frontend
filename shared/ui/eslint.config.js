@@ -1,4 +1,14 @@
-import { config } from '@madrasah/eslint-config/react-internal';
+import { reactConfig } from "@madrasah/eslint-config/react"
 
-/** @type {import("eslint").Linter.Config} */
-export default config;
+const uiConfig = [
+  ...reactConfig,
+  {
+    rules: {
+      "max-len": "off",
+      "@typescript-eslint/no-use-before-define": "off",
+      "@stylistic/quotes": ["error", "double"],
+    },
+  },
+]
+
+export default uiConfig

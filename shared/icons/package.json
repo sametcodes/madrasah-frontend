@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Custom icon library extending Phosphor icons",
   "license": "MIT",
-  "author": "Madrasah Team",
   "type": "module",
+  "author": "Madrasah Team",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
@@ -24,7 +24,6 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./custom": "./src/custom.tsx"
+    ".": "./src/index.ts"
   }
 }

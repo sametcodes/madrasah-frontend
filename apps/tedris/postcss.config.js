@@ -1,1 +1,6 @@
-export { plugins } from '@madrasah/ui/postcss.config';
+/** @type {import('postcss-load-config').Config} */
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+}

@@ -25,17 +25,17 @@ Import components, styles, and utilities from the package:
 
 ```tsx
 // Components
-import { Button } from '@madrasah/ui/components/button';
-import { Select } from '@madrasah/ui/components/select';
+import { Button } from "@madrasah/ui/components/button";
+import { Select } from "@madrasah/ui/components/select";
 
 // Styles
-import '@madrasah/ui/globals.css';
+import "@madrasah/ui/globals.css";
 
 // Utilities
-import { cn } from '@madrasah/ui/lib/utils';
+import { cn } from "@madrasah/ui/lib/utils";
 
 // Hooks
-import { useTheme } from '@madrasah/ui/hooks/use-theme';
+import { useTheme } from "@madrasah/ui/hooks/use-theme";
 ```
 
 ## Available Exports
@@ -117,7 +117,7 @@ src/
 - **Radix UI** - Accessible primitives
 - **class-variance-authority** - Component variants
 - **clsx & tailwind-merge** - Conditional classes
-- **Lucide React** - Icon library
+- **Phosphor React** - Icon library
 - **next-themes** - Theme management
 - **Zod** - Schema validation
 

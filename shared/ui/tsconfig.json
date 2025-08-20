@@ -1,17 +1,12 @@
 {
-  "extends": "@madrasah/typescript-config/nextjs.json",
+  "extends": "@madrasah/typescript-config/react-library",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
       "@madrasah/ui/*": ["../../shared/ui/src/*"]
     },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
   },
-  "include": ["next-env.d.ts", "next.config.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

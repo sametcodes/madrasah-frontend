@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { CaretLeftIcon, CaretRightIcon } from "@madrasah/icons";
+import { useState } from "react";
 
-import { FlashCard } from '@madrasah/types';
+import { FlashCard } from "@madrasah/types";
 
-import FlashCardContent from './flashcardContent';
+import FlashCardContent from "./flashcardContent";
 
 type FlashCardListProps = {
   cards: FlashCard[];
@@ -35,16 +35,24 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center">
-      {cards[currentIndex] && <FlashCardContent key={key} {...cards[currentIndex]} />}
+      {cards[currentIndex] && (
+        <FlashCardContent key={key} {...cards[currentIndex]} />
+      )}
       <div className="mt-4 flex items-center justify-between">
-        <button onClick={handlePrevious} className="rounded-full p-2 transition-colors hover:bg-gray-100">
-          <ChevronLeft size={24} />
+        <button
+          onClick={handlePrevious}
+          className="rounded-full p-2 transition-colors hover:bg-gray-100"
+        >
+          <CaretLeftIcon size={24} />
         </button>
         <span className="text-sm text-gray-500">
           {currentIndex + 1} / {cards.length}
         </span>
-        <button onClick={handleNext} className="rounded-full p-2 transition-colors hover:bg-gray-100">
-          <ChevronRight size={24} />
+        <button
+          onClick={handleNext}
+          className="rounded-full p-2 transition-colors hover:bg-gray-100"
+        >
+          <CaretRightIcon size={24} />
         </button>
       </div>
     </div>
