@@ -23,7 +23,9 @@ jobs:
         run: npm ci
 
       - name: Lint code
-        run: npm run lint
+        run: |
+          cp apps/tedris/.env.example apps/tedris/.env
+          npm run lint
 
       - name: Run tests
         run: npm test
