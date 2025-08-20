@@ -17,6 +17,21 @@ jobs:
       actions: read
       contents: read
       security-events: write
+
+    env:
+      KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
+      KEYCLOAK_CLIENT_SECRET: ${{ secrets.KEYCLOAK_CLIENT_SECRET }}
+      KEYCLOAK_ISSUER: ${{ secrets.KEYCLOAK_ISSUER }}
+      NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+
+      NEXT_PUBLIC_KEYCLOAK_ISSUER: ${{ secrets.NEXT_PUBLIC_KEYCLOAK_ISSUER }}
+      NEXT_PUBLIC_KEYCLOAK_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID }}
+      NEXT_PUBLIC_NEXTAUTH_URL: ${{ secrets.NEXT_PUBLIC_NEXTAUTH_URL }}
+
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${{ secrets.OTEL_EXPORTER_OTLP_ENDPOINT }}
+      OTEL_SERVICE_NAME: ${{ secrets.OTEL_SERVICE_NAME }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,7 +41,8 @@ jobs:
         with:
           node-version: "22"
           cache: "npm"
-      
+
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
