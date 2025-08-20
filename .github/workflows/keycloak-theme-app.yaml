@@ -58,51 +58,24 @@ jobs:
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.HOST }}
-          username: linuxserver.io
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.KC_SSH_HOST }}
+          username: ${{ secrets.KC_SSH_USERNAME }}
+          password: ${{ secrets.KC_SSH_PASSWORD }}
+          port: ${{ secrets.KC_SSH_PORT || 22 }}
           script: |
             echo "Creating backup of existing theme..."
-            sudo cp /opt/keycloak/providers/keycloak-theme.jar /opt/keycloak/providers/keycloak-theme.jar.backup.$(date +%Y%m%d_%H%M%S) || echo "No existing theme to backup"
-            
-            echo "Stopping Keycloak service..."
-            sudo systemctl stop keycloak || echo "Keycloak service not running or not managed by systemctl"
-            
-            echo "Preparing for new theme upload..."
-            sudo rm -f /tmp/keycloak-theme.jar
-
+            cp /opt/keycloak/themes/madrasah-theme.jar /opt/keycloak/themes/madrasah-theme.jar.backup.$(date +%Y%m%d_%H%M%S) || echo "No existing theme to backup"
+      
       - name: Copy JAR file to server
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: linuxserver.io
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.KC_SSH_HOST }}
+          username: ${{ secrets.KC_SSH_USERNAME }}
+          password: ${{ secrets.KC_SSH_PASSWORD }}
+          port: ${{ secrets.KC_SSH_PORT || 22 }}
           source: "apps/keycloak-theme/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar"
-          target: "/tmp/"
-          strip_components: 3
+          target: "/opt/keycloak/themes/madrasah-theme.jar"
 
-      - name: Install new theme and restart Keycloak
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.HOST }}
-          username: linuxserver.io
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: |
-            echo "Installing new theme..."
-            sudo mv /tmp/keycloak-theme-for-kc-all-other-versions.jar /opt/keycloak/providers/keycloak-theme.jar
-            sudo chown keycloak:keycloak /opt/keycloak/providers/keycloak-theme.jar || echo "Keycloak user may not exist, skipping chown"
-            sudo chmod 644 /opt/keycloak/providers/keycloak-theme.jar
-            
-            echo "Starting Keycloak service..."
-            sudo systemctl start keycloak || echo "Starting Keycloak with alternative method..."
-            
-            echo "Waiting for Keycloak to start..."
-            sleep 30
-            
-            echo "Checking Keycloak status..."
-            sudo systemctl status keycloak || echo "Service status check failed, but deployment may still be successful"
-            
-            echo "Keycloak theme deployment completed successfully!"
+      - name: Restart Keycloak at Coolify
+        run: | 
+         curl --request GET '${{ secrets.KEYCLOAK_COOLIFY_RESTART_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'

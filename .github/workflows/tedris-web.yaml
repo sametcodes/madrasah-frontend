@@ -1,4 +1,4 @@
-name: Tedris SPA
+name: Tedris Web
 
 on:
   workflow_dispatch:
@@ -14,12 +14,12 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-tedris-spa
+  IMAGE_NAME: ${{ github.repository }}-tedris-web
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || startsWith(github.event.release.tag_name, 'tedris-spa-') }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call' || startsWith(github.event.release.tag_name, 'tedris-web-') }}
     permissions:
       contents: read
       packages: write
@@ -54,4 +54,4 @@ jobs:
 
       - name: Deploy to Coolify
         run: | 
-         curl --request GET '${{ secrets.TEDRISAT_SPA_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
+         curl --request GET '${{ secrets.TEDRIS_WEB_COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}'
