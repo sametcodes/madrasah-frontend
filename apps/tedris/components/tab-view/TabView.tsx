@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { cn } from "@madrasah/ui/lib/utils";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { cn } from '@madrasah/ui/lib/utils'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export const TabView = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
-  const activeTab = pathname.split("/").pop();
+  const pathname = usePathname()
+  const activeTab = pathname.split('/').pop()
 
   return (
     <>
@@ -15,9 +15,9 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
           <Link
             href="/home"
             className={cn(
-              "px-4 py-2 text-sm font-medium",
-              activeTab === "home" &&
-                "text-brand-primary border-b-2 border-brand-primary"
+              'px-4 py-2 text-sm font-medium',
+              activeTab === 'home'
+              && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
             <span>Home</span>
@@ -26,9 +26,9 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
             prefetch
             href="/learning"
             className={cn(
-              "px-4 py-2 text-sm font-medium",
-              activeTab === "learning" &&
-                "text-brand-primary border-b-2 border-brand-primary"
+              'px-4 py-2 text-sm font-medium',
+              activeTab === 'learning'
+              && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
             <span>Learning</span>
@@ -37,9 +37,9 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
             prefetch
             href="/cards"
             className={cn(
-              "px-4 py-2 text-sm font-medium",
-              activeTab === "cards" &&
-                "text-brand-primary border-b-2 border-brand-primary"
+              'px-4 py-2 text-sm font-medium',
+              activeTab === 'cards'
+              && 'text-brand-primary border-b-2 border-brand-primary',
             )}
           >
             <span>Cards</span>
@@ -48,5 +48,5 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
       </div>
       <main className="container mx-auto py-2">{children}</main>
     </>
-  );
-};
+  )
+}
