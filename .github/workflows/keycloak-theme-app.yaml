@@ -37,9 +37,7 @@ jobs:
           maven-version: 3.9.6
 
       - name: Install dependencies
-        run: |
-          cd apps/keycloak-theme
-          npm ci
+        run: npm ci
 
       - name: Build Keycloak theme
         run: |
