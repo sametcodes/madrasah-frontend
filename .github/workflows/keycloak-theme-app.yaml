@@ -53,17 +53,6 @@ jobs:
           fi
           echo "JAR file found successfully"
 
-      - name: Deploy to server via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.KC_SSH_HOST }}
-          username: ${{ secrets.KC_SSH_USERNAME }}
-          password: ${{ secrets.KC_SSH_PASSWORD }}
-          port: ${{ secrets.KC_SSH_PORT || 22 }}
-          script: |
-            echo "Creating backup of existing theme..."
-            cp /opt/keycloak/themes/madrasah-theme.jar /opt/keycloak/themes/madrasah-theme.jar.backup.$(date +%Y%m%d_%H%M%S) || echo "No existing theme to backup"
-      
       - name: Copy JAR file to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -72,7 +61,27 @@ jobs:
           password: ${{ secrets.KC_SSH_PASSWORD }}
           port: ${{ secrets.KC_SSH_PORT || 22 }}
           source: "apps/keycloak-theme/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar"
-          target: "/opt/keycloak/themes/madrasah-theme.jar"
+          target: "/opt/keycloak/themes"
+          strip_components: 3
+          overwrite: true
+
+      - name: Backup existing theme and activate new JAR
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.KC_SSH_HOST }}
+          username: ${{ secrets.KC_SSH_USERNAME }}
+          password: ${{ secrets.KC_SSH_PASSWORD }}
+          port: ${{ secrets.KC_SSH_PORT || 22 }}
+          script: |
+            set -e
+            if [ -f "/opt/keycloak/themes/madrasah-theme.jar" ]; then
+              echo "Backing up existing theme..."
+              cp /opt/keycloak/themes/madrasah-theme.jar /opt/keycloak/themes/madrasah-theme.jar.backup.$(date +%Y%m%d_%H%M%S)
+            else
+              echo "No existing theme to backup"
+            fi
+            echo "Activating new theme..."
+            mv -f /opt/keycloak/themes/keycloak-theme-for-kc-all-other-versions.jar /opt/keycloak/themes/madrasah-theme.jar
 
       - name: Restart Keycloak at Coolify
         run: | 
