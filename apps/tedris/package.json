@@ -1,6 +1,6 @@
 {
-  "name": "tedris",
-  "version": "0.1.0",
+  "name": "tedris-web",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf .next",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "echo 'Tests not implemented'"
   },
   "dependencies": {
     "@madrasah/hooks": "*",
@@ -24,10 +25,10 @@
     "@vercel/otel": "^1.13.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "next": "^15.4.6",
+    "next": "^15.5.0",
     "next-auth": "^4.24.11",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^4.1.11",
     "tailwindcss-animate": "^1.0.7",
@@ -35,13 +36,14 @@
   },
   "devDependencies": {
     "@madrasah/eslint-config": "*",
-    "@tailwindcss/postcss": "^4.1.11",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.33.0",
     "eslint-config-next": "^15.4.6",
+    "lightningcss": "^1.30.1",
     "postcss": "^8",
     "typescript": "^5"
   }

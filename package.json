@@ -13,33 +13,17 @@
     "check-types": "turbo run check-types",
     "lint:fix": "turbo lint -- --fix",
     "clean": "turbo clean",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "turbo test"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@turbo/gen": "^1.13.4",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
+    "@turbo/gen": "^2.5.6",
     "husky": "^9.1.7",
     "jiti": "^2.5.1",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.5",
-    "typescript": "^5.0.0"
+    "turbo": "^2.5.6"
   },
-  "dependencies": {
-    "@madrasah/eslint-config": "*",
-    "@madrasah/typescript-config": "*"
-  },
-  "resolutions": {
-    "eslint": "^9.33.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "overrides": {
-    "eslint": "^9.33.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "packageManager": "npm@10.9.2"
+  "packageManager": "npm@11.5.2"
 }
