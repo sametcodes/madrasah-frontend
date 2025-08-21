@@ -17,11 +17,11 @@
     },
     "apps/tedris": {
       "release-type": "node",
-      "package-name": "tedris",
+      "package-name": "tedris-web",
       "include-component-in-tag": true,
       "pull-request-title-pattern": "chore(tedris-web): release ${version}",
       "pull-request-header": "Release for Tedris Web",
-      "component": "tedris",
+      "component": "tedris-web",
       "path": "apps/tedris",
       "extra-files": ["shared/**"]
     }
