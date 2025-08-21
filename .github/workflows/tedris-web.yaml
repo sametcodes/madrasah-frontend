@@ -41,9 +41,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=match,pattern=^tedris-web-v(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z\.-]+)?(?:\+[0-9A-Za-z\.-]+)?)$,group=version
+            type=match,pattern=tedris-web-v(.+),group=1
             type=raw,value=latest,enable={{is_default_branch}}
-            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
