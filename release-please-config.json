@@ -13,7 +13,6 @@
     "apps/keycloak-theme": {
       "release-type": "node",
       "package-name": "madrasah-keycloak-theme",
-      "initial-version": "1.0.0",
       "include-component-in-tag": true,
       "pull-request-title-pattern": "chore(keycloak-theme): release ${version}",
       "pull-request-header": "Release for Keycloak Theme",
@@ -24,11 +23,10 @@
     "apps/tedris": {
       "release-type": "node",
       "package-name": "tedris",
-      "initial-version": "0.1.0",
       "include-component-in-tag": true,
       "pull-request-title-pattern": "chore(tedris-web): release ${version}",
       "pull-request-header": "Release for Tedris Web",
-      "component": "tedris-web",
+      "component": "tedris",
       "path": "apps/tedris",
       "extra-files": ["shared/**"]
     }
