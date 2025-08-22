@@ -23,7 +23,7 @@ RUN npm run build -- --filter=nazir-web...
 WORKDIR /app/apps/nazir
 
 # Expose the port (Next.js default is 3000)
-EXPOSE 3000
+EXPOSE 3002
 
 # Start the production server
 CMD ["npm", "start"] 
