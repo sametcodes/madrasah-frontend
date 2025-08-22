@@ -24,6 +24,26 @@
       "component": "tedris-web",
       "path": "apps/tedris",
       "extra-files": ["shared/**"]
+    },
+    "apps/nizam": {
+      "release-type": "node",
+      "package-name": "nizam-web",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(nizam-web): release ${version}",
+      "pull-request-header": "Release for Nizam Web",
+      "component": "nizam-web",
+      "path": "apps/nizam",
+      "extra-files": ["shared/**"]
+    },
+    "apps/nazir": {
+      "release-type": "node",
+      "package-name": "nazir-web",
+      "include-component-in-tag": true,
+      "pull-request-title-pattern": "chore(nazir-web): release ${version}",
+      "pull-request-header": "Release for Nazir Web",
+      "component": "nazir-web",
+      "path": "apps/nazir",
+      "extra-files": ["shared/**"]
     }
   }
 }
