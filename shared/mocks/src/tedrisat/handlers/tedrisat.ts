@@ -1,21 +1,18 @@
-import { http, HttpHandler, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { MockApiHandlers } from '../../types';
+
 import { faker } from '../faker';
 import type { Card, List, TedrisatService } from '@madrasah/services/tedrisat';
 
-type MockApiHandlers = {
-  [K in keyof TedrisatService]: TedrisatService[K] extends (...args: any[]) => any ? HttpHandler : never;
-};
-
 /**
 * This is a factory function that creates HTTP handlers for mocking API endpoints.
-* @see {@link APIService}
 */
-export const tedrisatHandlers = (baseUrl: string): MockApiHandlers => {
+export const tedrisatHandlers = (baseUrl: string): MockApiHandlers<TedrisatService> => {
   if (!baseUrl) {
     throw new Error("Base URL is required to create mock API handlers.");
   }
 
-  const handlers: MockApiHandlers = {
+  const handlers: MockApiHandlers<TedrisatService> = {
     getCards: http.get(`${baseUrl}/cards`, (): HttpResponse<Card[]> => {
       const posts = faker.helpers.multiple((_, index) => faker.tedrisat.card(index + 1), { count: 10 })
       return HttpResponse.json(posts)
