@@ -5,43 +5,14 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/cjs/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    "./api": {
-      "import": {
-        "types": "./dist/api/index.d.ts",
-        "default": "./dist/esm/api/index.mjs"
-      },
-      "require": {
-        "types": "./dist/api/index.d.ts",
-        "default": "./dist/cjs/api/index.js"
-      }
-    },
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/esm/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      }
-    },
-    "./*": {
-      "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/esm/*.mjs"
-      },
-      "require": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/cjs/*.js"
-      }
+    "./tedrisat": {
+      "types": "./src/tedrisat/index.ts",
+      "import": "./src/tedrisat/index.ts",
+      "require": "./src/tedrisat/index.ts"
     }
   },
   "scripts": {
-    "build": "npm run clean && node ./build.js",
-    "dev": "node ./build.js --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf dist",

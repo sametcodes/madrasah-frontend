@@ -9,6 +9,7 @@ import { Header } from '~/components/header/header'
 import { ClientProviders } from '~/components/providers/client-providers'
 import { TabView } from '~/components/tab-view/TabView'
 import { MSWComponent } from '~/components/msw-component'
+import { MockIndicator } from '~/components/mock-indicator'
 
 export const metadata: Metadata = {
   title: 'Madrasah - Online Medrese',
@@ -28,8 +29,8 @@ export default async function RootLayout({
   return (
     <html lang="tr">
       <body className={inter.className}>
-        
         <MSWComponent />
+        <MockIndicator />
         <ClientProviders>
           <Header />
           <TabView>{children}</TabView>

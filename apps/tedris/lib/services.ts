@@ -1,16 +1,16 @@
 import 'server-only'; // Bu kodun istemciye gitmesini engeller
 
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
-import { APIService, createAPIClient } from '@madrasah/services/api';
+import { TedrisatService, createTedrisatClient } from '@madrasah/services/tedrisat';
 import { env } from '~/env';
 
-export const getAuthenticatedApiService = (cookies: ReadonlyRequestCookies): APIService => {
+export const getAuthenticatedApiService = (cookies: ReadonlyRequestCookies): TedrisatService => {
   const token = cookies.get('next-auth.session-token')?.value;
 
-  const client = createAPIClient({
+  const client = createTedrisatClient({
     baseUrl: env.TEDRISAT_API_BASE_URL,
     token: token,
   });
 
-  return new APIService(client);
+  return new TedrisatService(client);
 };

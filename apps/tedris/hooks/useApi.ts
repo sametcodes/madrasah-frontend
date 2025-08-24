@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
-import { APIService, createAPIClient } from '@madrasah/services/api';
+import { TedrisatService, createTedrisatClient } from '@madrasah/services/tedrisat';
 import { env } from '~/env';
 
 /**
@@ -14,7 +14,7 @@ import { env } from '~/env';
  *   - `api`: An instance of `APIService` if authenticated, otherwise `null`.
  *   - `status`: The current authentication status, which can be `'loading'`, `'authenticated'`, or `'unauthenticated'`.
  */
-export const useApi = (): { api: APIService | null; status: 'loading' | 'authenticated' | 'unauthenticated' } => {
+export const useApi = (): { api: TedrisatService | null; status: 'loading' | 'authenticated' | 'unauthenticated' } => {
   const { data: session, status } = useSession();
 
   const accessToken = session?.accessToken as string | undefined;
@@ -24,12 +24,12 @@ export const useApi = (): { api: APIService | null; status: 'loading' | 'authent
       return null;
     }
 
-    const client = createAPIClient({
+    const client = createTedrisatClient({
       baseUrl: env.NEXT_PUBLIC_TEDRISAT_API_BASE_URL!,
       token: accessToken
     });
 
-    return new APIService(client);
+    return new TedrisatService(client);
   }, [accessToken, status]);
 
   return { api: apiServiceInstance, status };

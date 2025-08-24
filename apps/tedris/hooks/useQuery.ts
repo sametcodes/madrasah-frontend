@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApi } from './useApi';
-import { APIService } from '@madrasah/services/api';
+import { TedrisatService } from '@madrasah/services/tedrisat';
 
 /**
  * 
@@ -14,7 +14,7 @@ type QueryResult<T> = { data: T | null; error: string | null };
  * @param options.skip A condition to prevent the request from being made.
  */
 export const useQuery = <T>(
-  queryFunction: (api: APIService) => Promise<QueryResult<T>>,
+  queryFunction: (api: TedrisatService) => Promise<QueryResult<T>>,
   options: { skip?: boolean } = {}
 ) => {
   const { api, status } = useApi();

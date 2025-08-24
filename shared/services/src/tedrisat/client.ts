@@ -5,7 +5,7 @@ export interface APIConfig {
   token?: string
 }
 
-export const createAPIClient = (config: APIConfig) => {
+export const createTedrisatClient = (config: APIConfig) => {
   return createHttpClient(config.baseUrl, {
     headers: {
       Authorization: `Bearer ${config.token}`,
