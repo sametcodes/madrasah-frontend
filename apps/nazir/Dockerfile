@@ -9,21 +9,21 @@ COPY tsconfig.json ./
 
 # Copy shared packages and configs
 COPY shared/ ./shared/
-COPY apps/nizam/ ./apps/nizam/
+COPY apps/nazir/ ./apps/nazir/
 
 # Copy .env.example as .env for build-time environment
-RUN cp apps/nizam/.env.example apps/nizam/.env
+RUN cp apps/nazir/.env.example apps/nazir/.env
 
 # Install dependencies
 RUN npm ci
 
 # Build the application using Turbo
-RUN npm run build -- --filter=nizam-web...
+RUN npm run build -- --filter=nazir-web...
 
-WORKDIR /app/apps/nizam
+WORKDIR /app/apps/nazir
 
 # Expose the port (Next.js default is 3000)
-EXPOSE 3001
+EXPOSE 3002
 
 # Start the production server
 CMD ["npm", "start"] 
