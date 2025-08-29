@@ -34,6 +34,11 @@ npm install
 npm run dev
 ```
 
+
+## Recommended VS Code Extensions
+
+To ensure a consistent and productive development experience, it is highly recommended to install the recommended VS Code extensions for this codebase. Search `@recommended` in the Extensions Marketplace, and install all.
+
 3. Build all packages:
 
 ```bash
