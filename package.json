@@ -13,7 +13,7 @@
     "check-types": "turbo run check-types",
     "lint:fix": "turbo lint -- --fix",
     "clean": "turbo clean",
-    "prepare": "husky",
+    "prepare": "husky && husky install",
     "test": "turbo test"
   },
   "devDependencies": {
