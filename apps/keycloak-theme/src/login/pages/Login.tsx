@@ -321,9 +321,7 @@ function PasswordWrapper(props: {
       <Button
         variant="outline"
         type="button"
-        aria-label={msgStr(
-          isPasswordRevealed ? 'hidePassword' : 'showPassword',
-        )}
+        aria-label={msgStr(isPasswordRevealed ? 'hidePassword' : 'showPassword')}
         aria-controls={passwordInputId}
         onClick={toggleIsPasswordRevealed}
         className="border-[var(--input)]"
