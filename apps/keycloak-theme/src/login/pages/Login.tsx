@@ -231,7 +231,7 @@ export default function Login(
                     )}
                     placeholder="Password"
                     className={cn(
-                      'w-full pr-10', // w-full: container genişliği, pr-10: göz ikonu için sağ padding
+                      'w-full pr-10', // w-full: container width, pr-10: right padding for eye icon
                       messagesPerField.existsError('username', 'password')
                       && 'border border-error-secondary !text-error-primary placeholder:text-error-primary',
                     )}

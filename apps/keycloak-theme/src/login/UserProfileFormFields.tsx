@@ -358,7 +358,7 @@ function InputTag(
           return valueOrValues
         })()}
         className={cn(
-          // Password field'ları için göz ikonu alanı
+          // Eye icon area for password fields
           (attribute.name === 'password' || attribute.name === 'password-confirm') && 'pr-10',
           displayableErrors.find(error => error.fieldIndex === fieldIndex)
           !== undefined

@@ -22,21 +22,21 @@ export function PasswordWrapper(props: {
   return (
     <div className="relative">
       {' '}
-      {/* Göz ikonunu input içine almak için relative container */}
+      {/* Relative container to place eye icon inside input */}
       {children}
       <Button
-        variant="ghost" // Şeffaf görünüm için
+        variant="ghost" // For transparent appearance
         type="button"
         aria-label={msgStr(
           isPasswordRevealed ? 'hidePassword' : 'showPassword',
         )}
         aria-controls={passwordInputId}
         onClick={toggleIsPasswordRevealed}
-        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent" // Input içinde absolute konumlandırma
+        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent" // Absolute positioning inside input
       >
         {isPasswordRevealed ? <EyeSlashIcon className="h-4 w-4 text-gray-500" /> : <EyeIcon className="h-4 w-4 text-gray-500" />}
         {' '}
-        {/* İkon boyutları ve renkleri */}
+        {/* Icon sizes and colors */}
       </Button>
     </div>
   )

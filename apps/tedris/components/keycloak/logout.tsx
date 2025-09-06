@@ -7,7 +7,7 @@ const KeycloakLogoutButton = () => {
   const session = useSession()
   const signOutWithRedirect = async () => {
     const idtoken = session.data?.idToken
-    // TODO: Exception yönetimi eklenmeli NEXT_PUBLIC_KEYCLOAK_CLIENT_ID, NEXT_PUBLIC_NEXTAUTH_URL ve idtoken için
+    // TODO: Exception management should be added for NEXT_PUBLIC_KEYCLOAK_CLIENT_ID, NEXT_PUBLIC_NEXTAUTH_URL and idtoken
     const params = new URLSearchParams({
       client_id: env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID ?? '',
       post_logout_redirect_uri: env.NEXT_PUBLIC_NEXTAUTH_URL ?? '',
@@ -20,7 +20,7 @@ const KeycloakLogoutButton = () => {
   return <Button onClick={() => signOutWithRedirect()}>ÇIKIŞ YAP</Button>
 }
 const KeycloakLogout = () => {
-  // TODO:Session Provider should not to be there. It must be move global provider of app context.
+  // TODO: Session Provider should not be there. It must be moved to global provider of app context.
   return (
     <SessionProvider>
       <KeycloakLogoutButton />
