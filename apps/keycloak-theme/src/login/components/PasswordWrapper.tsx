@@ -25,14 +25,14 @@ export function PasswordWrapper(props: {
       {/* Relative container to place eye icon inside input */}
       {children}
       <Button
-        variant="ghost" // For transparent appearance
+        variant="ghost"
         type="button"
         aria-label={msgStr(
           isPasswordRevealed ? 'hidePassword' : 'showPassword',
         )}
         aria-controls={passwordInputId}
         onClick={toggleIsPasswordRevealed}
-        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent" // Absolute positioning inside input
+        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
       >
         {isPasswordRevealed ? <EyeSlashIcon className="h-4 w-4 text-gray-500" /> : <EyeIcon className="h-4 w-4 text-gray-500" />}
         {' '}

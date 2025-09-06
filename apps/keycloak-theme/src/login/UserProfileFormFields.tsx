@@ -358,7 +358,6 @@ function InputTag(
           return valueOrValues
         })()}
         className={cn(
-          // Eye icon area for password fields
           (attribute.name === 'password' || attribute.name === 'password-confirm') && 'pr-10',
           displayableErrors.find(error => error.fieldIndex === fieldIndex)
           !== undefined
@@ -706,7 +705,6 @@ function SelectTag(props: InputFieldByTypeProps) {
   })()
 
   if (isMultiple) {
-    // For multiselect, fall back to native select as shadcn Select doesn't support multiple
     return (
       <select
         id={attribute.name}
@@ -749,7 +747,6 @@ function SelectTag(props: InputFieldByTypeProps) {
     )
   }
 
-  // For single select, use shadcn Select component
   return (
     <Select
       value={typeof valueOrValues === 'string' ? valueOrValues : ''}
