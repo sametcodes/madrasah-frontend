@@ -6,6 +6,7 @@
       "@/*": ["./*"],
       "@madrasah/ui/*": ["../../shared/ui/src/*"]
     },
+    "moduleResolution": "bundler"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

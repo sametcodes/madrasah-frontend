@@ -4,4 +4,4 @@
 export * from '@phosphor-icons/react'
 
 // Export custom icons
-export * from './custom'
+export * from '../custom'

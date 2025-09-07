@@ -24,6 +24,7 @@
     "@types/react-dom": "^19.1.7"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/csr/index.ts",
+    "./ssr": "./src/ssr/index.ts"
   }
 }
