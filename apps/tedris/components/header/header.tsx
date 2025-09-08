@@ -7,7 +7,7 @@ import { UserHeaderMenu } from './user-header-menu'
 import { UserNotifications } from './user-notification-menu'
 import Version from './version'
 export const Header = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions)
 
   return (
     <header className="flex justify-between items-center container mx-auto my-8">
@@ -28,8 +28,8 @@ export const Header = async () => {
           : (
               <KeycloakLogin />
             )}
-            <Version />
+        <Version />
       </div>
     </header>
-  );
-};
+  )
+}
