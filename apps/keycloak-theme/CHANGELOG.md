@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.1.0...keycloak-theme-v1.2.0) (2025-09-06)
+
+
+### Features
+
+* implement mobile responsive UI for login and register pages ([9946169](https://github.com/amel-tech/madrasah-frontend/commit/9946169afa0acf368a23f69a24dd58d666c208f9))
+* implement mobile responsive UI for login and register pages ([bacd012](https://github.com/amel-tech/madrasah-frontend/commit/bacd012c77fb08e06062b23460156bee8c69f3eb))
+* implement mobile responsive UI for login and register pages ([7b94e5b](https://github.com/amel-tech/madrasah-frontend/commit/7b94e5b6e51d2ba719b41079d8863bbf6f6e0eed))
+
 ## [1.1.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.0.0...keycloak-theme-v1.1.0) (2025-08-21)
 
 
