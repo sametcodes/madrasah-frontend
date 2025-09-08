@@ -1,5 +1,10 @@
 import { createJiti } from 'jiti'
+import NextBundleAnalyzer from '@next/bundle-analyzer'
 const jiti = createJiti(import.meta.url, { debug: true })
+
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 // Import env here to validate during build. Using jiti@^1 we can import .ts files :)
 jiti.import('./env.ts')
@@ -26,8 +31,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ['@phosphor-icons/react'],
+    optimizePackageImports: ['@madrasah/icons', '@madrasah/icons/ssr', '@phosphor-icons/react'],
   },
 }
 
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)
