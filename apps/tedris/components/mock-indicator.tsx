@@ -1,6 +1,6 @@
 import React from 'react'
 import { env } from '~/env'
-import { WarningIcon } from '@madrasah/icons'
+import { WarningIcon } from '@madrasah/icons/ssr'
 
 export const MockIndicator = () => {
   if (env.NEXT_PUBLIC_API_MOCKING !== 'enabled') {
