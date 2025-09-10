@@ -23,7 +23,8 @@
       "~/env": ["./env.ts"],
       "~/features/*": ["./features/*"],
       "~/components/*": ["./components/*"],
-      "~/lib/*": ["./lib/*"]
+      "~/lib/*": ["./lib/*"],
+      "~/hooks": ["./hooks"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

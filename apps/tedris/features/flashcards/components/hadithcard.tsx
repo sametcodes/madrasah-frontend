@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { HadithCard as HadithCardType } from "@madrasah/types"
-import { useState, TouchEvent, MouseEvent } from "react";
-import { BookOpenIcon, BookBookmarkIcon } from "@madrasah/icons";
-import FlashCard from "./flashcard";
-import { useFlashCards } from "../hooks/useFlashCards";
+import { HadithCard as HadithCardType } from '../types'
+import { useState, TouchEvent, MouseEvent } from 'react'
+import { BookOpenIcon, BookBookmarkIcon } from '@madrasah/icons'
+import FlashCard from './flashcard'
+import { useFlashCards } from '../hooks/useFlashCards'
 
-type HadithCardProps = HadithCardType;
+type HadithCardProps = HadithCardType
 
 export default function HadithCard({
   id,
@@ -14,39 +14,39 @@ export default function HadithCard({
   partialText,
   type,
 }: HadithCardProps) {
-  const [flipped, setFlipped] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [flipped, setFlipped] = useState(false)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
 
-  const { toggleMemorized, isCardMemorized } = useFlashCards();
-  const memorized = isCardMemorized(id);
+  const { toggleMemorized, isCardMemorized } = useFlashCards()
+  const memorized = isCardMemorized(id)
 
   const handleTouchStart = (e: TouchEvent | MouseEvent) => {
-    const clientX = "touches" in e ? e.touches[0]?.clientX : e.clientX;
-    setTouchStart(clientX ?? null);
-  };
+    const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX
+    setTouchStart(clientX ?? null)
+  }
 
   const handleTouchEnd = (e: TouchEvent | MouseEvent) => {
-    if (touchStart === null) return;
+    if (touchStart === null) return
 
-    const touchEnd =
-      "changedTouches" in e ? e.changedTouches[0]?.clientX : e.clientX;
-    if (touchEnd === undefined) return;
+    const touchEnd
+      = 'changedTouches' in e ? e.changedTouches[0]?.clientX : e.clientX
+    if (touchEnd === undefined) return
 
-    const diff = touchStart - touchEnd;
+    const diff = touchStart - touchEnd
 
-    if (Math.abs(diff) > 50) setFlipped((prev) => !prev);
-    setTouchStart(null);
-  };
+    if (Math.abs(diff) > 50) setFlipped(prev => !prev)
+    setTouchStart(null)
+  }
 
-  const handleCardFlip = () => setFlipped((prev) => !prev);
+  const handleCardFlip = () => setFlipped(prev => !prev)
 
   return (
     <div className="relative w-full h-[500px]">
       <div
-        className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? "rotate-y-180" : ""}`}
+        className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
         style={{
-          transformStyle: "preserve-3d",
-          perspective: "1000px",
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -58,8 +58,8 @@ export default function HadithCard({
         <div
           className="absolute backface-hidden w-full"
           style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
           }}
         >
           <FlashCard>
@@ -79,9 +79,9 @@ export default function HadithCard({
         <div
           className="absolute rotate-y-180 backface-hidden w-full"
           style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
           }}
         >
           <FlashCard>
@@ -98,7 +98,7 @@ export default function HadithCard({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Header() {
@@ -107,14 +107,14 @@ function Header() {
       <BookOpenIcon size={20} />
       <h3 className="text-base sm:text-lg font-semibold">Hadis Kartı</h3>
     </div>
-  );
+  )
 }
 
 type CardActionsProps = {
-  onFlip: () => void;
-  memorized: boolean;
-  onToggleMemorized: () => void;
-};
+  onFlip: () => void
+  memorized: boolean
+  onToggleMemorized: () => void
+}
 
 function CardActions({
   onFlip,
@@ -133,15 +133,15 @@ function CardActions({
         onClick={onToggleMemorized}
         className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors ${
           memorized
-            ? "bg-green-500 text-white hover:bg-green-600"
-            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            ? 'bg-green-500 text-white hover:bg-green-600'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
         }`}
       >
         <BookBookmarkIcon size={16} />
         <span className="text-sm font-medium">
-          {memorized ? "Ezberlendi" : "Ezberle"}
+          {memorized ? 'Ezberlendi' : 'Ezberle'}
         </span>
       </button>
     </div>
-  );
+  )
 }

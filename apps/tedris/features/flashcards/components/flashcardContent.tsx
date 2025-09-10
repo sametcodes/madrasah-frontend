@@ -1,48 +1,48 @@
-"use client";
+'use client'
 
-import { BookBookmarkIcon, BookOpenIcon } from "@madrasah/icons";
-import { MouseEvent, TouchEvent, useState } from "react";
+import { BookBookmarkIcon, BookOpenIcon } from '@madrasah/icons'
+import { MouseEvent, TouchEvent, useState } from 'react'
 
-import { toDisplay } from "../utils/flashCardUtils";
-import { FlashCard } from "@madrasah/types";
+import { toDisplay } from '../utils/flashCardUtils'
+import { Card } from '@madrasah/services/tedrisat'
 
-import { useFlashCards } from "../hooks/useFlashCards";
-import FlashCardComponent from "./flashcard";
+import { useFlashCards } from '../hooks/useFlashCards'
+import FlashCardComponent from './flashcard'
 
-export default function FlashCardContent(card: FlashCard) {
-  const [flipped, setFlipped] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const data = toDisplay(card);
-  const { toggleMemorized, isCardMemorized } = useFlashCards();
-  const memorized = isCardMemorized(data.id);
+export default function FlashCardContent(card: Card) {
+  const [flipped, setFlipped] = useState(false)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const data = toDisplay(card)
+  const { isCardMemorized } = useFlashCards()
+  const memorized = isCardMemorized(data.id)
 
   const handleTouchStart = (e: TouchEvent | MouseEvent) => {
-    const clientX = "touches" in e ? e.touches[0]?.clientX : e.clientX;
-    setTouchStart(clientX ?? null);
-  };
+    const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX
+    setTouchStart(clientX ?? null)
+  }
 
   const handleTouchEnd = (e: TouchEvent | MouseEvent) => {
-    if (touchStart === null) return;
+    if (touchStart === null) return
 
-    const touchEnd =
-      "changedTouches" in e ? e.changedTouches[0]?.clientX : e.clientX;
-    if (touchEnd === undefined) return;
+    const touchEnd
+      = 'changedTouches' in e ? e.changedTouches[0]?.clientX : e.clientX
+    if (touchEnd === undefined) return
 
-    const diff = touchStart - touchEnd;
+    const diff = touchStart - touchEnd
 
-    if (Math.abs(diff) > 50) setFlipped((prev) => !prev);
-    setTouchStart(null);
-  };
+    if (Math.abs(diff) > 50) setFlipped(prev => !prev)
+    setTouchStart(null)
+  }
 
-  const handleCardFlip = () => setFlipped((prev) => !prev);
+  const handleCardFlip = () => setFlipped(prev => !prev)
 
   return (
     <div className="relative h-[500px] w-full">
       <div
-        className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? "rotate-y-180" : ""}`}
+        className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
         style={{
-          transformStyle: "preserve-3d",
-          perspective: "1000px",
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -54,20 +54,22 @@ export default function FlashCardContent(card: FlashCard) {
         <div
           className="backface-hidden absolute w-full"
           style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
           }}
         >
           <FlashCardComponent className="mx-auto">
-            <Header title={data.title} />
+            {/* TODO: is this needed? */}
+            <Header title="Card" />
             <p className="whitespace-pre-wrap break-words text-lg text-gray-400 sm:text-xl">
-              {data.question}
+              {data.content.front}
             </p>
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
               onToggleMemorized={() =>
-                toggleMemorized({ id: data.id, type: data.type })
+                console.log('memorized')
+                // toggleMemorized({ id: data.id, type: data.type })}
               }
             />
           </FlashCardComponent>
@@ -77,44 +79,45 @@ export default function FlashCardContent(card: FlashCard) {
         <div
           className="rotate-y-180 backface-hidden absolute w-full"
           style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
           }}
         >
           <FlashCardComponent>
-            <Header title={data.title} />
+            <Header title="Card" />
             <p className="text-primary whitespace-pre-wrap break-words text-lg font-semibold sm:text-xl">
-              {data.value}
+              {data.content.back}
             </p>
             <CardActions
               onFlip={handleCardFlip}
               memorized={memorized}
               onToggleMemorized={() =>
-                toggleMemorized({ id: data.id, type: data.type })
+                console.log('memorized')
+                // toggleMemorized({ id: data.id, type: data.type })
               }
             />
           </FlashCardComponent>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-function Header({ title = "" }) {
+function Header({ title = '' }: { title?: string }) {
   return (
     <div className="text-primary mb-4 flex items-center justify-center gap-2">
       <BookOpenIcon size={20} />
-      <h3 className="text-base font-semibold sm:text-lg">{title ?? ""}</h3>
+      <h3 className="text-base font-semibold sm:text-lg">{title ?? ''}</h3>
     </div>
-  );
+  )
 }
 
 type CardActionsProps = {
-  onFlip: () => void;
-  memorized: boolean;
-  onToggleMemorized: () => void;
-};
+  onFlip: () => void
+  memorized: boolean
+  onToggleMemorized: () => void
+}
 
 function CardActions({
   onFlip,
@@ -133,15 +136,15 @@ function CardActions({
         onClick={onToggleMemorized}
         className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${
           memorized
-            ? "bg-green-500 text-white hover:bg-green-600"
-            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            ? 'bg-green-500 text-white hover:bg-green-600'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
         }`}
       >
         <BookBookmarkIcon size={16} />
         <span className="text-sm font-medium">
-          {memorized ? "Tekrarla" : "Ezberledim"}
+          {memorized ? 'Tekrarla' : 'Ezberledim'}
         </span>
       </button>
     </div>
-  );
+  )
 }

@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react'
 import {
   CardsIcon,
   StarIcon,
   StudentIcon,
   BookmarkSimpleIcon,
-} from "@madrasah/icons";
-import { Card } from "@madrasah/ui/components/card";
+} from '@madrasah/icons'
+import { Card } from '@madrasah/ui/components/card'
 
 type Props = {
-  title: string;
-  author: string;
-  cardCount: number;
-  rating: number;
-  downloadCount: number;
-  description: string;
-};
+  title: string
+  author: string
+  cardCount: number
+  rating: number
+  downloadCount: number
+  description: string
+}
 
 function DeckCard({
   title,
@@ -32,7 +32,10 @@ function DeckCard({
           <BookmarkSimpleIcon size={20} />
         </div>
       </div>
-      <div className="text-sm mb-2">by {author}</div>
+      <div className="text-sm mb-2">
+        by
+        {author}
+      </div>
       <div className="flex items-center mb-2 text-sm">
         <div className="text-neutral-tertiary flex items-center mr-4">
           <CardsIcon className="inline-block mr-1" size={14} />
@@ -49,7 +52,7 @@ function DeckCard({
       </div>
       <div className="text-sm text-neutral-tertiary">{description}</div>
     </Card>
-  );
+  )
 }
 
-export default DeckCard;
+export default DeckCard

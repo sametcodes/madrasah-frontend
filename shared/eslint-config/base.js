@@ -21,7 +21,7 @@ export const baseConfig = [
       '@stylistic': stylistic,
     },
     rules: {
-      'turbo/no-undeclared-env-vars': 'warn',
+      'turbo/no-undeclared-env-vars': 'off'
     },
   },
   {
@@ -29,5 +29,5 @@ export const baseConfig = [
       onlyWarn,
     },
   },
-  { ignores: ['archived/*', '**/build/', '**/dist/', 'node_modules/', 'public/build/', '.env'] },
+  { ignores: ['archived/*', '**/build/', '**/dist/', 'node_modules/', 'public/build/', '.env', '.next/**'] },
 ]

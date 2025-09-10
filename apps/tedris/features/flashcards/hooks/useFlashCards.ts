@@ -1,59 +1,61 @@
-import { useState, useEffect } from 'react';
-import { BaseFlashCard } from '@madrasah/types';
+import { useState, useEffect } from 'react'
+import { BaseFlashCard } from '../types'
 
 interface FlashCard extends BaseFlashCard {
-  lastReviewed: string;
+  lastReviewed: string
 }
 
 export function useFlashCards() {
-  const [cards, setCards] = useState<FlashCard[]>([]);
+  const [cards, setCards] = useState<FlashCard[]>([])
 
   useEffect(() => {
-    const savedCards = localStorage.getItem('memorizedCards');
+    const savedCards = localStorage.getItem('memorizedCards')
 
     if (savedCards) {
       try {
-        const parsedCards = JSON.parse(savedCards);
+        const parsedCards = JSON.parse(savedCards)
         if (parsedCards && parsedCards.length > 0) {
-          setCards(parsedCards);
-          return;
+          setCards(parsedCards)
+          return
         }
-      } catch (error) {
-        console.error('Error parsing saved cards:', error);
+      }
+      catch (error) {
+        console.error('Error parsing saved cards:', error)
       }
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (cards?.length > 0) {
-      localStorage.setItem('memorizedCards', JSON.stringify(cards));
+      localStorage.setItem('memorizedCards', JSON.stringify(cards))
     }
-  }, [cards]);
+  }, [cards])
 
   const addMemorizedCard = ({ id, type }: BaseFlashCard) => {
     const newCard: FlashCard = {
       id: id,
       type: type,
       lastReviewed: new Date().toISOString(),
-    };
-    setCards((prev) => [...prev, newCard]);
-  };
+    }
+    setCards(prev => [...prev, newCard])
+  }
 
   const removeMemorizedCard = (id: string | number) => {
-    setCards((prev) => prev.filter((card) => card.id !== id));
-  };
+    setCards(prev => prev.filter(card => card.id !== id))
+  }
 
   const isCardMemorized = (id: string | number) => {
-    return cards.some((c) => c.id === id);
-  };
+    return cards.some(c => c.id === id)
+  }
 
   const toggleMemorized = ({ id, type }: BaseFlashCard) => {
     if (isCardMemorized(id)) {
-      removeMemorizedCard(id);
-    } else {
-      addMemorizedCard({ id, type });
+      removeMemorizedCard(id)
     }
-  };
+    else {
+      addMemorizedCard({ id, type })
+    }
+  }
 
   return {
     cards,
@@ -61,5 +63,5 @@ export function useFlashCards() {
     removeMemorizedCard,
     isCardMemorized,
     toggleMemorized,
-  };
+  }
 }

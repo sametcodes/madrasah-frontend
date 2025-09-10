@@ -1,36 +1,36 @@
-"use client";
+'use client'
 
-import { CaretLeftIcon, CaretRightIcon } from "@madrasah/icons";
-import { useState } from "react";
+import { CaretLeftIcon, CaretRightIcon } from '@madrasah/icons'
+import { useState } from 'react'
 
-import { FlashCard } from "@madrasah/types";
+import { Card } from '@madrasah/services/tedrisat'
 
-import FlashCardContent from "./flashcardContent";
+import FlashCardContent from './flashcardContent'
 
 type FlashCardListProps = {
-  cards: FlashCard[];
-};
+  cards: Card[]
+}
 
 export default function FlashCardList({ cards }: FlashCardListProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [key, setKey] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [key, setKey] = useState(0)
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : cards.length - 1));
-    setKey((prev) => prev + 1);
-  };
+    setCurrentIndex(prev => (prev > 0 ? prev - 1 : cards.length - 1))
+    setKey(prev => prev + 1)
+  }
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev < cards.length - 1 ? prev + 1 : 0));
-    setKey((prev) => prev + 1);
-  };
+    setCurrentIndex(prev => (prev < cards.length - 1 ? prev + 1 : 0))
+    setKey(prev => prev + 1)
+  }
 
   if (!cards.length) {
     return (
       <div className="flex h-[500px] items-center justify-center">
         <p className="text-gray-500">Henüz kart bulunmuyor.</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -46,7 +46,10 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
           <CaretLeftIcon size={24} />
         </button>
         <span className="text-sm text-gray-500">
-          {currentIndex + 1} / {cards.length}
+          {currentIndex + 1}
+          {' '}
+          /
+          {cards.length}
         </span>
         <button
           onClick={handleNext}
@@ -56,5 +59,5 @@ export default function FlashCardList({ cards }: FlashCardListProps) {
         </button>
       </div>
     </div>
-  );
+  )
 }

@@ -70,50 +70,16 @@ Tailwind CSS v4 reads CSS variables directly, so you just need to import the the
 
 ```jsx
 // Tokens are available as Tailwind utilities with semantic naming
-<div className="bg-background-neutral-primary text-text-neutral-primary border border-border-neutral-primary">
-  <h1 className="text-text-brand-primary">Hello World</h1>
-  <p className="text-text-neutral-secondary">
+<div className="bg-neutral-primary text-neutral-primary border-neutral-primary">
+  <h1 className="text-brand-primary">Hello World</h1>
+  <p className="text-neutral-secondary">
     This uses semantic design tokens
   </p>
-  <button className="bg-background-success-bold text-text-success-inverse">
+  <button className="bg-success-bold text-success-inverse">
     Success Button
   </button>
 </div>
 ```
-
-## Available Token Categories
-
-### Background Colors
-
-- `background-color-neutral-{primary|secondary|tertiary|disabled}`
-- `background-color-neutralinverse-{primary|secondary|tertiary}`
-- `background-color-brand-{primary|secondary|tertiary}`
-- `background-color-success-{subtle|bold}`
-- `background-color-warning-{subtle|bold}`
-- `background-color-error-{subtle|bold}`
-- `background-color-info-{subtle|bold}`
-- `background-color-{white|black}`
-
-### Text Colors
-
-- `text-color-neutral-{primary|secondary|tertiary|disabled}`
-- `text-color-neutralinverse-{primary|secondary|tertiary}`
-- `text-color-brand-{primary|secondary|inverse}`
-- `text-color-success-{primary|secondary|inverse}`
-- `text-color-warning-{primary|secondary|inverse}`
-- `text-color-error-{primary|secondary|inverse}`
-- `text-color-info-{primary|secondary|inverse}`
-- `text-color-{white|black}`
-
-### Border Colors
-
-- `border-color-neutral-{primary|secondary}`
-- `border-color-neutralinverse-{primary|secondary}`
-- `border-color-brand-{primary|inverse}`
-- `border-color-success-{primary|inverse}`
-- `border-color-warning-{primary|inverse}`
-- `border-color-error-{primary|inverse}`
-- `border-color-info-{primary|inverse}`
 
 ## JavaScript API
 
