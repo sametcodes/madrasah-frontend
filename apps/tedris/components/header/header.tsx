@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import KeycloakLogin from '~/features/keycloak/login'
 import authOptions from '~/lib/auth_options'
-import { MadrasahLogoIcon } from '@madrasah/icons'
+import { MadrasahLogoIcon } from '@madrasah/icons/ssr'
 import { Input } from '@madrasah/ui/components/input'
 import { UserHeaderMenu } from './user-header-menu'
 import { UserNotifications } from './user-notification-menu'
