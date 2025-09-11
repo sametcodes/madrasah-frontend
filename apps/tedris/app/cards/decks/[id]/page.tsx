@@ -1,3 +1,5 @@
+'use server'
+
 import { cookies } from 'next/headers'
 import FlashCardList from '~/features/flashcards/components/flashcardList'
 import { getAuthenticatedApiService } from '~/lib/services'

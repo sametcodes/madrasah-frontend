@@ -1,8 +1,12 @@
+'use server'
+
+import Link from 'next/link'
+import { cookies } from 'next/headers'
+
 import { PlusIcon } from '@madrasah/icons'
 import { Button } from '@madrasah/ui/components/button'
-import Link from 'next/link'
+
 import DeckCard from '~/features/flashcards/components/deck/deckcard'
-import { cookies } from 'next/headers'
 import { getAuthenticatedApiService } from '~/lib/services'
 
 export default async function Page() {

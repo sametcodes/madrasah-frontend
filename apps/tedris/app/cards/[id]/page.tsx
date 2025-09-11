@@ -1,3 +1,5 @@
+'use server'
+
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { getAuthenticatedApiService } from '~/lib/services'
