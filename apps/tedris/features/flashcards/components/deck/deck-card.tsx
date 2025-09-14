@@ -4,7 +4,7 @@ import {
   StarIcon,
   StudentIcon,
   BookmarkSimpleIcon,
-} from '@madrasah/icons'
+} from '@madrasah/icons/ssr'
 import { Card } from '@madrasah/ui/components/card'
 
 type Props = {
@@ -25,7 +25,7 @@ function DeckCard({
   description,
 }: Props) {
   return (
-    <Card className="p-6 gap-0 hover:bg-neutral-100 has-[.bookmark-icon:hover]:bg-white cursor-pointer transition-all duration-200 ease-in-out">
+    <Card className="p-6 gap-0 hover:bg-neutral-100 has-[.bookmark-icon:hover]:bg-white cursor-pointer transition-all duration-200 ease-in-out h-full">
       <div className="flex justify-between items-center ">
         <div className="font-medium">{title}</div>
         <div className="bookmark-icon cursor-pointer hover:bg-neutral-300 h-8 w-8 flex justify-center items-center rounded-full">

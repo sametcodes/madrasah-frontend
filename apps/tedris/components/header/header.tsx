@@ -10,7 +10,7 @@ export const Header = async () => {
   const session = await getServerSession(authOptions)
 
   return (
-    <header className="flex justify-between items-center container mx-auto my-8">
+    <header className="flex justify-between items-center container mx-auto py-8">
       <div className="flex gap-4 items-center">
         <MadrasahLogoIcon size={36} />
         <p className="text-xl font-medium text-brand-primary">

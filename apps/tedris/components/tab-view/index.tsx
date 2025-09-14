@@ -45,7 +45,7 @@ export const TabView = ({ children }: { children: React.ReactNode }) => {
           </Link>
         </div>
       </div>
-      <main className="container mx-auto py-2">{children}</main>
+      <main className="container mx-auto py-2 grow-1 h-full">{children}</main>
     </>
   )
 }

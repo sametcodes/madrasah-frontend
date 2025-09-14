@@ -28,8 +28,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="tr">
-      <body className={inter.className}>
+    <html lang="tr" className="min-h-svh h-full">
+      <body className={`${inter.className} h-full flex flex-col`}>
         <MSWComponent />
         <MockIndicator />
         <ClientProviders>

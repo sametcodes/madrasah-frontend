@@ -1,12 +1,10 @@
-'use server'
-
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 
-import { PlusIcon } from '@madrasah/icons'
+import { PlusIcon } from '@madrasah/icons/ssr'
 import { Button } from '@madrasah/ui/components/button'
 
-import DeckCard from '~/features/flashcards/components/deck/deckcard'
+import DeckCard from '~/features/flashcards/components/deck/deck-card'
 import { getAuthenticatedApiService } from '~/lib/services'
 
 export default async function Page() {
@@ -26,7 +24,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="min-h-svh">
+    <div>
       <div className="flex items-center justify-between mb-6">
         <div>
           <Button variant="default" size="sm" className="mr-2">
@@ -76,7 +74,7 @@ export default async function Page() {
           </span>
         ))}
       </div>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         {explore?.map(deck => (
           <DeckCard
             key={deck.id}

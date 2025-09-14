@@ -1,7 +1,5 @@
-'use server'
-
 import { cookies } from 'next/headers'
-import FlashCardList from '~/features/flashcards/components/flashcardList'
+import FlashCardList from '~/features/flashcards/components/flashcard-list'
 import { getAuthenticatedApiService } from '~/lib/services'
 
 export default async function Page() {
@@ -21,7 +19,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex min-h-svh items-center justify-center">
+    <div className="flex items-center justify-center h-full">
       <FlashCardList cards={cards} />
     </div>
   )

@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import { Card } from '@madrasah/services/tedrisat'
 
-import FlashCardContent from './flashcardContent'
+import FlashCardContent from './flashcard-content'
 
 type FlashCardListProps = {
   cards: Card[]

@@ -37,12 +37,11 @@ export default function FlashCardContent(card: Card) {
   const handleCardFlip = () => setFlipped(prev => !prev)
 
   return (
-    <div className="relative h-[500px] w-full">
+    <div className="relative h-[500px] w-full" style={{ perspective: '1000px' }}>
       <div
         className={`absolute w-full transition-transform duration-500 ease-in-out ${flipped ? 'rotate-y-180' : ''}`}
         style={{
           transformStyle: 'preserve-3d',
-          perspective: '1000px',
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -84,7 +83,7 @@ export default function FlashCardContent(card: Card) {
             transform: 'rotateY(180deg)',
           }}
         >
-          <FlashCardComponent>
+          <FlashCardComponent className="mx-auto">
             <Header title="Card" />
             <p className="text-primary whitespace-pre-wrap break-words text-lg font-semibold sm:text-xl">
               {data.content.back}
@@ -134,10 +133,9 @@ function CardActions({
       </button>
       <button
         onClick={onToggleMemorized}
-        className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${
-          memorized
-            ? 'bg-green-500 text-white hover:bg-green-600'
-            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+        className={`flex items-center gap-2 rounded-full px-3 py-2 transition-colors ${memorized
+          ? 'bg-green-500 text-white hover:bg-green-600'
+          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
         }`}
       >
         <BookBookmarkIcon size={16} />
