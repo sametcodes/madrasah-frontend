@@ -16,19 +16,29 @@ import {
   TableRow,
 } from '@madrasah/ui/components/table'
 
-interface DataTableProps<TData, TValue> {
+export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onRowUpdate?: (updatedRow: TData) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onRowUpdate,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    defaultColumn: {
+      size: 500,
+      minSize: 50,
+      maxSize: 300,
+    },
+    meta: {
+      updateData: onRowUpdate,
+    },
   })
 
   return (
@@ -39,7 +49,10 @@ export function DataTable<TData, TValue>({
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    key={header.id}
+                    style={{ width: header.getSize() }}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -61,7 +74,10 @@ export function DataTable<TData, TValue>({
                     data-state={row.getIsSelected() && 'selected'}
                   >
                     {row.getVisibleCells().map(cell => (
-                      <TableCell key={cell.id}>
+                      <TableCell
+                        key={cell.id}
+                        style={{ width: cell.column.getSize() }}
+                      >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}

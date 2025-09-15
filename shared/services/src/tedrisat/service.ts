@@ -1,5 +1,5 @@
 import { createTedrisatClient } from './client'
-import { Card, List } from './types'
+import { Card } from './types'
 
 type HttpClient = ReturnType<typeof createTedrisatClient>
 
@@ -14,19 +14,15 @@ export class TedrisatService {
     return this.client<Card[]>('/cards')
   }
 
+  async createCard(body: Card) {
+    return this.client<Card>(`/card`, { method: 'POST', body: JSON.stringify(body) })
+  }
+
   async getCard(id: number) {
     return this.client<Card>(`/cards/${id}`)
   }
 
-  async getLists() {
-    return this.client<List[]>('/lists')
-  }
-
-  async getList(id: number) {
-    return this.client<List>(`/lists/${id}`)
-  }
-
-  async getListCards(id: number) {
-    return this.client<Card[]>(`/lists/${id}/cards`)
+  async updateCard(id: number, body: Partial<Card>) {
+    return this.client<Card>(`/cards/${id}`, { method: 'PUT', body: JSON.stringify(body) })
   }
 }

@@ -6,11 +6,3 @@ export type Card = {
   image_source: string
   content: any
 }
-
-export type List = {
-  id: number
-  author_id: number
-  title: string
-  description: string
-  is_public: boolean
-}

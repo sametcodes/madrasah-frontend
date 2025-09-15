@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@madrasah/icons": "^1.0.0",
+    "@madrasah/services": "^0.1.0",
     "@madrasah/ui": "*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "next": "15.4.6",
