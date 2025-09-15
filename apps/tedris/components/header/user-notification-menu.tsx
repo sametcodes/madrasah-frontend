@@ -1,4 +1,4 @@
-import { BellIcon } from '@madrasah/icons'
+import { BellIcon } from '@madrasah/icons/ssr'
 import {
   HoverCard,
   HoverCardContent,

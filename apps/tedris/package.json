@@ -8,9 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf .next",
+    "clean": "rm -rf .turbo .next node_modules dist",
     "check-types": "tsc --noEmit",
-    "test": "echo 'Tests not implemented'"
+    "test": "echo 'Tests not implemented'",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@madrasah/hooks": "*",
@@ -19,6 +20,7 @@
     "@madrasah/types": "*",
     "@madrasah/ui": "*",
     "@madrasah/utils": "*",
+    "@next/bundle-analyzer": "^15.5.2",
     "@opentelemetry/api": "^1.9.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@t3-oss/env-nextjs": "^0.13.8",

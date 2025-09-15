@@ -9,7 +9,8 @@
   "types": "./src/index.ts",
   "scripts": {
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .turbo node_modules"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19.1.7"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/csr/index.ts",
+    "./ssr": "./src/ssr/index.ts"
   }
 }

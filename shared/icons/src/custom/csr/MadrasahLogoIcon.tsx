@@ -1,11 +1,7 @@
-// @ts-nocheck
+import * as React from 'react'
+import { IconWeight, IconBase, Icon } from '@phosphor-icons/react'
 
-import React, { forwardRef } from 'react'
-import { ReactElement } from 'react'
-
-import { Icon, IconBase, IconWeight } from '@phosphor-icons/react'
-
-const weights = new Map<IconWeight, ReactElement>([
+const weights = new Map<IconWeight, React.ReactElement>([
   [
     'regular',
     <>
@@ -27,12 +23,13 @@ const weights = new Map<IconWeight, ReactElement>([
         </filter>
       </defs>
     </>,
-
   ],
 ])
 
-export const MadrasahLogoIcon: Icon = forwardRef((props, ref) => (
-  <IconBase ref={ref} viewBox="0 0 48 48" {...props} weights={weights} />
+// @ts-ignore
+export const MadrasahLogoIcon: Icon = React.forwardRef((props, ref) => (
+  <IconBase ref={ref} viewBox="0 0 48 48" {...props} weights={weights as any} />
 ))
 
 MadrasahLogoIcon.displayName = 'MadrasahLogoIcon'
+export default MadrasahLogoIcon
