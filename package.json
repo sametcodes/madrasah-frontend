@@ -30,7 +30,7 @@
   "msw": {
     "workerDirectory": [
       "apps/tedris/public",
-      "apps/nizam"
+      "apps/nizam/public"
     ]
   }
 }
