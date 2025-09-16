@@ -22,14 +22,30 @@ npm install @madrasah/icons
 ### Import All Phosphor Icons
 
 ```tsx
-import { Heart, Star, House } from "@madrasah/icons";
+import { HeartIcon, StarIcon, HouseIcon } from "@madrasah/icons";
 
 export function MyComponent() {
   return (
     <div>
-      <Heart size={24} weight="fill" />
-      <Star size={32} color="#gold" />
-      <House size={20} weight="bold" />
+      <HeartIcon size={24} weight="fill" />
+      <StarIcon size={32} color="#gold" />
+      <HouseIcon size={20} weight="bold" />
+    </div>
+  );
+}
+```
+
+### Importing SSR-Compatible Icons
+For server-side rendering (SSR) compatibility, import icons from the `ssr` submodule:
+
+```tsx
+import { HeartIcon, StarIcon, HouseIcon } from "@madrasah/icons/ssr";
+export function MyComponent() {
+  return (
+    <div>
+      <HeartIcon size={24} weight="fill" />
+      <StarIcon size={32} color="#gold" />
+      <HouseIcon size={20} weight="bold" />
     </div>
   );
 }
@@ -38,27 +54,14 @@ export function MyComponent() {
 ### Import Custom Icons
 
 ```tsx
-import { MadrasahLogo } from "@madrasah/icons";
+import { MadrasahLogo } from "@madrasah/icons/custom";
+// for SSR-compatible import:
+// import { MadrasahLogo } from "@madrasah/icons/custom/ssr";
 
 export function Header() {
   return (
     <div>
       <MadrasahLogo size={40} color="#primary" weight="bold" />
-    </div>
-  );
-}
-```
-
-### Mixed Usage
-
-```tsx
-import { Heart, MadrasahLogo } from "@madrasah/icons";
-
-export function App() {
-  return (
-    <div>
-      <MadrasahLogo size={32} />
-      <Heart size={24} weight="fill" />
     </div>
   );
 }
@@ -105,10 +108,6 @@ export const MyCustomIcon: React.FC<IconProps> = ({
 ### Phosphor Icons
 
 All icons from [@phosphor-icons/react](https://phosphoricons.com/) are available.
-
-### Custom Icons
-
-- `MadrasahLogo` - Company logo with all weight variations
 
 ## Development
 
