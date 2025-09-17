@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import * as XLSX from 'xlsx'
+
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 import { TableHeader } from './components/table-header'
@@ -66,9 +68,25 @@ export default function CardsPage() {
     }
   }
 
+  const onDeckFileImport = async (file: File) => {
+    const data = await file.arrayBuffer()
+    const workbook = XLSX.read(data, { type: 'array' })
+    const sheetName = workbook.SheetNames[0] || ''
+    const worksheet = workbook.Sheets[sheetName]
+
+    // TODO: make an error popup
+    // TODO: add i18n
+    if (!worksheet) {
+      return console.error('No worksheet found in the uploaded file')
+    }
+
+    const json = XLSX.utils.sheet_to_json(worksheet)
+    console.log(json) // This is an array of objects, one per row
+  }
+
   return (
     <div className="container py-10">
-      <TableHeader onCardCreate={onCardCreate} />
+      <TableHeader onCardCreate={onCardCreate} onDeckFileImport={onDeckFileImport} />
       <DataTable
         columns={columns}
         data={localCards || []}
