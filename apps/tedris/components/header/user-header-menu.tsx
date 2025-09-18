@@ -70,11 +70,10 @@ export const UserHeaderMenu = () => {
           <SignOutIcon className="text-neutral-primary" />
           <p className="text-neutral-primary text-sm">Sign out</p>
         </DropdownMenuItem>
-        <DropdownMenuSeparator>
-          <DropdownMenuItem>
-            <Version />
-          </DropdownMenuItem>
-        </DropdownMenuSeparator>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Version />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
