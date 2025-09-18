@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
+    "clean": "rm -rf .turbo node_modules dist",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
@@ -45,6 +46,7 @@
     "./postcss.config": "./postcss.config.js",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
+    "./custom/*": "./src/custom/*.tsx",
     "./hooks/*": "./src/hooks/*.ts"
   }
 }

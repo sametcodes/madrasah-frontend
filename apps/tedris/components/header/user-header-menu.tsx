@@ -10,8 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@madrasah/ui/components/dropdown-menu'
-import { UserAvatar } from '../user-avatar'
-import Version from './version'
+import { UserAvatar } from '../../features/user-avatar'
 
 export const UserHeaderMenu = () => {
   const { data: session, status } = useSession()
