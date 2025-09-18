@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.2.0...keycloak-theme-v1.3.0) (2025-09-18)
+
+
+### Features
+
+* **flashcard:** use msw on dashboard, and card pages ([4379ca3](https://github.com/amel-tech/madrasah-frontend/commit/4379ca39e730c27e806bbca0f80f376ce8a8474e))
+
 ## [1.2.0](https://github.com/amel-tech/madrasah-frontend/compare/keycloak-theme-v1.1.0...keycloak-theme-v1.2.0) (2025-09-06)
 
 
