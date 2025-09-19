@@ -22,7 +22,7 @@ export function seedDatabase(
   // Default seed configuration using the passed faker instance
   const defaultSeedConfig: SeedConfig = {
     card: {
-      count: 20,
+      count: 3,
       customData: f => (f as Faker & { tedrisat: { card: () => Record<string, unknown> } }).tedrisat.card(),
     },
   }

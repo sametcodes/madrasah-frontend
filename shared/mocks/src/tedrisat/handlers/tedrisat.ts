@@ -24,13 +24,12 @@ export const tedrisatHandlers = (baseUrl: string): MockApiHandlers<TedrisatServi
       })
       return HttpResponse.json(card)
     }),
-    createCard: http.post(`${baseUrl}/card`, ({ request }): HttpResponse<Card> => {
-      console.log(request)
-      const body = request.body as unknown as Card
+    createCard: http.post(`${baseUrl}/card`, async ({ request }): Promise<HttpResponse<Card[]>> => {
+      const body = await request.json() as Card[]
       if (!body) return HttpResponse.error()
 
-      const response = db.card.create(body)
-      return HttpResponse.json(response)
+      const createdCards = body.map(card => db.card.create(card))
+      return HttpResponse.json(createdCards)
     }),
     updateCard: http.put(`${baseUrl}/cards/:id`, async ({ params: { id }, request }) => {
       console.log('Updating card:', id)

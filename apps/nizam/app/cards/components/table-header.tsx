@@ -2,9 +2,9 @@ import { DownloadIcon } from '@madrasah/icons/ssr'
 import { Button } from '@madrasah/ui/components/button'
 import { useRef } from 'react'
 
-export const TableHeader = ({ onCardCreate, onDeckFileImport }: {
-  onCardCreate: () => void
+export const TableHeader = ({ onDeckFileImport, onClickDownloadSampleFile }: {
   onDeckFileImport: (file: File) => void
+  onClickDownloadSampleFile: () => void
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -20,22 +20,31 @@ export const TableHeader = ({ onCardCreate, onDeckFileImport }: {
     }
   }
   return (
-    <div className="flex items-center justify-between mb-4">
-      <Button onClick={onCardCreate}>Create a new random card</Button>
-      <Button onClick={onButtonClick} variant="ghost">
-        <DownloadIcon />
-        {' '}
-        <small>
-          Import From Excel
-        </small>
-      </Button>
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".xlsx,.xls"
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
+    <div className="flex justify-between mb-4">
+      <div className="flex gap-2">
+        <Button onClick={onButtonClick}>
+          <DownloadIcon />
+          {' '}
+          <small>
+            Import From Excel
+          </small>
+        </Button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".xlsx,.xls"
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
+
+        <Button onClick={onClickDownloadSampleFile} variant="outline">
+          <DownloadIcon />
+          {' '}
+          <small>
+            Download Sample File
+          </small>
+        </Button>
+      </div>
     </div>
   )
 }

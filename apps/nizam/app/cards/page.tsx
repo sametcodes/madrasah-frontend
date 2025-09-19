@@ -11,6 +11,17 @@ import { useApi } from '~/hooks/useApi'
 import { faker } from '@madrasah/msw/tedrisat'
 import { Card } from '@madrasah/services/tedrisat'
 
+type SpreadsheetCardRepresentation = {
+  id: number
+  type: 'hadeeth' | 'vocabulary'
+  author_id: number
+  is_public: boolean
+  front: string
+  back: string
+  note: string
+  image_source: string
+}
+
 export default function CardsPage() {
   const { api } = useApi()
   const { data: cards, error, isLoading, refetch } = useQuery(api => api.getCards())
@@ -26,16 +37,6 @@ export default function CardsPage() {
   }
   if (isLoading) {
     return <div>Loading...</div>
-  }
-
-  const onCardCreate = async () => {
-    if (!api) return
-    const randomCard = faker.tedrisat.card()
-
-    const response = await api.createCard(randomCard)
-    if (!response.error) {
-      refetch()
-    }
   }
 
   const onRowUpdate = async (updatedRow: Card) => {
@@ -80,13 +81,58 @@ export default function CardsPage() {
       return console.error('No worksheet found in the uploaded file')
     }
 
-    const json = XLSX.utils.sheet_to_json(worksheet)
-    console.log(json) // This is an array of objects, one per row
+    const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
+    const cardsToImport: Card[] = json.map(row => ({
+      ...row,
+      id: row.id,
+      author_id: row.author_id,
+      type: row.type,
+      image_source: row.image_source,
+      is_public: row.is_public,
+      content: {
+        front: row.front,
+        back: row.back,
+        note: row.note,
+      },
+    }))
+
+    try {
+      const response = await api?.createCard(cardsToImport)
+      if (response?.error) {
+        console.error('Failed to import cards:', response.error)
+      }
+      else {
+        console.log('Cards imported successfully:', response?.data)
+        refetch()
+      }
+    }
+    catch (error) {
+      console.error('Failed to import cards:', error)
+    }
+  }
+
+  const onClickDownloadSampleFile = () => {
+    const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map(() => {
+      const sampleCard = faker.tedrisat.card()
+      return {
+        ...sampleCard,
+        id: sampleCard.id,
+        author_id: sampleCard.author_id,
+        front: sampleCard?.content?.front || 'Front word',
+        back: sampleCard?.content?.back || 'Back word',
+        note: sampleCard?.content?.note || 'Note',
+      }
+    })
+
+    const worksheet = XLSX.utils.json_to_sheet(sampleCards)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'SampleCards')
+    XLSX.writeFile(workbook, 'sample_cards.xlsx')
   }
 
   return (
     <div className="container py-10">
-      <TableHeader onCardCreate={onCardCreate} onDeckFileImport={onDeckFileImport} />
+      <TableHeader onClickDownloadSampleFile={onClickDownloadSampleFile} onDeckFileImport={onDeckFileImport} />
       <DataTable
         columns={columns}
         data={localCards || []}

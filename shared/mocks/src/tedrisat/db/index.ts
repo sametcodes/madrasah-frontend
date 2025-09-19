@@ -11,6 +11,7 @@ export const db = factory({
     content: {
       front: faker.word.adjective,
       back: faker.lorem.paragraphs,
+      note: faker.lorem.sentence,
     },
     type: () => faker.helpers.arrayElement(['hadeeth', 'vocabulary']),
     image_source: () => faker.image.urlLoremFlickr({ category: 'nature' }),

@@ -14,8 +14,8 @@ export class TedrisatService {
     return this.client<Card[]>('/cards')
   }
 
-  async createCard(body: Card) {
-    return this.client<Card>(`/card`, { method: 'POST', body: JSON.stringify(body) })
+  async createCard(body: Card[]) {
+    return this.client<Card[]>(`/card`, { method: 'POST', body: JSON.stringify(body) })
   }
 
   async getCard(id: number) {
