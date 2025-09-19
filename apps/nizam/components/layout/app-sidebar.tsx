@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 
 import { NavMain } from '~/components/layout/nav-main'
 import { NavUser } from '~/components/layout/nav-user'
@@ -22,7 +22,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
   const { data } = useSession()
 
-  const navMain = React.useMemo(() => {
+  const navMain = useMemo(() => {
     return routes.navMain.map(route => ({
       ...route,
       isActive: pathname.startsWith(route.url),
@@ -33,7 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }))
   }, [pathname])
 
-  const user = React.useMemo(() => {
+  const user = useMemo(() => {
     return ({
       name: data?.user?.name || '',
       email: data?.user?.email || '',
@@ -47,7 +47,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/">
+              <Link href="/home">
                 <div>
                   <MadrasahLogoIcon size={36} />
                 </div>

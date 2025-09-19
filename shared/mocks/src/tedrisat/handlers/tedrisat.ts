@@ -39,15 +39,20 @@ export const tedrisatHandlers = (baseUrl: string): MockApiHandlers<TedrisatServi
       return HttpResponse.json(decks)
     }),
     getDecks: http.get(`${baseUrl}/decks`, (): HttpResponse<Deck[]> => {
-      const decks = faker.helpers.multiple((_, index) => faker.tedrisat.deck(index + 1), { count: 8 })
+      const decks = db.deck.findMany({})
       return HttpResponse.json(decks)
     }),
     getDeck: http.get(`${baseUrl}/decks/:id`, ({ params: { id } }): HttpResponse<Deck> => {
       const deck = faker.tedrisat.deck(Number(id))
       return HttpResponse.json(deck)
     }),
-    getDeckCards: http.get(`${baseUrl}/decks/:id/cards`, (): HttpResponse<Card[]> => {
-      const cards = faker.helpers.multiple((_, index) => faker.tedrisat.card(index + 1), { count: 10 })
+    getDeckCards: http.get(`${baseUrl}/decks/:id/cards`, ({
+      params: { id },
+    }): HttpResponse<Card[]> => {
+      const cards = db.card.findMany({
+        where: { deck_id: { equals: Number(id) } },
+      })
+      console.log(`Fetched ${cards.length} cards for deck ID ${id}`)
       return HttpResponse.json(cards)
     }),
     getTags: http.get(`${baseUrl}/tags`, (): HttpResponse<Tag[]> => {

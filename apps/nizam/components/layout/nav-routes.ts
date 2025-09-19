@@ -13,8 +13,8 @@ export const routes: {
 } = {
   navMain: [
     {
-      title: 'Cards',
-      url: '/cards',
+      title: 'Decks',
+      url: '/decks',
       icon: TableIcon,
     },
   ],

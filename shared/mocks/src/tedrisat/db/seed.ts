@@ -25,6 +25,14 @@ export function seedDatabase(
       count: 3,
       customData: f => (f as Faker & { tedrisat: { card: () => Record<string, unknown> } }).tedrisat.card(),
     },
+    deck: {
+      count: 3,
+      customData: f => (f as Faker & { tedrisat: { deck: () => Record<string, unknown> } }).tedrisat.deck(),
+    },
+    tag: {
+      count: 3,
+      customData: f => (f as Faker & { tedrisat: { tag: () => Record<string, unknown> } }).tedrisat.tag(),
+    },
   }
 
   const seedConfig = config || defaultSeedConfig

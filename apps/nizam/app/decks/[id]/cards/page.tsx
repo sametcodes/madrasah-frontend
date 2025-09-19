@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import * as XLSX from 'xlsx'
 
 import { columns } from './components/columns'
-import { DataTable } from './components/data-table'
+import { DataTable } from '~/components/data-table'
 import { TableHeader } from './components/table-header'
 import { useQuery } from '~/hooks/useQuery'
 import { useApi } from '~/hooks/useApi'
@@ -22,9 +22,15 @@ type SpreadsheetCardRepresentation = {
   image_source: string
 }
 
-export default function CardsPage() {
+export default function DeckCardsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = use(params)
+
   const { api } = useApi()
-  const { data: cards, error, isLoading, refetch } = useQuery(api => api.getDeckCards('0'))
+  const { data: cards, error, isLoading, refetch } = useQuery(api => api.getDeckCards(id))
   const [localCards, setLocalCards] = useState(cards)
 
   // Sync local cards with server data
@@ -94,6 +100,7 @@ export default function CardsPage() {
         back: row.back,
         note: row.note,
       },
+      deck_id: Number(id),
     }))
 
     try {
