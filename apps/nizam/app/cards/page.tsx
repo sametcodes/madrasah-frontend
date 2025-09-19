@@ -14,7 +14,7 @@ import { Card } from '@madrasah/services/tedrisat'
 type SpreadsheetCardRepresentation = {
   id: number
   type: 'hadeeth' | 'vocabulary'
-  author_id: number
+  author: string
   is_public: boolean
   front: string
   back: string
@@ -24,7 +24,7 @@ type SpreadsheetCardRepresentation = {
 
 export default function CardsPage() {
   const { api } = useApi()
-  const { data: cards, error, isLoading, refetch } = useQuery(api => api.getCards())
+  const { data: cards, error, isLoading, refetch } = useQuery(api => api.getDeckCards('0'))
   const [localCards, setLocalCards] = useState(cards)
 
   // Sync local cards with server data
@@ -85,7 +85,7 @@ export default function CardsPage() {
     const cardsToImport: Card[] = json.map(row => ({
       ...row,
       id: row.id,
-      author_id: row.author_id,
+      author: row.author,
       type: row.type,
       image_source: row.image_source,
       is_public: row.is_public,
@@ -117,7 +117,7 @@ export default function CardsPage() {
       return {
         ...sampleCard,
         id: sampleCard.id,
-        author_id: sampleCard.author_id,
+        author: sampleCard.author,
         front: sampleCard?.content?.front || 'Front word',
         back: sampleCard?.content?.back || 'Back word',
         note: sampleCard?.content?.note || 'Note',

@@ -6,7 +6,7 @@ export const db = factory({
   card: {
     id: primaryKey(faker.number.int),
     list_id: faker.number.int,
-    author_id: faker.number.int,
+    author: faker.string.uuid,
     is_public: faker.datatype.boolean,
     content: {
       front: faker.word.adjective,
