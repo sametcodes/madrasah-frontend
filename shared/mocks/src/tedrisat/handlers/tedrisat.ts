@@ -1,7 +1,8 @@
 import { http, HttpResponse } from 'msw'
 import { MockApiHandlers } from '../../types'
 
-import type { Card, TedrisatService } from '@madrasah/services/tedrisat'
+import { faker } from '../faker'
+import type { Card, Deck, Tag, TedrisatService } from '@madrasah/services/tedrisat'
 import { db } from '../db'
 
 /**
@@ -13,11 +14,6 @@ export const tedrisatHandlers = (baseUrl: string): MockApiHandlers<TedrisatServi
   }
 
   const handlers: MockApiHandlers<TedrisatService> = {
-    getCards: http.get(`${baseUrl}/cards`, (): HttpResponse<Card[]> => {
-      console.log('Fetching all cards from mock DB')
-      const cards = db.card.findMany({})
-      return HttpResponse.json(cards)
-    }),
     getCard: http.get(`${baseUrl}/cards/:id`, ({ params: { id } }): HttpResponse<Card> => {
       const card = db.card.findFirst({
         where: { id: { equals: Number(id) } },
@@ -30,6 +26,33 @@ export const tedrisatHandlers = (baseUrl: string): MockApiHandlers<TedrisatServi
 
       const createdCards = body.map(card => db.card.create(card))
       return HttpResponse.json(createdCards)
+    }),
+    getDashboard: http.get(`${baseUrl}/decks/dashboard`, (): HttpResponse<{ decks: Deck[], tags: Tag[], explore: Deck[] }> => {
+      const decks = faker.helpers.multiple((_, index) => faker.tedrisat.deck(index + 1), { count: 4 })
+      const tags = faker.helpers.multiple((_, index) => faker.tedrisat.tag(index + 1), { count: 10 })
+      const explore = faker.helpers.multiple((_, index) => faker.tedrisat.deck(index + 1), { count: 8 })
+
+      return HttpResponse.json({ decks, tags, explore })
+    }),
+    getDecksSelf: http.get(`${baseUrl}/decks/self`, (): HttpResponse<Deck[]> => {
+      const decks = faker.helpers.multiple((_, index) => faker.tedrisat.deck(index + 1), { count: 4 })
+      return HttpResponse.json(decks)
+    }),
+    getDecks: http.get(`${baseUrl}/decks`, (): HttpResponse<Deck[]> => {
+      const decks = faker.helpers.multiple((_, index) => faker.tedrisat.deck(index + 1), { count: 8 })
+      return HttpResponse.json(decks)
+    }),
+    getDeck: http.get(`${baseUrl}/decks/:id`, ({ params: { id } }): HttpResponse<Deck> => {
+      const deck = faker.tedrisat.deck(Number(id))
+      return HttpResponse.json(deck)
+    }),
+    getDeckCards: http.get(`${baseUrl}/decks/:id/cards`, (): HttpResponse<Card[]> => {
+      const cards = faker.helpers.multiple((_, index) => faker.tedrisat.card(index + 1), { count: 10 })
+      return HttpResponse.json(cards)
+    }),
+    getTags: http.get(`${baseUrl}/tags`, (): HttpResponse<Tag[]> => {
+      const lists = faker.helpers.multiple((_, index) => faker.tedrisat.tag(index + 1), { count: 12 })
+      return HttpResponse.json(lists)
     }),
     updateCard: http.put(`${baseUrl}/cards/:id`, async ({ params: { id }, request }) => {
       console.log('Updating card:', id)

@@ -1,5 +1,5 @@
 import { createTedrisatClient } from './client'
-import { Card } from './types'
+import { Card, Tag, Deck } from './types'
 
 type HttpClient = ReturnType<typeof createTedrisatClient>
 
@@ -10,8 +10,8 @@ export class TedrisatService {
     this.client = client
   }
 
-  async getCards() {
-    return this.client<Card[]>('/cards')
+  async getDashboard() {
+    return this.client<{ decks: Deck[], tags: Tag[], explore: Deck[] }>('/decks/dashboard')
   }
 
   async createCard(body: Card[]) {
@@ -24,5 +24,25 @@ export class TedrisatService {
 
   async updateCard(id: number, body: Partial<Card>) {
     return this.client<Card>(`/cards/${id}`, { method: 'PUT', body: JSON.stringify(body) })
+  }
+
+  async getDecksSelf() {
+    return this.client<Deck[]>('/decks/self')
+  }
+
+  async getDecks() {
+    return this.client<Deck[]>(`/decks`)
+  }
+
+  async getDeck(id: string) {
+    return this.client<Deck>(`/decks/${id}`)
+  }
+
+  async getDeckCards(id: string) {
+    return this.client<Card[]>(`/decks/${id}/cards`)
+  }
+
+  async getTags() {
+    return this.client<Tag[]>('/tags/')
   }
 }

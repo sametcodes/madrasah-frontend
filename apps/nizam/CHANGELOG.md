@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.1...nizam-web-v0.1.2) (2025-09-18)
+
+
+### Features
+
+* **flashcard:** use msw on dashboard, and card pages ([4379ca3](https://github.com/amel-tech/madrasah-frontend/commit/4379ca39e730c27e806bbca0f80f376ce8a8474e))
+
 ## [0.1.1](https://github.com/amel-tech/madrasah-frontend/compare/nizam-web-v0.1.0...nizam-web-v0.1.1) (2025-08-23)
 
 
