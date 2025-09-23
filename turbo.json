@@ -21,6 +21,10 @@
     },
     "test": {
       "dependsOn": ["^test"]
+    },
+    "distribute": {
+      "dependsOn": ["^distribute"],
+      "outputs": ["apps/*/public/mocks/**"]
     }
   }
 }

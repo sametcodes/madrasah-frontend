@@ -6,9 +6,7 @@ import * as XLSX from 'xlsx'
 import { columns } from './components/columns'
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './components/table-header'
-import { useQuery } from '~/hooks/useQuery'
-import { useApi } from '~/hooks/useApi'
-import { faker } from '@madrasah/msw/tedrisat'
+import { getTedrisatMock } from '~/lib/mock-data'
 import { Card } from '@madrasah/services/tedrisat'
 
 type SpreadsheetCardRepresentation = {
@@ -24,55 +22,36 @@ type SpreadsheetCardRepresentation = {
 
 export default function DeckCardsPage({
   params,
-}: {
-  params: Promise<{ id: string }>
-}) {
+}: PageProps<'/decks/[id]/cards'>) {
   const { id } = use(params)
 
-  const { api } = useApi()
-  const { data: cards, error, isLoading, refetch } = useQuery(api => api.getDeckCards(id))
-  const [localCards, setLocalCards] = useState(cards)
+  const [localCards, setLocalCards] = useState<Card[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   // Sync local cards with server data
   useEffect(() => {
-    setLocalCards(cards)
-  }, [cards])
+    async function loadMockData() {
+      try {
+        const data = await getTedrisatMock()
+        setLocalCards(data.cards as Card[])
+      }
+      catch (error) {
+        console.error('Failed to load mock data:', error)
+      }
+      finally {
+        setIsLoading(false)
+      }
+    }
 
-  if (error) {
-    return <div>Error loading cards</div>
-  }
+    loadMockData()
+  }, [])
+
   if (isLoading) {
     return <div>Loading...</div>
   }
 
   const onRowUpdate = async (updatedRow: Card) => {
-    if (!api) return
-
-    // Optimistically update local state
-    setLocalCards(prev =>
-      prev?.map(card =>
-        card.id === updatedRow.id ? updatedRow : card,
-      ) || [],
-    )
-
-    try {
-      const response = await api.updateCard(updatedRow.id, updatedRow)
-      if (response.error) {
-        console.error('Failed to update card:', response.error)
-        // Rollback on error
-        setLocalCards(cards)
-      }
-      else {
-        console.log('Card updated successfully:', response.data)
-        // Optionally refetch to ensure consistency
-        // refetch();
-      }
-    }
-    catch (error) {
-      console.error('Failed to update card:', error)
-      // Rollback on error
-      setLocalCards(cards)
-    }
+    console.log('Row updated:', updatedRow)
   }
 
   const onDeckFileImport = async (file: File) => {
@@ -103,24 +82,20 @@ export default function DeckCardsPage({
       deck_id: Number(id),
     }))
 
-    try {
-      const response = await api?.createCard(cardsToImport)
-      if (response?.error) {
-        console.error('Failed to import cards:', response.error)
-      }
-      else {
-        console.log('Cards imported successfully:', response?.data)
-        refetch()
-      }
-    }
-    catch (error) {
-      console.error('Failed to import cards:', error)
-    }
+    setLocalCards(prevCards => [...prevCards, ...cardsToImport])
   }
 
   const onClickDownloadSampleFile = () => {
     const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map(() => {
-      const sampleCard = faker.tedrisat.card()
+      const sampleCard = localCards[0] || {
+        id: 1,
+        author: 'Sample Author',
+        type: 'vocabulary' as const,
+        is_public: true,
+        content: { front: 'Front word', back: 'Back word', note: 'Note' },
+        image_source: '',
+        deck_id: Number(id),
+      }
       return {
         ...sampleCard,
         id: sampleCard.id,

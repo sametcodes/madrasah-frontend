@@ -5,9 +5,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 import AppLayout from '~/components/layout/app-layout'
 import { ClientProviders } from '~/components/providers/client-providers'
-import { env } from '~/env'
-import { MSWComponent } from '~/components/msw-component'
-import { MockIndicator } from '~/components/mock-indicator'
 
 export const metadata: Metadata = {
   title: 'Nizam',
@@ -19,16 +16,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  if (process.env.NEXT_RUNTIME === 'nodejs' && env.API_MOCKING === 'enabled' && process.env.NODE_ENV === 'development') {
-    const { server } = await import('../mocks/server')
-    server.listen({ onUnhandledRequest: 'bypass' })
-  }
-
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MSWComponent />
-        <MockIndicator />
         <ClientProviders>
           <AppLayout>{children}</AppLayout>
         </ClientProviders>
