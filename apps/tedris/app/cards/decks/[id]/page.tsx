@@ -2,7 +2,11 @@ import FlashCardList from '~/features/flashcards/components/flashcard-list'
 import { Card } from '@madrasah/services/tedrisat'
 import { getTedrisatMock } from '~/lib/mock-data'
 
-export default async function Page({ params }: PageProps<'/cards/decks/[id]'>) {
+export default async function Page({ params }: {
+  params: Promise<{
+    id: string
+  }>
+}) {
   const { id } = await params
   const tedrisatMock = await getTedrisatMock()
   const { cards = [] } = tedrisatMock

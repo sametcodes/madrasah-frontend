@@ -3,7 +3,11 @@ import { getTedrisatMock } from '~/lib/mock-data'
 
 export default async function Card({
   params,
-}: PageProps<'/cards/[id]'>) {
+}: {
+  params: Promise<{
+    id: string
+  }>
+}) {
   const { id } = await params
 
   const { cards } = await getTedrisatMock()

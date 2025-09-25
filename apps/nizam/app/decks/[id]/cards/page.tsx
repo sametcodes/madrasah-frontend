@@ -22,7 +22,11 @@ type SpreadsheetCardRepresentation = {
 
 export default function DeckCardsPage({
   params,
-}: PageProps<'/decks/[id]/cards'>) {
+}: {
+  params: Promise<{
+    id: string
+  }>
+}) {
   const { id } = use(params)
 
   const [localCards, setLocalCards] = useState<Card[]>([])
