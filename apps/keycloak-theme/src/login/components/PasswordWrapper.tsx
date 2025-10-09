@@ -17,7 +17,7 @@ export function PasswordWrapper(props: {
   const { msgStr } = i18n
 
   const { isPasswordRevealed, toggleIsPasswordRevealed }
-        = useIsPasswordRevealed({ passwordInputId })
+    = useIsPasswordRevealed({ passwordInputId })
 
   return (
     <div className="relative">
