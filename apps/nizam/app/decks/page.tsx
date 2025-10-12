@@ -3,33 +3,36 @@
 import { useRouter } from 'next/navigation'
 import { columns } from './components/columns'
 import { DataTable } from '~/components/data-table'
-import { Deck } from '@madrasah/services/tedrisat'
-import { getTedrisatMock } from '~/lib/mock-data'
 import { useEffect, useState } from 'react'
+import { FlashcardDeckResponse } from '@madrasah/services/tedrisat'
 
 export default function DecksPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
-  const [decks, setDecks] = useState<Deck[]>([])
+  const [decks, setDecks] = useState<FlashcardDeckResponse[]>([])
 
   useEffect(() => {
-    async function loadMockData() {
+    async function loadDecks() {
       try {
-        const mockData = await getTedrisatMock()
-        setDecks(mockData.decks)
+        const response = await fetch('/api/decks')
+        if (!response.ok) {
+          throw new Error('Failed to fetch decks')
+        }
+        const data = await response.json()
+        setDecks(data)
       }
       catch (error) {
-        console.error('Failed to load mock data:', error)
+        console.error('Failed to load decks:', error)
       }
       finally {
         setIsLoading(false)
       }
     }
 
-    loadMockData()
+    loadDecks()
   }, [])
 
-  const handleRowClick = (deck: Deck) => {
+  const handleRowClick = (deck: FlashcardDeckResponse) => {
     router.push(`/decks/${deck.id}/cards`)
   }
 

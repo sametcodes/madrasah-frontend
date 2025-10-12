@@ -6,18 +6,16 @@ import * as XLSX from 'xlsx'
 import { columns } from './components/columns'
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './components/table-header'
-import { getTedrisatMock } from '~/lib/mock-data'
-import { Card } from '@madrasah/services/tedrisat'
+import { FlashcardResponse, FlashcardResponseTypeEnum } from '@madrasah/services/tedrisat'
 
 type SpreadsheetCardRepresentation = {
   id: number
-  type: 'hadeeth' | 'vocabulary'
-  author: string
-  is_public: boolean
+  type: FlashcardResponseTypeEnum
   front: string
   back: string
-  note: string
-  image_source: string
+  author?: string
+  is_public?: boolean
+  note?: string
 }
 
 export default function DeckCardsPage({
@@ -29,32 +27,36 @@ export default function DeckCardsPage({
 }) {
   const { id } = use(params)
 
-  const [localCards, setLocalCards] = useState<Card[]>([])
+  const [localCards, setLocalCards] = useState<FlashcardResponse[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   // Sync local cards with server data
   useEffect(() => {
-    async function loadMockData() {
+    async function loadCards() {
       try {
-        const data = await getTedrisatMock()
-        setLocalCards(data.cards as Card[])
+        const response = await fetch(`/api/decks/${id}/cards`)
+        if (!response.ok) {
+          throw new Error('Failed to fetch cards')
+        }
+        const data = await response.json()
+        setLocalCards(data)
       }
       catch (error) {
-        console.error('Failed to load mock data:', error)
+        console.error('Failed to load cards:', error)
       }
       finally {
         setIsLoading(false)
       }
     }
 
-    loadMockData()
-  }, [])
+    loadCards()
+  }, [id])
 
   if (isLoading) {
     return <div>Loading...</div>
   }
 
-  const onRowUpdate = async (updatedRow: Card) => {
+  const onRowUpdate = async (updatedRow: FlashcardResponse) => {
     console.log('Row updated:', updatedRow)
   }
 
@@ -71,19 +73,13 @@ export default function DeckCardsPage({
     }
 
     const json = XLSX.utils.sheet_to_json<SpreadsheetCardRepresentation>(worksheet)
-    const cardsToImport: Card[] = json.map(row => ({
-      ...row,
-      id: row.id,
-      author: row.author,
+    const cardsToImport: FlashcardResponse[] = json.map((row, index) => ({
+      id: index,
       type: row.type,
-      image_source: row.image_source,
-      is_public: row.is_public,
-      content: {
-        front: row.front,
-        back: row.back,
-        note: row.note,
-      },
-      deck_id: Number(id),
+      contentFront: row.front,
+      contentBack: row.back,
+      deckId: Number(id),
+      authorId: 1, // TODO: replace with actual user id
     }))
 
     setLocalCards(prevCards => [...prevCards, ...cardsToImport])
@@ -94,19 +90,18 @@ export default function DeckCardsPage({
       const sampleCard = localCards[0] || {
         id: 1,
         author: 'Sample Author',
-        type: 'vocabulary' as const,
+        type: FlashcardResponseTypeEnum.Vocabulary,
         is_public: true,
-        content: { front: 'Front word', back: 'Back word', note: 'Note' },
-        image_source: '',
-        deck_id: Number(id),
+        contentFront: 'Front word',
+        contentBack: 'Back word',
+        contentNote: 'Note',
+        deckId: Number(id),
       }
       return {
         ...sampleCard,
         id: sampleCard.id,
-        author: sampleCard.author,
-        front: sampleCard?.content?.front || 'Front word',
-        back: sampleCard?.content?.back || 'Back word',
-        note: sampleCard?.content?.note || 'Note',
+        front: sampleCard?.contentFront || 'Front word',
+        back: sampleCard?.contentBack || 'Back word',
       }
     })
 

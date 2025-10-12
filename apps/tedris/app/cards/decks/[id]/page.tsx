@@ -1,6 +1,20 @@
+import { cookies } from 'next/headers'
+
 import FlashCardList from '~/features/flashcards/components/flashcard-list'
-import { Card } from '@madrasah/services/tedrisat'
-import { getTedrisatMock } from '~/lib/mock-data'
+import { env } from '~/env'
+import { createServerTedrisatAPIs, FlashcardResponse } from '@madrasah/services/tedrisat'
+
+async function getDeckCards(deckId: string): Promise<FlashcardResponse[]> {
+  const cookieStore = await cookies()
+  const { decks } = await createServerTedrisatAPIs(cookieStore, env.TEDRISAT_API_BASE_URL)
+
+  const deck = await decks.getFlashcardDeckWithCards({
+    id: Number(deckId),
+    include: ['flashcards'],
+  })
+
+  return deck.flashcards || []
+}
 
 export default async function Page({ params }: {
   params: Promise<{
@@ -8,17 +22,11 @@ export default async function Page({ params }: {
   }>
 }) {
   const { id } = await params
-  const tedrisatMock = await getTedrisatMock()
-  const { cards = [] } = tedrisatMock
-
-  console.log('Deck ID:', id) // Debugging line to check the id value
-  console.log('Cards:', cards) // Debugging line to check the cards array
-
-  const filteredCards = cards.filter(card => card.deck_id === Number(id)) as Card[]
+  const cards = await getDeckCards(id)
 
   return (
     <div className="flex items-center justify-center h-full">
-      <FlashCardList cards={filteredCards} />
+      <FlashCardList cards={cards} />
     </div>
   )
 }

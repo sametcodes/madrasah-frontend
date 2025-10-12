@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { ColumnDef, CellContext } from '@tanstack/react-table'
-import { Card } from '@madrasah/services/tedrisat'
 import { Input } from '@madrasah/ui/components/input'
 import { cn } from '@madrasah/ui/lib/utils'
+import { FlashcardResponse } from '@madrasah/services/tedrisat'
 
 // Editable Cell Component
 function EditableCell({
@@ -13,7 +13,7 @@ function EditableCell({
   column,
   table,
   className,
-}: CellContext<Card, unknown> & { className?: string }) {
+}: CellContext<FlashcardResponse, unknown> & { className?: string }) {
   const initialValue = getValue<string>()
   const [value, setValue] = useState<string>(initialValue || '')
   const [isEditing, setIsEditing] = useState(false)
@@ -24,13 +24,10 @@ function EditableCell({
       const updatedRow = { ...row.original }
       // Handle nested content structure
       if (column.id === 'front') {
-        updatedRow.content.front = value
+        updatedRow.contentFront = value
       }
       else if (column.id === 'back') {
-        updatedRow.content.back = value
-      }
-      else if (column.id === 'note') {
-        updatedRow.content.note = value
+        updatedRow.contentBack = value
       }
       table.options.meta.updateData(updatedRow)
     }
@@ -71,10 +68,10 @@ function EditableCell({
   )
 }
 
-export const columns: ColumnDef<Card>[] = [
+export const columns: ColumnDef<FlashcardResponse>[] = [
   {
     id: 'front',
-    accessorFn: row => row.content?.front,
+    accessorFn: row => row.contentFront,
     header: 'Front face',
     cell: props => (
       <EditableCell
@@ -85,7 +82,7 @@ export const columns: ColumnDef<Card>[] = [
   },
   {
     id: 'back',
-    accessorFn: row => row.content?.back,
+    accessorFn: row => row.contentBack,
     header: 'Back face',
     cell: props => (
       <EditableCell
@@ -95,18 +92,5 @@ export const columns: ColumnDef<Card>[] = [
     size: 300,
     minSize: 200,
     maxSize: 400,
-  },
-  {
-    id: 'note',
-    accessorFn: row => row.content?.note,
-    header: 'Note',
-    cell: props => (
-      <EditableCell
-        {...props}
-      />
-    ),
-    size: 250,
-    minSize: 150,
-    maxSize: 300,
   },
 ]

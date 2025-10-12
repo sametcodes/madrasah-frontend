@@ -1,14 +1,9 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import { Deck } from '@madrasah/services/tedrisat'
+import { FlashcardDeckResponse } from '@madrasah/services/tedrisat'
 
-export const columns: ColumnDef<Deck>[] = [
-  {
-    id: 'author',
-    accessorFn: row => row.author,
-    header: 'Author',
-  },
+export const columns: ColumnDef<FlashcardDeckResponse>[] = [
   {
     id: 'title',
     accessorFn: row => row.title,
