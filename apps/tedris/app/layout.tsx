@@ -25,6 +25,7 @@ export default async function RootLayout({
           <Header />
           <TabView>{children}</TabView>
         </ClientProviders>
+        <Toaster />
       </body>
     </html>
   )
