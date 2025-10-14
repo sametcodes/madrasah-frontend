@@ -23,7 +23,7 @@ RUN npm run build -- --filter=tedris-web...
 WORKDIR /app/apps/tedris
 
 # Expose the port (Next.js default is 3000)
-EXPOSE 4000
+EXPOSE 3000
 
 # Start the production server
 CMD ["npm", "start"] 

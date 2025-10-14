@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 import { Header } from '~/components/header/header'
 import { ClientProviders } from '~/components/providers/client-providers'
 import { TabView } from '~/components/tab-view'
+import { Toaster } from '@madrasah/ui/components/sonner'
 
 export const metadata: Metadata = {
   title: 'Madrasah - Online Medrese',
