@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   ColumnDef,
   flexRender,
@@ -20,7 +21,7 @@ import {
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  onRowUpdate?: (updatedRow: TData) => void
+  onRowUpdate?: (updatedRow: TData) => Promise<boolean> | void
   onRowClick?: (row: TData) => void
   options?: TableOptions<TData>
 }
@@ -32,6 +33,37 @@ export function DataTable<TData, TValue>({
   onRowClick,
   options,
 }: DataTableProps<TData, TValue>) {
+  const [loadingCells, setLoadingCells] = useState<Set<string>>(new Set())
+
+  // Enhanced update function that handles loading state
+  const handleRowUpdate = async (updatedRow: TData, cellId?: string) => {
+    if (!onRowUpdate) return
+
+    // If cellId is provided, track loading for that specific cell
+    if (cellId) {
+      setLoadingCells(prev => new Set([...prev, cellId]))
+    }
+
+    try {
+      const result = onRowUpdate(updatedRow)
+
+      // If it's a promise, wait for it to complete
+      if (result instanceof Promise) {
+        await result
+      }
+    }
+    finally {
+      // Remove loading state for the cell
+      if (cellId) {
+        setLoadingCells((prev) => {
+          const newSet = new Set(prev)
+          newSet.delete(cellId)
+          return newSet
+        })
+      }
+    }
+  }
+
   const table = useReactTable({
     data,
     columns,
@@ -42,8 +74,9 @@ export function DataTable<TData, TValue>({
       maxSize: 300,
     },
     meta: {
-      updateData: onRowUpdate,
+      updateData: handleRowUpdate,
       onRowClick: onRowClick,
+      loadingCells: loadingCells,
     },
     ...options,
   })
