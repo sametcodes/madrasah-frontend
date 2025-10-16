@@ -50,7 +50,7 @@ export function EditableCell({
   if (isEditing) {
     return (
       <Input
-        className={cn(className, 'truncate font-medium')}
+        className={cn(className, 'truncate font-medium px-2')}
         style={{ width: column.getSize() - 16 }} // Adjust for padding
         value={value}
         onChange={e => setValue(e.target.value)}
@@ -68,11 +68,12 @@ export function EditableCell({
       style={{ width: column.getSize() - 16 }} // Adjust for padding
       className={cn(
         className,
-        'truncate font-medium p-1 rounded min-h-[32px] flex items-center relative',
+        !isLoading && 'border border-transparent hover:cursor-text hover:bg-neutral-secondary hover:border hover:border-neutral-primary',
+        'truncate font-medium py-1 rounded min-h-[32px] flex items-center relative px-2',
       )}
     >
       {isLoading
-        ? <Skeleton className={cn(className, 'h-8 w-full p-0 m-0 bg-neutral-tertiary')} />
+        ? <Skeleton className={cn(className, 'h-8 w-full p-0 m-0 bg-neutral-primary')} />
         : value || 'Click to edit...'}
     </div>
   )

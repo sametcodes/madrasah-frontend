@@ -3,8 +3,8 @@
 import { EditableCell } from './editable-cell'
 import { ColumnDef } from '@tanstack/react-table'
 import { FlashcardResponse } from '@madrasah/services/tedrisat'
-
-// Editable Cell Component
+import { Button } from '@madrasah/ui/components/button'
+import { TrashIcon } from '@madrasah/icons'
 
 export const columns: ColumnDef<FlashcardResponse>[] = [
   {
@@ -30,5 +30,29 @@ export const columns: ColumnDef<FlashcardResponse>[] = [
     size: 300,
     minSize: 200,
     maxSize: 400,
+  },
+  {
+    id: 'actions',
+    cell: ({ row, table }) => {
+      const onRowDelete = table.options.meta?.onRowDelete
+
+      return (
+        <div className="flex items-center justify-center">
+          <Button
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation()
+              onRowDelete?.(row.original.id)
+            }}
+            disabled={!onRowDelete}
+          >
+            <TrashIcon size={24} />
+          </Button>
+        </div>
+      )
+    },
+    size: 50,
+    minSize: 50,
+    maxSize: 100,
   },
 ]

@@ -17,7 +17,7 @@ export default function Decks({
   }
 
   return (
-    <div className="container py-10">
+    <div>
       <DataTable
         columns={columns}
         data={decks}

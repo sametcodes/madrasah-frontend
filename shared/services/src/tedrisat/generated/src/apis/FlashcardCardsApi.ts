@@ -28,13 +28,13 @@ import {
     UpdateFlashcardDtoToJSON,
 } from '../models/index';
 
-export interface DeleteFlashcardRequest {
-    id: number;
-}
-
-export interface FlashcardControllerCreateManyRequest {
+export interface CreateFlashcardsRequest {
     deckId: number;
     createFlashcardDto: Array<CreateFlashcardDto>;
+}
+
+export interface DeleteFlashcardRequest {
+    id: number;
 }
 
 export interface GetFlashcardByIdRequest {
@@ -55,6 +55,55 @@ export interface UpdateFlashcardRequest {
  * 
  */
 export class FlashcardCardsApi extends runtime.BaseAPI {
+
+    /**
+     * Creates multiple flashcards within a specified deck. All cards will be assigned to the same deck and author.
+     * Create multiple flashcards in a deck
+     */
+    async createFlashcardsRaw(requestParameters: CreateFlashcardsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FlashcardResponse>>> {
+        if (requestParameters['deckId'] == null) {
+            throw new runtime.RequiredError(
+                'deckId',
+                'Required parameter "deckId" was null or undefined when calling createFlashcards().'
+            );
+        }
+
+        if (requestParameters['createFlashcardDto'] == null) {
+            throw new runtime.RequiredError(
+                'createFlashcardDto',
+                'Required parameter "createFlashcardDto" was null or undefined when calling createFlashcards().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+
+        let urlPath = `/flashcard/decks/{deckId}/cards`;
+        urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['createFlashcardDto']!.map(CreateFlashcardDtoToJSON),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FlashcardResponseFromJSON));
+    }
+
+    /**
+     * Creates multiple flashcards within a specified deck. All cards will be assigned to the same deck and author.
+     * Create multiple flashcards in a deck
+     */
+    async createFlashcards(requestParameters: CreateFlashcardsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<FlashcardResponse>> {
+        const response = await this.createFlashcardsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Permanently deletes a flashcard by its ID. This action cannot be undone.
@@ -92,55 +141,6 @@ export class FlashcardCardsApi extends runtime.BaseAPI {
      */
     async deleteFlashcard(requestParameters: DeleteFlashcardRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.deleteFlashcardRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     * Creates multiple flashcards within a specified deck. All cards will be assigned to the same deck and author.
-     * Create multiple flashcards in a deck
-     */
-    async flashcardControllerCreateManyRaw(requestParameters: FlashcardControllerCreateManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<FlashcardResponse>>> {
-        if (requestParameters['deckId'] == null) {
-            throw new runtime.RequiredError(
-                'deckId',
-                'Required parameter "deckId" was null or undefined when calling flashcardControllerCreateMany().'
-            );
-        }
-
-        if (requestParameters['createFlashcardDto'] == null) {
-            throw new runtime.RequiredError(
-                'createFlashcardDto',
-                'Required parameter "createFlashcardDto" was null or undefined when calling flashcardControllerCreateMany().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-
-        let urlPath = `/flashcard/decks/{deckId}/cards`;
-        urlPath = urlPath.replace(`{${"deckId"}}`, encodeURIComponent(String(requestParameters['deckId'])));
-
-        const response = await this.request({
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: requestParameters['createFlashcardDto']!.map(CreateFlashcardDtoToJSON),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(FlashcardResponseFromJSON));
-    }
-
-    /**
-     * Creates multiple flashcards within a specified deck. All cards will be assigned to the same deck and author.
-     * Create multiple flashcards in a deck
-     */
-    async flashcardControllerCreateMany(requestParameters: FlashcardControllerCreateManyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<FlashcardResponse>> {
-        const response = await this.flashcardControllerCreateManyRaw(requestParameters, initOverrides);
-        return await response.value();
     }
 
     /**

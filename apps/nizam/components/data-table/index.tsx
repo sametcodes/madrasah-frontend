@@ -23,6 +23,7 @@ export interface DataTableProps<TData, TValue> {
   data: TData[]
   onRowUpdate?: (updatedRow: TData) => Promise<boolean> | void
   onRowClick?: (row: TData) => void
+  onRowDelete?: (id: number) => Promise<boolean> | void
   options?: TableOptions<TData>
 }
 
@@ -31,6 +32,7 @@ export function DataTable<TData, TValue>({
   data,
   onRowUpdate,
   onRowClick,
+  onRowDelete,
   options,
 }: DataTableProps<TData, TValue>) {
   const [loadingCells, setLoadingCells] = useState<Set<string>>(new Set())
@@ -76,6 +78,7 @@ export function DataTable<TData, TValue>({
     meta: {
       updateData: handleRowUpdate,
       onRowClick: onRowClick,
+      onRowDelete: onRowDelete,
       loadingCells: loadingCells,
     },
     ...options,

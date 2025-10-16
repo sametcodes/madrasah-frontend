@@ -15,8 +15,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
-        <header className="container flex h-16 shrink-0 items-center gap-2">
+      <SidebarInset className="container">
+        <header className="flex h-16 shrink-0 items-center gap-2">
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
             <Separator
@@ -26,7 +26,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <Breadcrumbs routes={routes} />
           </div>
         </header>
-        <main className="relative block">{children}</main>
+        <main className="relative block mt-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

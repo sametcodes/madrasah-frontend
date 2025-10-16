@@ -1,22 +1,21 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState } from 'react'
 import * as XLSX from 'xlsx'
-import { updateFlashcard } from '../actions'
+import { updateFlashcard, createFlashcards, deleteFlashcard } from '../actions'
 
 import { columns } from './columns'
 import { DataTable } from '~/components/data-table'
 import { TableHeader } from './table-header'
 import { FlashcardResponse, FlashcardResponseTypeEnum } from '@madrasah/services/tedrisat'
+import { toastHelper } from '@madrasah/ui/lib/toast-helper'
 
 type SpreadsheetCardRepresentation = {
   id: number
   type: FlashcardResponseTypeEnum
-  front: string
-  back: string
-  author?: string
+  contentFront: string
+  contentBack: string
   is_public?: boolean
-  note?: string
 }
 
 export default function DeckCards({
@@ -55,48 +54,52 @@ export default function DeckCards({
     const cardsToImport: FlashcardResponse[] = json.map((row, index) => ({
       id: index,
       type: row.type,
-      contentFront: row.front,
-      contentBack: row.back,
+      contentFront: row.contentFront,
+      contentBack: row.contentBack,
       deckId: Number(deckId),
       authorId: 1,
     }))
 
+    await createFlashcards(Number(deckId), cardsToImport)
     setLocalCards(prevCards => [...prevCards, ...cardsToImport])
+    toastHelper.success({ title: 'Cards Imported', description: `${cardsToImport.length} cards were imported successfully.` })
   }
 
-  const onClickDownloadSampleFile = () => {
-    const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map(() => {
-      const sampleCard = localCards[0] || {
-        id: 1,
-        author: 'Sample Author',
-        type: FlashcardResponseTypeEnum.Vocabulary,
-        is_public: true,
-        contentFront: 'Front word',
-        contentBack: 'Back word',
-        contentNote: 'Note',
-        deckId: Number(deckId),
-      }
+  const onRowDelete = async (id: number) => {
+    const response = await deleteFlashcard(id)
+    if (response) {
+      setLocalCards(prevCards => prevCards.filter(card => card.id !== id))
+      toastHelper.success({ title: 'Card Deleted', description: `Card with ID ${id} was deleted.` }, { cardId: id })
+    }
+    return response
+  }
+
+  const onClickDownloadSampleFile = async () => {
+    const sampleCards: SpreadsheetCardRepresentation[] = Array.from({ length: 5 }).map((_, index) => {
       return {
-        ...sampleCard,
-        id: sampleCard.id,
-        front: sampleCard?.contentFront || 'Front word',
-        back: sampleCard?.contentBack || 'Back word',
+        id: index,
+        type: FlashcardResponseTypeEnum.Vocabulary,
+        contentFront: `Front word ${index + 1}`,
+        contentBack: `Back word ${index + 1}`,
+        deckId: Number(deckId),
+        is_public: true,
       }
     })
 
     const worksheet = XLSX.utils.json_to_sheet(sampleCards)
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet, 'SampleCards')
-    XLSX.writeFile(workbook, 'sample_cards.xlsx')
+    await XLSX.writeFile(workbook, 'sample_cards.xlsx')
   }
 
   return (
-    <div className="container py-10">
+    <div>
       <TableHeader onClickDownloadSampleFile={onClickDownloadSampleFile} onDeckFileImport={onDeckFileImport} />
       <DataTable
         columns={columns}
         data={localCards || []}
         onRowUpdate={onRowUpdate}
+        onRowDelete={onRowDelete}
       />
     </div>
   )

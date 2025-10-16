@@ -1,4 +1,4 @@
-import { toast } from '@madrasah/ui/components/sonner'
+import { toast } from "../components/sonner"
 
 interface ToastArgs {
   title: string
@@ -8,7 +8,7 @@ interface ToastArgs {
 
 interface LogContext {
   timestamp: Date
-  level: 'error' | 'success' | 'info' | 'warning'
+  level: "error" | "success" | "info" | "warning"
   title: string
   description: string
   userId?: string
@@ -37,7 +37,7 @@ export class ToastHelper {
     this.logCallback = callback
   }
 
-  private log(level: LogContext['level'], args: ToastArgs, additionalContext?: Record<string, unknown>) {
+  private log(level: LogContext["level"], args: ToastArgs, additionalContext?: Record<string, unknown>) {
     const context: LogContext = {
       timestamp: new Date(),
       level,
@@ -65,7 +65,7 @@ export class ToastHelper {
       description: args.description,
       ...(args.id && { id: args.id }),
     })
-    this.log('error', args, additionalContext)
+    this.log("error", args, additionalContext)
   }
 
   /**
@@ -78,7 +78,7 @@ export class ToastHelper {
       description: args.description,
       ...(args.id && { id: args.id }),
     })
-    this.log('success', args, additionalContext)
+    this.log("success", args, additionalContext)
   }
 
   info(args: ToastArgs, additionalContext?: Record<string, unknown>) {
@@ -86,7 +86,7 @@ export class ToastHelper {
       description: args.description,
       ...(args.id && { id: args.id }),
     })
-    this.log('info', args, additionalContext)
+    this.log("info", args, additionalContext)
   }
 
   warning(args: ToastArgs, additionalContext?: Record<string, unknown>) {
@@ -94,7 +94,7 @@ export class ToastHelper {
       description: args.description,
       ...(args.id && { id: args.id }),
     })
-    this.log('warning', args, additionalContext)
+    this.log("warning", args, additionalContext)
   }
 
   /**
