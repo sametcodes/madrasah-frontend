@@ -12,8 +12,7 @@
       "pull-request-title-pattern": "chore(keycloak-theme): release ${version}",
       "pull-request-header": "Release for Keycloak Theme",
       "component": "keycloak-theme",
-      "path": "apps/keycloak-theme",
-      "extra-files": ["shared/**"]
+      "path": "apps/keycloak-theme"
     },
     "apps/tedris": {
       "release-type": "node",
@@ -23,7 +22,13 @@
       "pull-request-header": "Release for Tedris Web",
       "component": "tedris-web",
       "path": "apps/tedris",
-      "extra-files": ["shared/**"]
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "shared/services/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     "apps/nizam": {
       "release-type": "node",
@@ -33,7 +38,13 @@
       "pull-request-header": "Release for Nizam Web",
       "component": "nizam-web",
       "path": "apps/nizam",
-      "extra-files": ["shared/**"]
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "shared/services/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
     },
     "apps/nazir": {
       "release-type": "node",
@@ -43,7 +54,13 @@
       "pull-request-header": "Release for Nazir Web",
       "component": "nazir-web",
       "path": "apps/nazir",
-      "extra-files": ["shared/**"]
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "shared/services/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
     }
   }
 }
